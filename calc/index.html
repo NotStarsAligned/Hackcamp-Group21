@@ -1,0 +1,58 @@
+// -----------------------------
+// ROOM MEASUREMENT VARIABLES
+// -----------------------------
+
+let roomLength = 4.5;      // room length (m or ft)
+let roomWidth = 3.2;       // room width  (m or ft)
+let measurementUnit = "m"; // "m" = metres, "ft" = feet
+
+// -----------------------------
+// TILE VARIABLES
+// -----------------------------
+
+let tileLengthMM = 600;    // tile length in millimetres
+let tileWidthMM = 600;     // tile width in millimetres
+let tilesPerBox = 4;       // number of tiles in one box
+
+// -----------------------------
+// CONSTANTS
+// -----------------------------
+
+const SQFT_PER_SQM = 10.7639; // conversion from m² to ft²
+
+// -----------------------------
+// AREA CALCULATIONS
+// -----------------------------
+
+let areaSquareMeters;
+let areaSquareFeet;
+
+if (measurementUnit === "m") {
+  areaSquareMeters = roomLength * roomWidth;
+  areaSquareFeet = areaSquareMeters * SQFT_PER_SQM;
+} else {
+  areaSquareFeet = roomLength * roomWidth;
+  areaSquareMeters = areaSquareFeet / SQFT_PER_SQM;
+}
+
+// -----------------------------
+// TILE CALCULATIONS
+// -----------------------------
+
+let tileLengthM = tileLengthMM / 1000; // convert mm to metres
+let tileWidthM = tileWidthMM / 1000;
+
+let tileAreaM2 = tileLengthM * tileWidthM; // area of one tile in m²
+
+let tilesNeeded = Math.ceil(areaSquareMeters / tileAreaM2); // total tiles
+let boxesNeeded = Math.ceil(tilesNeeded / tilesPerBox);     // total boxes
+
+// -----------------------------
+// OUTPUT (for checking only)
+// -----------------------------
+
+console.log("Area (m²):", areaSquareMeters);
+console.log("Area (ft²):", areaSquareFeet);
+console.log("Tiles needed:", tilesNeeded);
+console.log("Boxes needed:", boxesNeeded);
+

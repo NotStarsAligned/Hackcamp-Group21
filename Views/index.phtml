@@ -1,4 +1,33 @@
-<?php require("Views/template/header.phtml"); ?>
-<h1> WELCOME TO HELL</h1>
-
-<?php require("Views/template/header.phtml"); ?>
+<?php require ("Views/template/header.phtml");?>
+<div>
+    <table class="table-primary">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-primary">
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<?php require ("Views/template/footer.phtml");?>

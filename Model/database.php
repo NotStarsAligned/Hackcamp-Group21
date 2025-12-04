@@ -10,12 +10,12 @@ class Database{
         if (!$dbPath){
             die("Database path not set");
         }
-        $this->conn = new PDO("sqlite" . $dbPath);
+        $this->conn = new PDO("sqlite:" . $dbPath);
         //exception
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     public static function getInstance(){
-        if (self::$instance==null){
+        if (self::$instance === null){
             self::$instance = new Database();
         }
         return self::$instance;

@@ -6,15 +6,27 @@ if (session_status() == PHP_SESSION_NONE){
 class Authentication {
 //for logging user checking the email phone number and password.
 
-    public static function login(string $account_email,string $password):bool{
+    public static function login(string $email,string $password):bool{
         //path to database
         require_once __DIR__ . "/database.php";
         $db = Database::getInstance()->getConnection();
-        $stmt = $db->prepare("SELECT * FROM users WHERE account_email = :account_email");
+
+        $stmt = $db->prepare("SELECT * FROM users WHERE account_email = :email AND is_active = 1 LIMIT = 1");
         //execute the query with the username used
-        $stmt->execute([':account_email' => $account_email]);
-        //$= $stmt->fetch(PDO::FETCH_ASSOC);
-        return false;
+        $stmt->execute([':email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user){
+            return false;
+        }
+        if (password_verify($password, $user['password_hashed'])) {
+            return false; //wrong password
+        }
+
+        $_SESSION['email'] = $user['account_email'];
+        $_SESSION['username'] = $user['full_name'];
+        $_SESSION['role'] = strtolower($user['role']); // admin, staff, etc.aaaaaaaaaaaaa
+        return true;
     }
 
 //check if user is logged in, only logged in user can have access
@@ -44,7 +56,8 @@ class Authentication {
         return $_SESSION['username'] ?? '';
     }
 
-    public static function Logout() {
+    public static function logout(): void
+    {
         session_unset();
         session_destroy();
     }

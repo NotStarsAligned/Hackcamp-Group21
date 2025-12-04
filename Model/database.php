@@ -6,7 +6,7 @@ class Database{
 
     private function __construct(){
         //path to database
-        $dbPath = realpath(__DIR__.'/../database/people.sqlite/');
+        $dbPath = realpath(__DIR__.'database.sqlite');
         if (!$dbPath){
             die("Database path not set");
         }

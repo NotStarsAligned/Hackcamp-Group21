@@ -11,15 +11,17 @@ class Authentication {
         require_once __DIR__ . "/database.php";
         $db = Database::getInstance()->getConnection();
 
-        $stmt = $db->prepare("SELECT * FROM users WHERE account_email = :email AND is_active = 1 LIMIT = 1");
+        // Prepare a SQL query to fetch a user with the given email, but only if the account is active.
+// LIMIT 1 ensures that only one row is returned even if, due to some error, multiple users exist with the same email.
+        $stmt = $db->prepare("SELECT * FROM users WHERE account_email = :email AND is_active = 1 LIMIT 1");
         //execute the query with the username used
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$user){
-            return false;
+            return false; //email not found in db
         }
-        if (password_verify($password, $user['password_hashed'])) {
+        if (!password_verify($password, $user['password_hashed'])) {
             return false; //wrong password
         }
 

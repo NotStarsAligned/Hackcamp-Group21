@@ -47,7 +47,7 @@ header {
     cursor: pointer;
 }
 
-/* ===== FOOTER STYLES ===== */
+/* ===== FOOTER STYLES ===== by chengwu*/
 footer {
     background: #ffffff;
     padding: 40px 20px;
@@ -95,7 +95,7 @@ footer .bottom-bar {
     gap: 40px;
 }
 
-/* ===== USER INFO PAGE STYLES ===== */
+/* ===== USER INFO PAGE STYLES ===== by我*/
 .userinfo-container {
     padding: 40px 0;
     min-height: calc(100vh - 200px); /* 考虑header和footer的高度 */

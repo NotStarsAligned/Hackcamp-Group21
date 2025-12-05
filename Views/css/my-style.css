@@ -362,6 +362,63 @@ footer .bottom-bar {
 }
 
 
+    /*the css for the quote*/
+     /* 主蓝色区域，类似品牌色 / Main blue color, like a brand color */
+ .main-blue-color {
+     background-color: #007bff;
+ }
+
+/* 中间内容外框，有点卡片风格 / Card-like border for content area */
+.content-card {
+    border: 4px solid #0056b3; /* 深蓝边框 / dark blue border */
+    padding: 0;
+    overflow: hidden; /* 确保内容不会溢出 / Prevent content overflow */
+}
+
+/* 评论框顶部的用户信息栏 / Review header section containing user info */
+.review-header {
+    display: flex; /* 水平排列 / Layout items horizontally */
+    align-items: center; /* 垂直居中 / Center vertically */
+    padding: 1rem;
+    background-color: #f8f9fa; /* 浅灰背景 / light grey background */
+}
+
+.review-text {
+    padding: 1rem; /* 评论文字区域的内边距 / padding for review content */
+}
+
+/* 用户头像占位符 / Placeholder for avatar */
+.review-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* 圆形头像 / circular avatar */
+    background-color: #ccc;
+    margin-right: 1rem; /* 与文字区域留一点间隔 / space between avatar and text */
+}
+
+/* 模拟滚动条的占位条 / Fake scrollbar placeholder just for layout */
+.scroll-bar-placeholder {
+    height: 10px;
+    width: 50%;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin: 2rem auto; /* 居中显示 / centered */
+    position: relative;
+}
+
+.scroll-bar-placeholder::after {
+    content: '';
+    position: absolute;
+    left: 30%; /* 小滑块的位置 / slider position */
+    top: -5px;
+    width: 40px;
+    height: 20px;
+    background-color: gray;
+    border-radius: 5px;
+}
+
+
+
 
 /* Responsive adjustments by wang我的作业*/
 @media (max-width: 768px) {

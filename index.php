@@ -11,7 +11,7 @@ require_once __DIR__ . "/Model/database.php";
 $view = new stdClass();
 $view->username = null;
 $view->isLogged = false;
-
+header("Location: sendEmail.php");
 
 // Views get output here
 require_once("Views/index.phtml");

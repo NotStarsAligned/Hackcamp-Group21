@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 中文：设置网页字符编码，避免乱码  English: Set character encoding to prevent text issues -->
+    <meta charset="UTF-8">
+
+    <!-- 中文：让网页在手机上更好显示  English: Makes the page display better on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 中文：网页标题  English: Page title shown on browser tab -->
+    <title>Tile Plan UK - Dashboard</title>
+
+    <!-- 中文：引用 Bootstrap 样式库  English: Importing Bootstrap CSS library for layout and styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- 中文：左侧侧边栏区域  English: Left sidebar section -->
+        <div class="col-lg-3 col-md-4 sidebar-dark-blue p-4">
+
+            <!-- 中文：Logo 区域  English: Logo area -->
+            <div class="d-flex align-items-center mb-4">
+                <div class="logo-box me-3">
+                </div>
+                <div>
+                    <!-- 中文：网站名称  English: Website name -->
+                    <h5 class="text-white mb-0">Tile plan UK</h5>
+                </div>
+            </div>
+
+            <!-- 中文：用户信息区  English: User info section -->
+            <div class="d-flex align-items-end">
+                <div class="photo-box">
+                </div>
+                <div class="ms-3 mb-1">
+                    <!-- 中文：欢迎词  English: Welcome text -->
+                    <div class="small">welcome,</div>
+                    <!-- 中文：用户名展示  English: Displaying username -->
+                    <h5 class="text-white fw-bold">Barry Allen</h5>
+                </div>
+            </div>
+
+            <!-- 中文：分割线  English: Separator line -->
+            <div class="separator-line"></div>
+
+            <!-- 中文：左边导航栏  English: Navigation links on the left -->
+            <nav class="nav flex-column">
+                <a class="nav-link-custom" href="#">&lt;Nav&gt;</a>
+                <a class="nav-link-custom" href="#">&lt;Nav&gt;</a>
+                <a class="nav-link-custom" href="#">&lt;Nav&gt;</a>
+                <a class="nav-link-custom" href="#">&lt;Nav&gt;</a>
+            </nav>
+        </div>
+
+        <!-- 中文：右侧主内容区域  English: Right main content section -->
+        <div class="col-lg-9 col-md-8 p-4 bg-light">
+
+            <!-- 中文：今日访问量模块  English: Visits Today widget -->
+            <div class="mb-4">
+                <h6 class="fw-bold">Visits Today</h6>
+                <!-- 中文：内容卡片占位框  English: Content card placeholder -->
+                <div class="content-card p-2 bg-white" style="height: 30px;">
+                </div>
+            </div>
+
+            <!-- 中文：销售概览模块  English: Sales Overview widget -->
+            <div class="mb-4">
+                <h6 class="fw-bold">Sales Overview</h6>
+                <div class="content-card bg-white" style="height: 200px;">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!-- 中文：设备使用情况模块  English: Device usage section -->
+                <div class="col-lg-6 col-md-12">
+                    <h6 class="fw-bold">Device Usage</h6>
+                    <div class="content-card bg-white" style="height: 150px;">
+                    </div>
+                </div>
+
+                <!-- 中文：最近订单模块  English: Recent orders section -->
+                <div class="col-lg-6 col-md-12">
+                    <h6 class="fw-bold">Recent Orders</h6>
+
+                    <div class="content-card bg-white p-0">
+                        <!-- 中文：订单示例  English: Example order entry -->
+                        <div class="p-3">
+                            <p class="mb-1 fw-bold">Name - Address - Cost</p>
+                            <p class="small text-muted mb-0">More details</p>
+                        </div>
+
+                        <!-- 中文：订单分割线  English: Order separator line -->
+                        <div class="order-separator"></div>
+
+                        <!-- 中文：订单示例  English: Example order entry -->
+                        <div class="p-3">
+                            <p class="mb-1 fw-bold">Name - Address - Cost</p>
+                            <p class="small text-muted mb-0">More details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 中文：Bootstrap 的 JS 组件支持  English: Bootstrap JS support for interactive components -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

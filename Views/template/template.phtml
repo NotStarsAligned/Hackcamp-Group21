@@ -1,59 +1,345 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Quotation Invoice</title>
+    <!-- Tailwind CSS script removed -->
+    <style>
+        /* Base styles and fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f3f8; /* Light blue-grey background */
+            margin: 0;
+            padding: 20px;
+            color: #1f2937; /* Default dark grey text */
+        }
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        /* Main Container - Simulates A4 paper */
+        .invoice-paper {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px 48px; /* Equivalent of p-8 md:p-12 */
+        }
 
-    <!-- Bootstrap core CSS -->
-    <link href="/Views/css/bootstrap.css" rel="stylesheet">
-    <!-- Bootstrap theme -->
-    <link href="/Views/css/bootstrap-theme.css" rel="stylesheet">
-    <link href="/Views/css/my-style.css" rel="stylesheet">
+        /* Header Styles */
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 4px solid #0891b2; /* border-cyan-600 */
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
 
-    <title>Tile Plan UK</title>
+        .company-title {
+            font-size: 32px; /* text-4xl */
+            font-weight: 800; /* font-extrabold */
+            color: #0e7490; /* text-cyan-700 */
+            letter-spacing: -0.025em; /* tracking-tight */
+        }
+
+        .document-title {
+            font-size: 24px; /* text-3xl */
+            font-weight: 700; /* font-bold */
+        }
+
+        /* Information Section (Client/Surveyor) */
+        .info-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 40px;
+            font-size: 14px; /* text-sm */
+        }
+
+        .info-block h2 {
+            font-weight: 700;
+            font-size: 18px; /* text-lg */
+            margin-bottom: 8px;
+            color: #374151; /* text-gray-700 */
+            padding-left: 8px;
+            border-left: 4px solid #22d3ee; /* border-cyan-400 */
+        }
+        .info-block.right h2 {
+            padding-left: 0;
+            padding-right: 8px;
+            border-left: none;
+            border-right: 4px solid #22d3ee;
+        }
+        .info-block.right {
+            text-align: right;
+        }
+
+        /* Table Styles */
+        .item-table-container {
+            overflow-x: auto;
+        }
+
+        .item-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #d1d5db; /* border-gray-200/300 */
+            border-radius: 8px;
+        }
+
+        .item-table thead {
+            background-color: #ecfeff; /* bg-cyan-50 */
+        }
+
+        .item-table th, .item-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #f3f4f6; /* Subtle row separation */
+        }
+
+        .item-table th {
+            font-size: 12px; /* text-xs */
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #4b5563; /* text-gray-700 */
+        }
+
+        .item-table td {
+            font-size: 14px; /* text-sm */
+        }
+
+        .item-table td.center {
+            text-align: center;
+        }
+
+        .item-table td.right {
+            text-align: right;
+        }
+
+        /* Totals Summary */
+        .summary-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .summary-box {
+            width: 100%;
+            max-width: 50%; /* md:w-1/2 */
+        }
+
+        .summary-details {
+            padding: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background-color: #f9fafb; /* bg-gray-50 */
+            margin-bottom: 16px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            font-size: 16px; /* text-base */
+        }
+
+        .summary-row.border-top {
+            border-top: 1px solid #d1d5db;
+            padding-top: 8px;
+            margin-top: 4px;
+            font-size: 18px; /* text-lg */
+            font-weight: 700;
+        }
+
+        .vat-amount {
+            font-weight: 600;
+            color: #dc2626; /* text-red-600 */
+        }
+
+        /* Grand Total Box */
+        .grand-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background-color: #0e7490; /* bg-cyan-700 */
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+        }
+
+        .grand-total .label {
+            font-size: 24px; /* text-2xl */
+            font-weight: 700;
+        }
+
+        .grand-total .amount {
+            font-size: 36px; /* text-4xl */
+            font-weight: 800;
+        }
+
+        /* Footer/Notes */
+        .invoice-footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #d1d5db;
+            font-size: 12px; /* text-xs */
+            color: #6b7280; /* text-gray-500 */
+            text-align: center;
+        }
+        .invoice-footer h4 {
+            font-weight: 700;
+            color: #374151; /* text-gray-700 */
+            margin-bottom: 8px;
+        }
+        .invoice-footer p {
+            margin-top: 8px;
+        }
+
+        /* Print Styles - Ensure only the document content is visible */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .invoice-paper {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                max-width: 100%;
+                padding: 0 !important;
+            }
+            @page {
+                size: A4;
+                margin: 0.5in;
+            }
+        }
+    </style>
 </head>
 <body>
-<div>
-    <table class="table-primary">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="table-primary">
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-        </tr>
-        </tbody>
-    </table>
+
+<div class="invoice-paper">
+
+    <!-- Header & Company Details -->
+    <header class="invoice-header">
+        <div>
+            <div class="company-title">SALFORD FLOORING</div>
+            <p style="font-size: 14px; color: #6b7280; margin-top: 4px;">Official Quotation & Invoice | Professional Flooring Suppliers</p>
+        </div>
+        <div style="text-align: right;">
+            <h1 class="document-title">QUOTATION</h1>
+            <p style="font-size: 12px; color: #4b5563;">ID: <span id="quote-id" style="font-weight: 600;">#QUO-2025-0042</span></p>
+            <p style="font-size: 12px; color: #4b5563;">Date: <span id="quote-date">25/11/2025</span></p>
+        </div>
+    </header>
+
+    <!-- Billing & Surveyor Info -->
+    <section class="info-section">
+        <div class="info-block">
+            <h2>Client Details</h2>
+            <p style="font-weight: 600;">Mr. John Smith</p>
+            <p>Apartment 10, The Bridge Quay</p>
+            <p>Manchester, M5 4AP</p>
+            <p>john.smith@client.com</p>
+        </div>
+        <div class="info-block right">
+            <h2>Survey & Contact</h2>
+            <p style="font-weight: 600;">Surveyor: Jane Doe</p>
+            <p>Phone: (0161) 555-TILE</p>
+            <p>Email: surveyor@salfordflooring.co.uk</p>
+            <p style="font-size: 12px; margin-top: 8px; color: #6b7280;">Quotation valid for 30 days.</p>
+        </div>
+    </section>
+
+    <!-- Itemized Breakdown Table -->
+    <section style="margin-bottom: 40px;">
+        <h3 style="font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 16px;">Itemised Cost Breakdown (Kitchen - 22.50 m²)</h3>
+        <div class="item-table-container">
+            <table class="item-table">
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th class="center">Qty/Area</th>
+                    <th class="right">Unit Price (£)</th>
+                    <th class="right">Total (£)</th>
+                </tr>
+                </thead>
+                <tbody id="invoice-items">
+                <!-- Static Data for dompdf compatibility (pre-calculated values) -->
+                <tr style="background-color: #ffffff;">
+                    <td style="font-weight: 600;">Porcelain Tile - Coastal Grey (60x60cm)</td>
+                    <td class="center">18 box</td>
+                    <td class="right">£35.00</td>
+                    <td class="right">£630.00</td>
+                </tr>
+                <tr style="background-color: #f9fafb;">
+                    <td style="color: #4b5563;">High-Strength Flexible Adhesive</td>
+                    <td class="center">3 bag</td>
+                    <td class="right">£45.00</td>
+                    <td class="right">£135.00</td>
+                </tr>
+                <tr style="background-color: #ffffff;">
+                    <td style="color: #4b5563;">Grout & Sealant Kit - Mid-Grey</td>
+                    <td class="center">2 unit</td>
+                    <td class="right">£22.50</td>
+                    <td class="right">£45.00</td>
+                </tr>
+                <tr style="background-color: #f9fafb;">
+                    <td style="color: #4b5563;">Aluminium Edge Trim - Brushed Steel</td>
+                    <td class="center">19 metre</td>
+                    <td class="right">£8.50</td>
+                    <td class="right">£161.50</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Totals and Summary Box -->
+    <section class="summary-container">
+        <div class="summary-box">
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span style="font-weight: 500; color: #374151;">Subtotal (Materials & Consumables):</span>
+                    <span id="subtotal" style="font-weight: 600;">£971.50</span>
+                </div>
+                <div class="summary-row">
+                    <span style="font-weight: 500; color: #374151;">Installation Labour:</span>
+                    <span id="labour-cost" style="font-weight: 600;">£560.00</span>
+                </div>
+                <div class="summary-row">
+                    <span style="font-weight: 500; color: #374151;">Delivery Cost:</span>
+                    <span id="delivery-cost" style="font-weight: 600;">£50.00</span>
+                </div>
+                <div class="summary-row border-top">
+                    <span style="color: #1f2937;">Subtotal Before VAT:</span>
+                    <span id="pre-vat-total" style="color: #1f2937;">£1,581.50</span>
+                </div>
+                <div class="summary-row">
+                    <span style="font-weight: 500; color: #374151;">VAT (20%):</span>
+                    <span id="vat-amount" class="vat-amount">£316.30</span>
+                </div>
+            </div>
+
+            <div class="grand-total">
+                <span class="label">TOTAL DUE:</span>
+                <span id="grand-total" class="amount">£1,897.80</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Notes -->
+    <footer class="invoice-footer">
+        <h4>Payment & Installation Notes</h4>
+        <p>A 20% non-refundable deposit is required to secure installation dates. Full terms and conditions are available upon request.</p>
+        <p style="margin-top: 8px;">Thank you for choosing Salford Flooring. We appreciate your business.</p>
+    </footer>
+
 </div>
+
 </body>
 </html>
-<style>
-    table, th, td {
-        border: 1px solid green;
-    }
-</style>

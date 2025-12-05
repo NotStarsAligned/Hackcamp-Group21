@@ -38,7 +38,7 @@ if (isset($_GET['logout'])){
   header("Location: Login.php");
    exit;
 }
-include __DIR__ . "/Views/template/header.phtml";
+include __DIR__ . "/template/header.phtml";
 ?>
 
 <main class="login-section">
@@ -68,4 +68,4 @@ include __DIR__ . "/Views/template/header.phtml";
     <?php endif; ?>
 
 </main>
-<?php include __DIR__ . "/Views/template/footer.phtml"; ?>
+<?php include __DIR__ . "/template/footer.phtml"; ?>

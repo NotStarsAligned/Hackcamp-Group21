@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 }
-include __DIR__ . "/Views/template/header.phtml";
+include __DIR__ . "/template/header.phtml";
 ?>
 <main class="registration-section">
     <h2>Register New Account</h2>
@@ -116,4 +116,4 @@ include __DIR__ . "/Views/template/header.phtml";
     </form>
 </main>
 
-<?php include __DIR__ . "/Views/template/footer.phtml"; ?>
+<?php include __DIR__ . "/template/footer.phtml"; ?>

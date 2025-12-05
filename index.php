@@ -5,6 +5,8 @@
 
 //Session management logic, primarily useful for tracking logins and ensuring everything isn't stateless
 session_start();
+require_once __DIR__ . "/Model/Auth.php";
+require_once __DIR__ . "/Model/database.php";
 
 $view = new stdClass();
 $view->username = null;

@@ -86,27 +86,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 }
-include __DIR__ . "/template/header.phtml";
+include __DIR__ . "/Views/template/header.phtml";
 ?>
-<main class="registration-section">
+<main class="registration-section" xmlns="http://www.w3.org/1999/html">
     <h2>Register New Account</h2>
 
     <form method="POST" action="Registration.php" class="registration-form">
 
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required>
+        <input type="text" id="email" name="email" required> <br>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" required> <br>
 
         <label for="confirm_password">Confirm Password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
+        <input type="password" id="confirm_password" name="confirm_password" required> <br>
 
         <label for="full_name">Full Name:</label>
-        <input type="text" id="full_name" name="full_name" required>
+        <input type="text" id="full_name" name="full_name" required><br>
 
         <label for="account_phone">Phone Number:</label>
-        <input type="text" id="account_phone" name="account_phone">
+        <input type="text" id="account_phone" name="account_phone"><br>
 
         <button type="submit">Register</button>
 
@@ -116,4 +116,4 @@ include __DIR__ . "/template/header.phtml";
     </form>
 </main>
 
-<?php include __DIR__ . "/template/footer.phtml"; ?>
+<?php include __DIR__ . "/Views/template/footer.phtml"; ?>

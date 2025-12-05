@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once __DIR__ . "/Model/Auth.php";
+require_once __DIR__ . "/Model/database.php";
+require_once __DIR__ . "/Views/template/header.phtml";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,3 +18,7 @@
 
 </body>
 </html>
+
+<?php
+require_once __DIR__ . "/Views/template/footer.phtml";
+?>

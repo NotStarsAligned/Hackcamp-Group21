@@ -38,7 +38,7 @@ if (isset($_GET['logout'])){
   header("Location: Login.php");
    exit;
 }
-include __DIR__ . "/template/header.phtml";
+include __DIR__ . "/Views/template/header.phtml";
 ?>
 
 <main class="login-section">
@@ -48,10 +48,10 @@ include __DIR__ . "/template/header.phtml";
 
             <label for="email">Email:</label>
             <label for="account_email"></label>
-            <input type="text" id="email" name="email" required>
+            <input type="text" id="email" name="email" required> <br>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" required> <br>
 
             <button type="submit">Login</button>
 
@@ -62,10 +62,14 @@ include __DIR__ . "/template/header.phtml";
 
     <?php else: ?>
         <div class="logout-container">
-            <p><?= htmlspecialchars(Authentication::full_name()) ?> is logged in.</p>
+            <p>Welcome: <?= htmlspecialchars(Authentication::full_name()) ?> </p>
             <a href="/Login.php?logout=1" class="logout-btn">Logout</a>
         </div>
     <?php endif; ?>
+    <p class="register-link">
+        Don't have an account?
+        <a href="Registration.php">Register here</a>
+    </p>
 
 </main>
-<?php include __DIR__ . "/template/footer.phtml"; ?>
+<?php include __DIR__ . "/Views/template/footer.phtml"; ?>

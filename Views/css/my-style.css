@@ -1,38 +1,190 @@
-#title {
-    margin-top: 12px;
-    background-color: #fff;
-    color: #000;
+/* style.css - TilePlan Header, Footer and User Info Styles */
 
-}
-#menu {
-    border-top: solid 6px #f00;
-    background-color: #f00;
-    color: #fff;
-    height: 400px;
+/* ===== RESET & BASE STYLES ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-#menu a {
-    background-color: #f00;
-    color: #fff;
-    text-decoration: none;
-    display: block;
-}
-#menu a:hover {
-    background-color: #f00;
-    color: #ddd;
-    text-decoration:underline;
-    display: block;
+/* ===== HEADER STYLES ===== */
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 30px;
+    border-bottom: 4px solid #1a1a1a;
+    box-sizing: border-box;
 }
 
-#content {
-    background-color: #fff;
-    border-top: solid 6px #f00;
-
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-#footer {
-    margin_top: 20px;
+.nav-links {
+    display: flex;
+    gap: 40px;
+    font-size: 18px;
+    color: #444;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 18px;
+}
+
+.logout-btn {
+    background-color: #1a1a4d;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ===== FOOTER STYLES ===== */
+footer {
+    background: #ffffff;
+    padding: 40px 20px;
     text-align: center;
-    background-color: #000;
-    color: #fff;
+    border-top: 6px solid #f2c300;
+    position: relative;
+}
+
+footer .logo img {
+    width: 140px;
+    margin-bottom: 10px;
+}
+
+footer .social i {
+    margin: 0 5px;
+    font-size: 20px;
+    color: #001a55;
+}
+
+footer .nav-section {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 80px;
+}
+
+footer .contact {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding: 0 40px;
+}
+
+footer .contact div {
+    text-align: left;
+}
+
+footer .bottom-bar {
+    margin-top: 40px;
+    background: #001a55;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+/* ===== USER INFO PAGE STYLES ===== */
+.userinfo-container {
+    padding: 40px 0;
+    min-height: calc(100vh - 200px); /* 考虑header和footer的高度 */
+}
+
+/* profile picture circle */
+.profile-pic {
+    width: 160px;
+    height: 160px;
+    background: #0b0f3a;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 60px;
+    margin: 0 auto;
+}
+
+/* card for personal info */
+.info-card {
+    border: 3px solid #0b0f3a;
+    border-radius: 20px;
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* buttons */
+.btn-darkblue {
+    background-color: #0b0f3a;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-darkblue:hover {
+    background-color: #1a1a4d;
+}
+
+.btn-yellow {
+    background-color: #f2c300;
+    color: black;
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: 2px solid #000;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-yellow:hover {
+    background-color: #e6b800;
+}
+
+.divider-line {
+    width: 2px;
+    background-color: #0b0f3a;
+    height: 300px;
+    margin: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .divider-line {
+        width: 80%;
+        height: 2px;
+        margin: 30px auto;
+    }
+
+    .info-card {
+        height: auto;
+        min-height: 200px;
+    }
+
+    footer .nav-section,
+    footer .contact {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    footer .bottom-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

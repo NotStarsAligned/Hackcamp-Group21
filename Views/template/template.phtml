@@ -1,59 +1,250 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation - Dark Mode High-Visibility</title>
+    <style>
+        /* Design 9: Dark Mode / High-Visibility Bar */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=Bebas+Neue&display=swap');
+        body {
+            font-family: 'Fira Sans', sans-serif;
+            background-color: #333; /* Dark background for surrounding page */
+            margin: 0;
+            padding: 30px;
+            color: #f0f0f0; /* Default light text */
+        }
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        /* --- Main Container: Dark Paper --- */
+        .invoice-paper {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #212121; /* Charcoal Black document background */
+            border-radius: 8px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+            padding: 40px;
+        }
 
-    <!-- Bootstrap core CSS -->
-    <link href="/Views/css/bootstrap.css" rel="stylesheet">
-    <!-- Bootstrap theme -->
-    <link href="/Views/css/bootstrap-theme.css" rel="stylesheet">
-    <link href="/Views/css/my-style.css" rel="stylesheet">
+        /* --- Header & Title --- */
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+        }
+        .company-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 50px;
+            font-weight: 400;
+            color: #ff5722; /* Bright Orange/Red Accent */
+            letter-spacing: 0.15em;
+        }
+        .document-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #f0f0f0;
+            text-transform: uppercase;
+        }
+        .header-meta p {
+            font-size: 14px;
+            color: #ccc;
+            margin: 2px 0;
+        }
 
-    <title>Tile Plan UK</title>
+        /* --- Information Section: Uses full-width bars for separation --- */
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 15px 0;
+            background-color: #303030; /* Slightly lighter band for info */
+            border-radius: 4px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .info-block {
+            width: 48%; /* Adjust for spacing */
+        }
+        .info-block h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ff5722;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .info-block p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .info-block.right {
+            text-align: right;
+        }
+
+        /* --- Table Styles --- */
+        .item-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .item-table thead {
+            background-color: #ff5722; /* Accent Block Header */
+            color: #212121;
+        }
+        .item-table th, .item-table td {
+            padding: 12px 18px;
+            border-bottom: 1px solid #333; /* Subtle divider */
+            text-align: left;
+            font-size: 14px;
+        }
+        .item-table th {
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .item-table tr:nth-child(even) {
+            background-color: #282828;
+        }
+        .item-table td.right, .item-table td.center {
+            text-align: right;
+        }
+        .item-table td:last-child {
+            font-weight: 700;
+            color: #f0f0f0;
+        }
+
+        /* --- Summary Section --- */
+        .summary-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+        .summary-box {
+            width: 100%;
+            max-width: 50%;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 15px;
+            border-bottom: 1px dashed #444;
+        }
+        .summary-row.final-calc {
+            font-weight: 600;
+            color: #ff5722;
+            border-bottom: none;
+            padding-bottom: 15px;
+        }
+
+        /* Grand Total Emphasis Block */
+        .grand-total-block {
+            background-color: #ff5722; /* Full Accent Block */
+            color: #212121;
+            padding: 18px 20px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .grand-total-block .label {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .grand-total-block .amount {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            font-weight: 400;
+        }
+
+        /* --- Footer --- */
+        .invoice-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 13px;
+            color: #999;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <table class="table-primary">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="table-primary">
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-        </tr>
-        </tbody>
-    </table>
+
+<div class="invoice-paper">
+
+    <header class="invoice-header">
+        <div>
+            <div class="company-title">TILE PLAN UK</div>
+            <p style="font-size: 14px; color: #ccc; margin-top: 4px;">Official Quotation & Invoice | Premium Tile Specialists</p>
+        </div>
+        <div class="header-meta" style="text-align: right;">
+            <h1 class="document-title">QUOTATION</h1>
+            <p>ID: <span style="font-weight: 700;">#QUO-2025-0042</span></p>
+            <p>Date: 25/11/2025</p>
+        </div>
+    </header>
+
+    <section class="info-section">
+
+        <div class="info-block">
+            <h2>Client Details</h2>
+            <p style="font-weight: 600; color: #ff5722;">Mr. John Smith</p>
+            <p>Apartment 10, The Bridge Quay</p>
+            <p>Manchester, M5 4AP</p>
+            <p>john.smith@client.com</p>
+        </div>
+
+        <div class="info-block right">
+            <h2>Terms & Contact</h2>
+            <p>Contact Email: **office@tileplanuk.co.uk**</p>
+            <p>Quotation valid for **30 days**.</p>
+            <p>Phone: (0161) 555-TILE</p>
+            <p style="font-size: 12px; margin-top: 8px; color: #999;">Reference ID: #QUO-2025-0042</p>
+        </div>
+    </section>
+
+    <section style="margin-bottom: 40px;">
+        <h3 style="font-size: 20px; font-weight: 700; color: #ff5722; margin-bottom: 15px;">Itemised Cost Breakdown (Kitchen - 22.50 m²)</h3>
+        <div class="item-table-container">
+            <table class="item-table">
+                <thead><tr><th>Description</th><th style="text-align: center;">Qty/Area</th><th style="text-align: right;">Unit Price (£)</th><th style="text-align: right;">Total (£)</th></tr></thead>
+                <tbody>
+                <tr><td>Porcelain Tile - Coastal Grey (60x60cm)</td><td class="center">18 box</td><td class="right">£35.00</td><td class="right">£630.00</td></tr>
+                <tr><td>High-Strength Flexible Adhesive</td><td class="center">3 bag</td><td class="right">£45.00</td><td class="right">£135.00</td></tr>
+                <tr><td>Grout & Sealant Kit - Mid-Grey</td><td class="center">2 unit</td><td class="right">£22.50</td><td class="right">£45.00</td></tr>
+                <tr><td>Aluminium Edge Trim - Brushed Steel</td><td class="center">19 metre</td><td class="right">£8.50</td><td class="right">£161.50</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="summary-container">
+        <div class="summary-box">
+            <div class="summary-details">
+                <div class="summary-row"><span>Subtotal (Materials & Consumables):</span><span style="font-weight: 500;">£971.50</span></div>
+                <div class="summary-row"><span>Installation Labour:</span><span style="font-weight: 500;">£560.00</span></div>
+                <div class="summary-row final-calc"><span>Delivery Cost:</span><span style="font-weight: 500;">£50.00</span></div>
+                <div class="summary-row final-calc"><span>Subtotal Before VAT:</span><span style="color: #ff5722;">£1,581.50</span></div>
+                <div class="summary-row"><span>VAT (20%):</span><span style="font-weight: 600; color: #ff5722;">£316.30</span></div>
+            </div>
+
+            <div class="grand-total-block">
+                <span class="label">TOTAL DUE:</span>
+                <span id="grand-total" class="amount">£1,897.80</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="invoice-footer">
+        <h4 style="font-weight: 700; color: #ff5722; margin-bottom: 8px;">Payment & Installation Notes</h4>
+        <p>A 20% non-refundable deposit is required to secure installation dates. Full terms and conditions are available upon request.</p>
+        <p style="margin-top: 8px;">Thank you for choosing Tile Plan UK. Please direct all enquiries to **office@tileplanuk.co.uk**.</p>
+    </footer>
+
 </div>
+
 </body>
 </html>
-<style>
-    table, th, td {
-        border: 1px solid green;
-    }
-</style>

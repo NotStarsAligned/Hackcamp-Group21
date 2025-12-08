@@ -1,28 +1,64 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Header for tileplan</title>
-    <link rel="stylesheet" href="my-style.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- OpenLayers CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <title>TilePlan</title>
 </head>
-<body>
-<header>
-    <!--wang work我的代码系列-->
-    <div class="logo">
-        <img src="logo.png" alt="TilePlan Logo" height="50" />
-    </div>
 
-    <nav class="nav-links" style="margin-left: 40px;">
-        <span>&lt;nav&gt;</span>
-        <span>&lt;nav&gt;</span>
-        <span>&lt;nav&gt;</span>
-    </nav>
+<body role="document">
 
-    <div class="user-section" style="margin-left:auto;">
-        <span></span>
-        <button class="logout-btn">Logout</button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.php">
+            <img src="logo.png" alt="TilePlan Logo" height="50" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Nav Link 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Nav Link 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Nav Link 3</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav me-3">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="logout.php">Logout</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</header>
-</body>
-</html>
+</nav>
+
+<div class="container-fluid" style="padding-top: 70px;">
+    <div class="row">
+        <div class="col-12">
+            <h1></h1>
+        </div>
+    </div>

@@ -21,6 +21,7 @@ $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 $pdfString = $dompdf->output();
+$dompdf->stream("Quotation-Invoice-42.pdf", ["Attachment" => false]);
 // --- CONFIGURATION / BEST PRACTICE ---
 // CRITICAL SECURITY WARNING: Do NOT use your primary Gmail password here.
 // Instead, you must generate an App Password in your Google Account security settings
@@ -56,7 +57,7 @@ try {
     $mail->setFrom($smtp_username, $sender_name);
 
     // The actual recipient
-    $mail->addAddress("jumbonzerhema@gmail.com", "Jumbo");
+    $mail->addAddress("putEmailhere", "John Doe");
 
     // Content
     $mail->isHTML(true); // Set email format to HTML
@@ -71,6 +72,7 @@ try {
         'application/pdf'           // Mime type
     );
     // Send the email
+
     $mail->send();
     echo "Message has been sent successfully!";
 

@@ -9,7 +9,7 @@ session_start();
 $view = new stdClass();
 $view->username = null;
 $view->isLogged = false;
-header("Location: sendEmail.php");
+//removed location straight to send email.phtml
 
 // Views get output here
 require_once("Views/index.phtml");

@@ -11,10 +11,10 @@
     <meta name="author" content="TilePlan">
 
     <!-- Bootstrap core CSS -->
-    <link href="Views/css/bootstrap.css" rel="stylesheet">
+    <link href="/Views/css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="Views/css/bootstrap-theme.css" rel="stylesheet">
-    <link href="Views/css/my-style.css" rel="stylesheet">
+    <link href="/Views/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/Views/css/my-style.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
@@ -30,19 +30,28 @@
             <!-- Logo 和所有链接都在左边 -->
             <div class="navbar-nav mr-auto">
                 <!-- Logo -->
-                <a class="navbar-brand mr-4" href="index.php?page=home">
+                <a class="navbar-brand mr-4" href=../../index.php?page=home">
                     <img src="images/logo-image/TilePlan.png" alt="TilePlan Logo" class="navbar-logo">
                 </a>
 
                 <!-- 导航链接 -->
-                <a class="nav-link active" href="index.php?page=home">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="#">Start Survey</a>
-                <a class="nav-link" href="#">Site Information</a>
+                <a class="nav-link active" href="../../index.php?page=home">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="page1.php">Start Survey</a>
+                <a class="nav-link" href="page2.php">Site Information</a>
             </div>
+            <!-- div for User Name to display who is logged in-->
+            <div class="navbar-nav mr-auto">
+                <?php if (Authentication::isLoggedIn()): ?>
+                <p>Welcome: <?= htmlspecialchars(Authentication::full_name()) ?> </p>
+
+                <?php endif; ?>
+
+            </div>
+
 
             <!-- 右侧只放登录按钮 -->
             <div class="navbar-nav ml-auto">
-                <a class="btn btn-outline-primary" href="#">
+                <a class="btn btn-outline-primary" href="/Login.php">
                     <i class="fas fa-sign-in-alt mr-1"></i> Login
                 </a>
             </div>

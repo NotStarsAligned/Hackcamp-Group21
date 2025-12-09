@@ -592,7 +592,7 @@ footer .bottom-bar {
 }
 
 .btn-wishlist {
-    background-color: #eee;
+    background-color: #f2c300;
     color: #000;
 }
 
@@ -602,11 +602,11 @@ footer .bottom-bar {
 }
 
 .btn-wishlist:hover {
-    background-color: #ddd;
+    background-color: #FFDF4D;
 }
 
 .btn-quote:hover {
-    background-color: #1D215E;
+    background-color: #2F3BB7;
 }
 
 /* Pagination styling */

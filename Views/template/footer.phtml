@@ -1,81 +1,82 @@
-</div>
-</div>
-
-<footer class="page-footer font-small blue">
-
-    <div class="container-fluid py-4">
+<footer class="page-footer font-small footer-blue pt-4 mt-5">
+    <div class="container-fluid text-center text-md-left">
         <div class="row">
-            <div class="col-md-3 text-center">
-                <div class="logo mb-3">
-                    <img src="logo.png" alt="TilePlan Logo" height="50" />
-                </div>
+            <!-- Contact Information -->
+            <div class="col-md-6 mt-md-0 mt-3">
+                <h5 class="text-uppercase">TilePlan Survey</h5>
+                <p>Professional tile planning and measurement solutions</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-map-marker-alt mr-2"></i> 123 Survey Street, Salford, UK</li>
+                    <li><i class="fas fa-phone mr-2"></i> +44 (0) 1234 567890</li>
+                    <li><i class="fas fa-envelope mr-2"></i> info@tileplansurvey.com</li>
+                </ul>
             </div>
 
-            <div class="col-md-3 text-center">
-                <div class="social mb-3">
-                    <i class="fab fa-facebook mx-2"></i>
-                    <i class="fab fa-x-twitter mx-2"></i>
-                    <i class="fab fa-instagram mx-2"></i>
-                    <i class="fab fa-youtube mx-2"></i>
-                    <i class="fab fa-linkedin mx-2"></i>
-                </div>
+            <!-- Quick Links -->
+            <div class="col-md-3 mb-md-0 mb-3">
+                <h5 class="text-uppercase">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#!" class="text-white">Home</a></li>
+                    <li><a href="#!" class="text-white">Start Survey</a></li>
+                    <li><a href="#!" class="text-white">Site Information</a></li>
+                    <li><a href="#!" class="text-white">Login</a></li>
+                </ul>
             </div>
 
-            <div class="col-md-3 text-center">
-                <div class="nav-section mb-3">
-                    <a href="#" class="d-block">Nav Link 1</a>
-                    <a href="#" class="d-block">Nav Link 2</a>
-                    <a href="#" class="d-block">Nav Link 3</a>
-                    <a href="#" class="d-block">Nav Link 4</a>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="contact">
-                    <div><i class="fa-regular fa-envelope"></i> info@tileplan.com</div>
-                    <div>
-                        <p class="mb-1">London & South: Tel: 020 3397 2997</p>
-                        <p class="mb-1">Midlands: Tel: 0121 663 0832</p>
-                        <p class="mb-1">North: Tel: 0161 883 0027</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-12 text-center">
-                <div class="bottom-bar">
-                    <a href="#" class="mx-3">Privacy Policy</a>
-                    <a href="#" class="mx-3">News</a>
-                    <a href="#" class="mx-3">About Us</a>
-                </div>
+            <!-- Services -->
+            <div class="col-md-3 mb-md-0 mb-3">
+                <h5 class="text-uppercase">Our Services</h5>
+                <ul class="list-unstyled">
+                    <li>Tile Measurement</li>
+                    <li>Project Planning</li>
+                    <li>Product Selection</li>
+                    <li>Site Survey</li>
+                </ul>
             </div>
         </div>
     </div>
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">
-        <p>© 2024 University of Salford using the MVC design pattern and the Bootstrap CSS framework</p>
+        <p>© 2025 TilePlan Survey | University of Salford Project |
+            Using MVC design pattern and Bootstrap CSS framework</p>
+        <p>Contact: support@tileplansurvey.com | Phone: +44 (0) 1234 567890</p>
     </div>
-    <!-- Copyright -->
-
 </footer>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
+</div>
 
-<!-- jQuery, Popper, Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/Views/js/bootstrap.min.js"></script>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<!-- OpenLayers JS (if you still need it) -->
-<script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+<!-- 打字效果脚本 -->
 <script>
-    $('#loginErrorModal').modal('show')
+    // 确保打字效果在页面加载后工作
+    document.addEventListener('DOMContentLoaded', function() {
+        const typingText = document.querySelector('.typing-text');
+        if (typingText) {
+            // 重置动画以便重复观看
+            typingText.style.animation = 'none';
+            setTimeout(() => {
+                typingText.style.animation = '';
+            }, 10);
+        }
+
+        // 简单的按钮点击提示（后续可替换为实际功能）
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    const buttonText = this.textContent.trim();
+                    alert(`${buttonText} functionality will be implemented soon!`);
+                }
+            });
+        });
+    });
 </script>
 
 </body>

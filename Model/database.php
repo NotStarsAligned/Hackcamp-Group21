@@ -6,16 +6,16 @@ class Database{
 
     private function __construct(){
         //path to database
-        $dbPath = realpath(__DIR__.'/../database/people.sqlite/');
+        $dbPath = realpath(__DIR__.'/../database.sqlite');
         if (!$dbPath){
             die("Database path not set");
         }
-        $this->conn = new PDO("sqlite" . $dbPath);
+        $this->conn = new PDO("sqlite:" . $dbPath);
         //exception
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     public static function getInstance(){
-        if (self::$instance==null){
+        if (self::$instance === null){
             self::$instance = new Database();
         }
         return self::$instance;

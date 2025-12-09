@@ -33,22 +33,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
      }
 }
 //log out
-if (isset($_GET['Logout'])){
+if (isset($_GET['logout'])){
   Authentication::logout();
   header("Location: Login.php");
    exit;
 }
+include __DIR__ . "/Views/template/header.phtml";
 ?>
 
 <main class="login-section">
     <h2>Log In</h2>
     <?php if (!Authentication::isLoggedIn()): ?>
         <form method="POST" action="Login.php" class="login-form">
-            <label for="account_email">Email:</label>
-            <input type="text" id="account_email" name="account_email" required>
+
+            <label for="email">Email:</label>
+            <label for="account_email"></label>
+            <input type="text" id="email" name="email" required> <br>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" required> <br>
 
             <button type="submit">Login</button>
 
@@ -59,9 +62,14 @@ if (isset($_GET['Logout'])){
 
     <?php else: ?>
         <div class="logout-container">
-            <p><?= htmlspecialchars(Authentication::full_name()) ?> is logged in.</p>
-            <a href="Login.php?logout=1" class="logout-btn">Logout</a>
+            <p>Welcome: <?= htmlspecialchars(Authentication::full_name()) ?> </p>
+            <a href="/Login.php?logout=1" class="logout-btn">Logout</a>
         </div>
     <?php endif; ?>
+    <p class="register-link">
+        Don't have an account?
+        <a href="Registration.php">Register here</a>
+    </p>
 
 </main>
+<?php include __DIR__ . "/Views/template/footer.phtml"; ?>

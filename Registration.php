@@ -81,8 +81,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ":full_name" => $full_name,
                 ":phone" => $account_phone,
             ]);
+            // get the new user's ID
+            $user_id = $db->lastInsertId();
 
-            $message = "Registration successful! You can now log in.";
+        // insert into another table
+            $stmt2 = $db->prepare("
+                  INSERT INTO customers (user_id)
+                  VALUES (:user_id)");
+            $stmt2->execute([":user_id" => $user_id]);
+
+            // AUTO LOGIN AFTER REGISTRATION
+            // Store user data in session
+            $_SESSION['user_id'] = $user_id;
+            $_SESSION['email'] = $email;
+            $_SESSION['full_name'] = $full_name;
+            $_SESSION['role'] = 'customer';
+            // Redirect to  home page
+            header("Location: /index.php");
+            exit();
+
         }
     }else{
         $message = $errors;

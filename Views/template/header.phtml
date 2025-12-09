@@ -4,61 +4,65 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="TilePlan Survey Website - Professional tile planning solutions">
+    <meta name="author" content="TilePlan">
 
     <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Views/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="/Views/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/Views/css/my-style.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <!-- OpenLayers CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <link href="style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-    <title>TilePlan</title>
+    <title>TilePlan Survey</title>
 </head>
 
 <body role="document">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">
-            <img src="logo.png" alt="TilePlan Logo" height="50" />
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<div class="container-fluid">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <!-- Logo 和所有链接都在左边 -->
+            <div class="navbar-nav mr-auto">
+                <!-- Logo -->
+                <a class="navbar-brand mr-4" href=../../index.php?page=home">
+                    <img src="images/logo-image/TilePlan.png" alt="TilePlan Logo" class="navbar-logo">
+                </a>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Nav Link 1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Nav Link 2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Nav Link 3</a>
-                </li>
-            </ul>
+                <!-- 导航链接 -->
+                <a class="nav-link active" href="../../index.php?page=home">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="page1.php">Start Survey</a>
+                <a class="nav-link" href="page2.php">Site Information</a>
+            </div>
+            <!-- div for User Name to display who is logged in-->
+            <div class="navbar-nav mr-auto">
+                <?php if (Authentication::isLoggedIn()): ?>
+                <p>Welcome: <?= htmlspecialchars(Authentication::full_name()) ?> </p>
 
-            <ul class="navbar-nav me-3">
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="logout.php">Logout</a>
-                </li>
-            </ul>
+                <?php endif; ?>
+
+            </div>
+
+
+            <!-- 右侧只放登录按钮 -->
+            <div class="navbar-nav ml-auto">
+                <a class="btn btn-outline-primary" href="/Login.php">
+                    <i class="fas fa-sign-in-alt mr-1"></i> Login
+                </a>
+            </div>
+
+            <!-- 移动端菜单按钮 -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
-    </div>
-</nav>
+    </nav>
+</div>
 
-<div class="container-fluid" style="padding-top: 70px;">
-    <div class="row">
-        <div class="col-12">
-            <h1></h1>
-        </div>
-    </div>
+<!-- 注意：这里已经移除了显示 pageTitle 的 h1 标签 -->

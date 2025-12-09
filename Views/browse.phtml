@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Made by Andrew -->
+<?php require ("Views/template/header.phtml");?>
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Products</title>
+    <link rel="stylesheet" href="../my-style.css">
+</head>
+<body>
+
+<div id="title">
+    <h1>TilePlan – Browse Products</h1>
+</div>
+
+<div id="content">
+    <h2>Products</h2>
+
+    <?php if (empty($view->tiles)): ?>
+        <p>No products found.</p>
+    <?php else: ?>
+        <div class="product-grid">
+            <?php foreach ($view->tiles as $tile): ?>
+                <?php
+                $img = $tile['thumbnail_url'] ?: 'placeholder_image.png';
+                $variants = $tile['variants'];
+                ?>
+                <div class="product-card">
+                    <img src="<?php echo htmlspecialchars($img); ?>" alt="Product image">
+
+                    <h3><?php echo htmlspecialchars($tile['name']); ?></h3>
+                    <p><?php echo htmlspecialchars($tile['description']); ?></p>
+
+                    <?php if (!empty($variants)): ?>
+                        <label>
+                            <span class="variant-label">Colour / Polish:</span>
+                            <select class="variant-select">
+                                <?php foreach ($variants as $variant): ?>
+                                    <?php
+                                    $colour = $variant['colour'] ?: 'Unknown colour';
+                                    $polish = $variant['polish'] ?: 'Standard';
+                                    $price  = $variant['price_trade'];
+                                    $label  = $colour . ' / ' . $polish . ' (£' . number_format($price, 2) . ')';
+                                    ?>
+                                    <option value="<?php echo (int)$variant['id']; ?>">
+                                        <?php echo htmlspecialchars($label); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </label>
+                    <?php else: ?>
+                        <p><em>No variants available</em></p>
+                    <?php endif; ?>
+
+                    <div class="product-card-buttons">
+                        <button type="button" class="btn-wishlist">
+                            Add to wishlist
+                        </button>
+                        <button type="button" class="btn-quote">
+                            Add to quote
+                        </button>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <?php if ($view->page > 1): ?>
+                <a href="?page=<?php echo $view->page - 1; ?>">&laquo; Prev</a>
+            <?php else: ?>
+                <span class="disabled">&laquo; Prev</span>
+            <?php endif; ?>
+
+            <?php for ($p = 1; $p <= $view->totalPages; $p++): ?>
+                <?php if ($p == $view->page): ?>
+                    <span class="current"><?php echo $p; ?></span>
+                <?php else: ?>
+                    <a href="?page=<?php echo $p; ?>"><?php echo $p; ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($view->page < $view->totalPages): ?>
+                <a href="?page=<?php echo $view->page + 1; ?>">Next &raquo;</a>
+            <?php else: ?>
+                <span class="disabled">Next &raquo;</span>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>
+
+<div id="footer">
+    <p>&copy; <?php echo date('Y'); ?> TilePlan</p>
+</div>
+
+</body>
+<?php require ("Views/template/footer.phtml");?>
+</html>

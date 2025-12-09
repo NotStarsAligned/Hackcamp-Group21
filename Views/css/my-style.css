@@ -4,6 +4,7 @@
     color: #000;
 
 }
+
 #menu {
     border-top: solid 6px #f00;
     background-color: #f00;
@@ -17,10 +18,11 @@
     text-decoration: none;
     display: block;
 }
+
 #menu a:hover {
     background-color: #f00;
     color: #ddd;
-    text-decoration:underline;
+    text-decoration: underline;
     display: block;
 }
 
@@ -36,3 +38,179 @@
     background-color: #000;
     color: #fff;
 }
+
+
+
+/* 88888888888888888888888888888888888888888888888888888888888 */
+/*      ANDREW- drop down menu stuff for browsing -ANDREW      */
+/* 88888888888888888888888888888888888888888888888888888888888 */
+#title {
+    margin-top: 12px;
+    background-color: #fff;
+    color: #000;
+}
+
+#menu {
+    border-top: solid 6px #1D215E;
+    background-color: #1D215E;
+    color: #fff;
+    height: 400px;
+}
+
+#menu a {
+    background-color: #1D215E;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+#menu a:hover {
+    background-color: #1D215E;
+    color: #ddd;
+    text-decoration: underline;
+    display: block;
+}
+
+#content {
+    background-color: #fff;
+    border-top: solid 6px #1D215E;
+    padding: 20px;
+    min-height: 400px;
+}
+
+#footer {
+    margin_top: 20px; /* (typo but keeping your original) */
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+}
+
+/* --- Browse page specific styles --- */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background-color: #f5f5f5;
+}
+
+.product-card h3 {
+    margin: 4px 0;
+    font-size: 1rem;
+}
+
+.product-card p {
+    margin: 4px 0 8px;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.variant-label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+.variant-select {
+    width: 100%;
+    padding: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.product-card-buttons {
+    margin-top: auto;
+    display: flex;
+    gap: 8px;
+}
+
+.product-card-buttons button {
+    flex: 1;
+    padding: 8px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-wishlist {
+    background-color: #eee;
+    color: #000;
+}
+
+.btn-quote {
+    background-color: #1D215E;
+    color: #fff;
+}
+
+.btn-wishlist:hover {
+    background-color: #ddd;
+}
+
+.btn-quote:hover {
+    background-color: #1D215E;
+}
+
+/* Pagination styling */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.pagination a,
+.pagination span {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+}
+
+.pagination .current {
+    background-color: #1D215E;
+    color: #fff;
+    border-color: #1D215E;
+}
+
+.pagination .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Responsive: 2 columns then 1 column on small screens */
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 88888888888888888888888888888888888888888888888888888888888 */
+/*      ANDREW- drop down menu stuff for browsing -ANDREW      */
+/* 88888888888888888888888888888888888888888888888888888888888 */

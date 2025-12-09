@@ -37,7 +37,7 @@ class Authentication {
     }
     //need to modify  to display what user is logged in
     /*
- public static function getCurrentUser(){
+     * public static function getCurrentUser(){
         if (!isset($_SESSION['user_id'])) {
             return null;
         }

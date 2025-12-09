@@ -48,10 +48,10 @@ include __DIR__ . "/Views/template/header.phtml";
 
             <label for="email">Email:</label>
             <label for="account_email"></label>
-            <input type="text" id="email" name="email" required> <br>
+            <input type="text" id="email" name="email" required>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required> <br>
+            <input type="password" id="password" name="password" required>
 
             <button type="submit">Login</button>
 
@@ -62,14 +62,10 @@ include __DIR__ . "/Views/template/header.phtml";
 
     <?php else: ?>
         <div class="logout-container">
-            <p>Welcome: <?= htmlspecialchars(Authentication::full_name()) ?> </p>
+            <p><?= htmlspecialchars(Authentication::full_name()) ?> is logged in.</p>
             <a href="/Login.php?logout=1" class="logout-btn">Logout</a>
         </div>
     <?php endif; ?>
-    <p class="register-link">
-        Don't have an account?
-        <a href="Registration.php">Register here</a>
-    </p>
 
 </main>
 <?php include __DIR__ . "/Views/template/footer.phtml"; ?>

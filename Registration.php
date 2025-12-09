@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-require_once __DIR__ . "/Model/Auth.php";
 require_once __DIR__ . "/Model/database.php";
 
 $message = "";
@@ -16,11 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = "" ;
 
     //email validation
-    // email must contain domain and TLD (.com, .co.uk, etc.)
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/@.+\..+/", $email)) {
-        $message = "Invalid email address. Please enter a full email like example@gmail.com.<br>";
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $message = "Invalid email address.<br>";
     }
-
     //pasword validation
     if ($password !== $confirmPassword) {
         $errors .= "Passwords do not match.<br>";
@@ -91,83 +88,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 include __DIR__ . "/Views/template/header.phtml";
 ?>
-<main class="registration-section" xmlns="http://www.w3.org/1999/html">
+<main class="registration-section">
     <h2>Register New Account</h2>
 
     <form method="POST" action="Registration.php" class="registration-form">
-        <!--Name field-->
-        <label for="full_name">Full Name:</label>
-        <input type="text" id="full_name" name="full_name" placeholder="John Doe" required><br>
-        <!--email field-->
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email"  placeholder="example@gmail.com" required> <br>
-        <!--phone field-->
-        <label for="account_phone">Phone Number:</label>
-        <input type="text" id="account_phone" name="account_phone" placeholder="07123456789" required><br>
-        <!--password field-->
-        <label for="password">Password:</label>
 
-        <input type="password" id="password" name="password" placeholder="Min 12 characters" required>
-        <i class="fa fa-eye" id="togglePassword"></i>
-        <p id="password-length">Length: 0 / 12</p>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
 
         <label for="confirm_password">Confirm Password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-type password" required>
-        <i class="fa fa-eye" id="toggleConfirmPassword"></i>
+        <input type="password" id="confirm_password" name="confirm_password" required>
 
-        <p id="confirm-length">Length: 0 / 12</p>
+        <label for="full_name">Full Name:</label>
+        <input type="text" id="full_name" name="full_name" required>
 
-
+        <label for="account_phone">Phone Number:</label>
+        <input type="text" id="account_phone" name="account_phone">
 
         <button type="submit">Register</button>
 
-        <?php if (!empty($message)): ?>
-            <p class="message"><?= htmlspecialchars($message) ?></p>
+        <?php if ($message): ?>
+            <p class="message"><?= $message ?></p>
         <?php endif; ?>
-
     </form>
 </main>
-
-
-    <script>
-        // PASSWORD length display
-        const passwordField = document.getElementById("password");
-        passwordField.value = "";
-        const lengthDisplay = document.getElementById("password-length");
-
-        passwordField.addEventListener("input", function () {
-            const len = passwordField.value.length;
-            lengthDisplay.textContent = "Length: " + len + " / 12";
-        });
-
-        // CONFIRM PASSWORD length display
-        const confirmField = document.getElementById("confirm_password");
-        confirmField.value = "";
-        const confirmLengthDisplay = document.getElementById("confirm-length");
-
-        confirmField.addEventListener("input", function () {
-            const len = confirmField.value.length;
-            confirmLengthDisplay.textContent = "Length: " + len + " / 12";
-        });
-
-
-        // Toggle password visibility
-        const togglePassword = document.getElementById("togglePassword");
-        togglePassword.addEventListener("click", function () {
-            const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
-            passwordField.setAttribute("type", type);
-            this.classList.toggle("fa-eye-slash");
-        });
-
-        // Toggle confirm password visibility
-        const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
-        toggleConfirmPassword.addEventListener("click", function () {
-            const type = confirmField.getAttribute("type") === "password" ? "text" : "password";
-            confirmField.setAttribute("type", type);
-            this.classList.toggle("fa-eye-slash");
-        });
-    </script>
-
-<!-- dsada -->
 
 <?php include __DIR__ . "/Views/template/footer.phtml"; ?>

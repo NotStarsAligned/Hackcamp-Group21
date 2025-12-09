@@ -1,38 +1,482 @@
+ /* ===== RESET & BASE STYLES ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ===== MY ORIGINAL HEADER AREA ===== */
 #title {
     margin-top: 12px;
     background-color: #fff;
     color: #000;
-
 }
 #menu {
-    border-top: solid 6px #f00;
-    background-color: #f00;
+    border-top: solid 6px #003049;
+    background-color: #fff;
     color: #fff;
     height: 400px;
 }
-
 #menu a {
-    background-color: #f00;
+    background-color: #1b75bc;
     color: #fff;
     text-decoration: none;
     display: block;
 }
 #menu a:hover {
-    background-color: #f00;
-    color: #ddd;
-    text-decoration:underline;
+    background-color: #155a8f;
+    color: #e0ffe0;
+    text-decoration: underline;
     display: block;
 }
-
 #content {
     background-color: #fff;
-    border-top: solid 6px #f00;
-
+    border-top: solid 6px #1b75bc;
 }
-
 #footer {
     margin_top: 20px;
     text-align: center;
-    background-color: #000;
+    background-color: #003049;
     color: #fff;
 }
+
+
+/* ===== ACCOUNT DROPDOWN FROM andrew CSS (kept, integrated with my style) ===== */
+.account-menu {
+    position: relative;
+    display: inline-block;
+}
+.account-trigger {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    line-height: 0;
+}
+.account-trigger img {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+}
+.account-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    min-width: 180px;
+    background: #e8f7ff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 6px 0;
+    display: none;
+    z-index: 1000;
+}
+.account-menu:hover .account-dropdown,
+.account-menu:focus-within .account-dropdown {
+    display: block;
+}
+.account-dropdown a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+}
+
+/* ===== FOOTER STYLES ===== by 偶*/
+footer {
+    background: #ffffff;
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 6px solid #f2c300;
+    position: relative;
+}
+
+footer .logo img {
+    width: 140px;
+    margin-bottom: 10px;
+}
+
+footer .social i {
+    margin: 0 5px;
+    font-size: 20px;
+    color: #001a55;
+}
+
+footer .nav-section {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 80px;
+}
+
+footer .contact {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding: 0 40px;
+}
+
+footer .contact div {
+    text-align: left;
+}
+
+footer .bottom-bar {
+    margin-top: 40px;
+    background: #001a55;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+/* ===== USER INFO PAGE STYLES ===== by我*/
+.userinfo-container {
+    padding: 40px 0;
+    min-height: calc(100vh - 200px); /* 考虑header和footer的高度 */
+}
+
+/* profile picture circle By我*/
+.profile-pic {
+    width: 160px;
+    height: 160px;
+    background: #0b0f3a;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 60px;
+    margin: 0 auto;
+}
+
+/* card for personal info 我的作业*/
+.info-card {
+    border: 3px solid #0b0f3a;
+    border-radius: 20px;
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* buttons 按钮样式*/
+.btn-darkblue {
+    background-color: #0b0f3a;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-darkblue:hover {
+    background-color: #1a1a4d;
+}
+
+.btn-yellow {
+    background-color: #f2c300;
+    color: black;
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: 2px solid #000;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-yellow:hover {
+    background-color: #e6b800;
+}
+
+.divider-line {
+    width: 2px;
+    background-color: #0b0f3a;
+    height: 300px;
+    margin: auto;
+}
+
+/* ===== MEASUREMENT PAGE STYLES ===== by我*/
+
+.measurement-container {
+    min-height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.toggle-unit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.toggle-unit .form-check {
+    padding-left: 0;
+    margin: 0 10px;
+}
+
+/* 自定义开关样式以匹配图片 self adjustment match picture*/
+.unit-toggle-switch {
+    width: 70px;
+    height: 34px;
+    border-radius: 34px;
+    background-color: #0b0f3a;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.unit-toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: white;
+    transition: transform 0.3s;
+}
+
+/* 当input被选中时（模拟开关在右侧） the toggle*/
+.form-check-input:checked + .unit-toggle-switch {
+    background-color: #0b0f3a;
+}
+
+.form-check-input:checked + .unit-toggle-switch::after {
+    transform: translateX(36px);
+}
+
+/* 隐藏原始的 hide checkbox input */
+.form-check-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* 移除原有的 .input-group-custom 样式，使用 Grid 系统来布局 */
+/* .input-group-custom {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 80px;
+} */
+
+/* 新的布局容器，用于限制输入框的总宽度并居中 make sure the entry box at center*/
+.input-layout-wrapper {
+    max-width: 800px; /* 增加最大宽度以适应更宽的布局 increase the max width */
+    width: 100%;
+    margin-bottom: 80px;
+}
+
+.custom-input-box {
+    /* 确保文本在列内居中 make sure text at center*/
+    text-align: center;
+}
+
+.custom-input-box .form-control {
+    border: 3px solid #0b0f3a;
+    border-radius: 20px;
+    height: 50px;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.calc-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0b0f3a;
+    margin-bottom: 100px;
+}
+
+/* page indicator for measurement */
+.page-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #0b0f3a;
+    background-color: white;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #0b0f3a;
+}
+
+/* 顶部进度条/指示器  indicator at top*/
+.top-progress {
+    display: flex;
+    width: 100%;
+    height: 10px;
+    margin-bottom: 30px;
+}
+
+/* Page 1 of 5 调整 */
+.progress-segment-1of5 {
+    flex-grow: 1; /* 总共 5 份 total count five*/
+}
+
+/* 完成的步骤 (绿色) - 只有第 1 份 the green stuff */
+.progress-segment-1of5:nth-child(1) {
+    background-color: #4CAF50;
+}
+/* 未完成的步骤 (红色) - 第 2 到 第 5 份 uncompleted part 2/5*/
+.progress-segment-1of5:nth-child(n+2) {
+    background-color: #F44336;
+}
+
+/* 自定义深蓝色背景 admin page css */
+.sidebar-dark-blue {
+    background-color: #1a237e; /* the dark blue */
+    color: white; /* show white colour */
+    min-height: 100vh;
+}
+/* the logo and photo box */
+.logo-box, .photo-box {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: 2px solid white;
+    margin-bottom: 1rem;
+}
+.photo-box {
+    width: 100px; /* slighty bigger box额 */
+    height: 100px;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    background-color: #1a237e;
+    /* Mock-up 中 photo the dark blue background额  */
+    border: 4px solid #ffffff; /* use white border额 */
+}
+/* nav link 额*/
+.nav-link-custom {
+    color: white;
+    padding: 0.5rem 0;
+    display: block;
+}
+/* sepeate line from main额 */
+.separator-line {
+    height: 4px;
+    background-color: #fbc02d; /* 黄色分隔线 */
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+/* 内容卡片的边框 the card border*/
+.content-card {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+/* 订单详情的浅灰分隔线 the sepeater line*/
+.order-separator {
+    border-top: 1px solid #ddd;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+    /*the css for the quote*/
+     /* 主蓝色区域，类似品牌色 / Main blue color, like a brand color */
+ .main-blue-color {
+     background-color: #007bff;
+ }
+
+/* 中间内容外框，有点卡片风格 / Card-like border for content area */
+.content-card {
+    border: 4px solid #0056b3; /* 深蓝边框 / dark blue border */
+    padding: 0;
+    overflow: hidden; /* 确保内容不会溢出 / Prevent content overflow */
+}
+
+/* 评论框顶部的用户信息栏 / Review header section containing user info */
+.review-header {
+    display: flex; /* 水平排列 / Layout items horizontally */
+    align-items: center; /* 垂直居中 / Center vertically */
+    padding: 1rem;
+    background-color: #f8f9fa; /* 浅灰背景 / light grey background */
+}
+
+.review-text {
+    padding: 1rem; /* 评论文字区域的内边距 / padding for review content */
+}
+
+/* 用户头像占位符 / Placeholder for avatar */
+.review-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* 圆形头像 / circular avatar */
+    background-color: #ccc;
+    margin-right: 1rem; /* 与文字区域留一点间隔 / space between avatar and text */
+}
+
+/* 模拟滚动条的占位条 / Fake scrollbar placeholder just for layout */
+.scroll-bar-placeholder {
+    height: 10px;
+    width: 50%;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin: 2rem auto; /* 居中显示 / centered */
+    position: relative;
+}
+
+.scroll-bar-placeholder::after {
+    content: '';
+    position: absolute;
+    left: 30%; /* 小滑块的位置 / slider position */
+    top: -5px;
+    width: 40px;
+    height: 20px;
+    background-color: gray;
+    border-radius: 5px;
+}
+
+
+
+
+/* Responsive adjustments by wang我的作业*/
+@media (max-width: 768px) {
+    .divider-line {
+        width: 80%;
+        height: 2px;
+        margin: 30px auto;
+    }
+
+    .info-card {
+        height: auto;
+        min-height: 200px;
+    }
+
+    footer .nav-section,
+    footer .contact {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    footer .bottom-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+

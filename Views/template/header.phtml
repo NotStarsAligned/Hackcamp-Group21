@@ -45,19 +45,14 @@
 
                 <div class="d-flex align-items-center ms-auto">
                     <?php if (Authentication::isLoggedIn()): ?>
-                        <div class="dropdown">
-                            <button class="account-trigger icon-button dropdown-toggle"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                    style="border: 0; background: transparent; padding: 0; cursor: pointer;">
+                        <div class="account-menu">
+                            <button class="account-trigger icon-button" id="accountTriggerBtn">
                                 <img src="#" alt="Profile Menu" class="logo-img" style="width: 48px; height: 48px; border-radius: 6px;" />
                             </button>
-
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="browse.phtml">Browse</a></li>
-                                <li><a class="dropdown-item" href="#">Wish‑list</a></li>
-                                <li><hr class="dropdown-divider"></li> <li><a class="dropdown-item" href="/Logout.php">Log‑out</a></li>
+                            <ul class="account-dropdown" id="accountDropdownList">
+                                <li><a href="#">Browse</a></li>
+                                <li><a href="#">Wish‑list</a></li>
+                                <li><a href="/Logout.php">Log‑out</a></li>
                             </ul>
                         </div>
                     <?php else: ?>

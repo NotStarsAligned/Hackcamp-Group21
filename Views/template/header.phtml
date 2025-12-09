@@ -1,3 +1,13 @@
+<!--dont delete this path-->
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . "/../../Model/Auth.php";
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,7 +41,7 @@
             <div class="navbar-nav mr-auto">
                 <!-- Logo -->
                 <a class="navbar-brand mr-4" href=../../index.php?page=home">
-                    <img src="images/logo-image/TilePlan.png" alt="TilePlan Logo" class="navbar-logo">
+                    <img src="/images/TilePlan-Flooring" alt="TilePlan Logo" class="navbar-logo">
                 </a>
 
                 <!-- 导航链接 -->

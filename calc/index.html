@@ -1,58 +1,148 @@
-// -----------------------------
-// ROOM MEASUREMENT VARIABLES
-// -----------------------------
+<?php
 
-let roomLength = 4.5;      // room length (m or ft)
-let roomWidth = 3.2;       // room width  (m or ft)
-let measurementUnit = "m"; // "m" = metres, "ft" = feet
+class TileCalculator
+{
+    // Room dimensions (metres)
+    private $length;
+    private $width;
 
-// -----------------------------
-// TILE VARIABLES
-// -----------------------------
+    // Tile dimensions (millimetres)
+    private $tileLength;
+    private $tileWidth;
 
-let tileLengthMM = 600;    // tile length in millimetres
-let tileWidthMM = 600;     // tile width in millimetres
-let tilesPerBox = 4;       // number of tiles in one box
+    // 10% waste for cuts/breakage
+    private $wastePercent = 10.0;
 
-// -----------------------------
-// CONSTANTS
-// -----------------------------
+    // Assumption: 4 tiles per box
+    private $tilesPerBox = 4;
 
-const SQFT_PER_SQM = 10.7639; // conversion from m² to ft²
+    // Pricing (can later come from DB / spreadsheet)
+    private $materialCostPerM2 = 20.0; // 20 per m² (placeholder, depends on tile type)
+    private $labourCostPerM2   = 10.0; // 10 per m² (from "10 per meter" in meeting notes)
+    private $deliveryCost      = 65.0; // 65 (using full pallet rate)
+    private $consumablesCost   = 10.0; // 10 flat (adhesive, grout etc.)
+    private $taxRate           = 20.0; // 20% VAT (UK standard)
 
-// -----------------------------
-// AREA CALCULATIONS
-// -----------------------------
+    // Pallet information (not yet used in maths, stored for future)
+    private $palletCapacityM2   = 100.0; // 100 m² per pallet
+    private $fullPalletDelivery = 65.0;  // full pallet delivery rate
+    private $halfPalletDelivery = 55.0;  // half pallet delivery rate
 
-let areaSquareMeters;
-let areaSquareFeet;
 
-if (measurementUnit === "m") {
-  areaSquareMeters = roomLength * roomWidth;
-  areaSquareFeet = areaSquareMeters * SQFT_PER_SQM;
-} else {
-  areaSquareFeet = roomLength * roomWidth;
-  areaSquareMeters = areaSquareFeet / SQFT_PER_SQM;
+    // Constructor
+    public function __construct($length, $width, $tileLength, $tileWidth)
+    {
+        $this->length     = (float) $length;
+$this->width      = (float) $width;
+$this->tileLength = (int) $tileLength;
+$this->tileWidth  = (int) $tileWidth;
 }
 
-// -----------------------------
-// TILE CALCULATIONS
-// -----------------------------
+// Room area in square metres
+public function getRoomArea()
+{
+return $this->length * $this->width;
+}
 
-let tileLengthM = tileLengthMM / 1000; // convert mm to metres
-let tileWidthM = tileWidthMM / 1000;
+// Tile area in square metres (mm → m)
+public function getTileArea()
+{
+$tileLengthM = $this->tileLength / 1000;
+$tileWidthM  = $this->tileWidth / 1000;
 
-let tileAreaM2 = tileLengthM * tileWidthM; // area of one tile in m²
+return $tileLengthM * $tileWidthM;
+}
 
-let tilesNeeded = Math.ceil(areaSquareMeters / tileAreaM2); // total tiles
-let boxesNeeded = Math.ceil(tilesNeeded / tilesPerBox);     // total boxes
+// Raw tiles needed (no waste)
+public function getTilesNeededRaw()
+{
+if ($this->getTileArea() <= 0) {
+return 0;
+}
 
-// -----------------------------
-// OUTPUT (for checking only)
-// -----------------------------
+return ceil($this->getRoomArea() / $this->getTileArea());
+}
 
-console.log("Area (m²):", areaSquareMeters);
-console.log("Area (ft²):", areaSquareFeet);
-console.log("Tiles needed:", tilesNeeded);
-console.log("Boxes needed:", boxesNeeded);
+// Tiles needed including waste
+public function getTilesNeededWithWaste()
+{
+$raw = $this->getTilesNeededRaw();
+$multiplier = 1 + ($this->wastePercent / 100);
 
+return ceil($raw * $multiplier);
+}
+
+// Boxes needed
+public function getBoxesNeeded()
+{
+if ($this->tilesPerBox <= 0) {
+return 0;
+}
+
+return ceil($this->getTilesNeededWithWaste() / $this->tilesPerBox);
+}
+
+// Cost calculations
+public function getMaterialCost()
+{
+return $this->getRoomArea() * $this->materialCostPerM2;
+}
+
+public function getLabourCost()
+{
+// Later, if “no installation” is chosen, this can return 0 instead.
+return $this->getRoomArea() * $this->labourCostPerM2;
+}
+
+public function getSubtotal()
+{
+return
+$this->getMaterialCost() +
+$this->getLabourCost() +
+$this->deliveryCost +
+$this->consumablesCost;
+}
+
+public function getTaxAmount()
+{
+return $this->getSubtotal() * ($this->taxRate / 100);
+}
+
+public function getGrandTotal()
+{
+return $this->getSubtotal() + $this->getTaxAmount();
+}
+
+// Summary: returns ALL data neatly
+public function getSummary()
+{
+return [
+// Room info
+'room_length_m' => $this->length,
+'room_width_m'  => $this->width,
+'room_area_m2'  => round($this->getRoomArea(), 2),
+
+// Tile info
+'tile_length_mm' => $this->tileLength,
+'tile_width_mm'  => $this->tileWidth,
+'tile_area_m2'   => round($this->getTileArea(), 4),
+
+// Quantities
+'tiles_needed_raw'        => $this->getTilesNeededRaw(),
+'tiles_needed_with_waste' => $this->getTilesNeededWithWaste(),
+'boxes_needed'            => $this->getBoxesNeeded(),
+
+// Costs
+'material_cost'     => round($this->getMaterialCost(), 2),
+'labour_cost'       => round($this->getLabourCost(), 2),
+'delivery_cost'     => round($this->deliveryCost, 2),
+'consumables_cost'  => round($this->consumablesCost, 2),
+'subtotal'          => round($this->getSubtotal(), 2),
+
+// Tax + final
+'tax_rate_percent'  => $this->taxRate,
+'tax_amount'        => round($this->getTaxAmount(), 2),
+'grand_total'       => round($this->getGrandTotal(), 2),
+];
+}
+}

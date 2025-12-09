@@ -1,30 +1,39 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Header for tileplan</title>
-    <link rel="stylesheet" href="my-style.css">
+    <title>Merged CSS Preview</title>
 </head>
 <body>
-<header>
-    <!--wang work我的代码系列-->
-    <div class="logo">
-        <img src="logo.png" alt="TilePlan Logo" height="50" />
+<div id="title">
+    <div class="header-bar">
+        <a href="#" class="icon-button logo-btn" aria-label="Home">
+            <img src="https://via.placeholder.com/58" alt="Logo" class="logo-img" />
+        </a>
+        <nav class="main-nav left-nav">
+            <a href="#">Home</a>
+            <a href="#">Browse</a>
+            <a href="#">Logout</a>
+        </nav>
+        <div class="account-menu">
+            <button class="account-trigger icon-button">
+                <img src="https://via.placeholder.com/58" alt="Profile Menu" class="logo-img" />
+            </button>
+            <ul class="account-dropdown">
+                <li><a href="#">Browse</a></li>
+                <li><a href="#">Wish‑list</a></li>
+                <li><a href="#">Log‑in / Log‑out</a></li>
+            </ul>
+        </div>
     </div>
+</div>
 
-    <nav class="nav-links" style="margin-left: 40px;">
-        <span>&lt;nav&gt;</span>
-        <span>&lt;nav&gt;</span>
-        <span>&lt;nav&gt;</span>
-    </nav>
 
-    <div class="user-section" style="margin-left:auto;">
-        <span></span>
-        <button class="logout-btn">Logout</button>
-    </div>
-</header>
-</body>
-</html>
+
+<div id="content">
+    <p>Content preview area...</p>
+</div>
+
 
 

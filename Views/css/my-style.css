@@ -1,50 +1,85 @@
-/* style.css - TilePlan Header, Footer and User Info Styles */
-
-/* ===== RESET & BASE STYLES ===== */
+ /* ===== RESET & BASE STYLES ===== */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
 
-/* ===== HEADER STYLES ===== */
-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 10px 30px;
-    border-bottom: 4px solid #1a1a1a;
-    box-sizing: border-box;
+
+/* ===== MY ORIGINAL HEADER AREA ===== */
+#title {
+    margin-top: 12px;
+    background-color: #fff;
+    color: #000;
+}
+#menu {
+    border-top: solid 6px #003049;
+    background-color: #fff;
+    color: #fff;
+    height: 400px;
+}
+#menu a {
+    background-color: #1b75bc;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+#menu a:hover {
+    background-color: #155a8f;
+    color: #e0ffe0;
+    text-decoration: underline;
+    display: block;
+}
+#content {
+    background-color: #fff;
+    border-top: solid 6px #1b75bc;
+}
+#footer {
+    margin_top: 20px;
+    text-align: center;
+    background-color: #003049;
+    color: #fff;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
-.nav-links {
-    display: flex;
-    gap: 40px;
-    font-size: 18px;
-    color: #444;
+/* ===== ACCOUNT DROPDOWN FROM andrew CSS (kept, integrated with my style) ===== */
+.account-menu {
+    position: relative;
+    display: inline-block;
 }
-
-.user-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 18px;
-}
-
-.logout-btn {
-    background-color: #1a1a4d;
-    color: white;
-    padding: 10px 25px;
-    border-radius: 20px;
-    border: none;
-    font-size: 16px;
+.account-trigger {
+    border: 0;
+    background: transparent;
+    padding: 0;
     cursor: pointer;
+    line-height: 0;
+}
+.account-trigger img {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+}
+.account-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    min-width: 180px;
+    background: #e8f7ff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 6px 0;
+    display: none;
+    z-index: 1000;
+}
+.account-menu:hover .account-dropdown,
+.account-menu:focus-within .account-dropdown {
+    display: block;
+}
+.account-dropdown a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
 }
 
 /* ===== FOOTER STYLES ===== by 偶*/

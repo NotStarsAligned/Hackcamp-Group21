@@ -1,0 +1,145 @@
+/* ===== Login Page Styling (TEK Version) ===== */
+
+/* Whole login area */
+.login-section {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+/* Title */
+.login-section h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1D215E; /* dark blue */
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Yellow underline under title */
+.login-section h2::after {
+    content: "";
+    width: 60px;
+    height: 4px;
+    background-color: #F2C300; /* yellow */
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 3px;
+}
+
+/* Login form card */
+.login-form {
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    width: 360px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+    border: 3px solid #F2C300; /* yellow border */
+}
+
+/* Labels */
+.login-form label {
+    font-size: 14px;
+    color: #1D215E;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+/* Inputs */
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background: #F4F7FF; /* light blue */
+    margin-top: 4px;
+    margin-bottom: 14px;
+}
+
+/* Focus state */
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    outline: none;
+    border-color: #4CAF50; /* green focus */
+    background: #ffffff;
+}
+
+/* Login button */
+.login-form button[type="submit"] {
+    margin-top: 4px;
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 6px;
+    background: #1D215E;      /* dark blue button */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* Hover state */
+.login-form button[type="submit"]:hover {
+    background: #2F3BB7;      /* brighter blue on hover */
+}
+
+/* Error message */
+.login-form .error {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #d9534f; /* red */
+    text-align: center;
+}
+
+/* Logged-in container */
+.logout-container {
+    margin-top: 15px;
+    padding: 15px 20px;
+    background: #E9FFE9;
+    border-radius: 8px;
+    border: 1px solid #c3e6cb;
+}
+
+/* Logout button */
+.logout-btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 14px;
+    border-radius: 5px;
+    background: #F2C300;   /* yellow logout button */
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #FFDF4D;
+    color: #000;
+}
+
+/* “Register here” text under login */
+.register-link {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+    color: #333;
+}
+
+.register-link a {
+    color: #1D215E;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}

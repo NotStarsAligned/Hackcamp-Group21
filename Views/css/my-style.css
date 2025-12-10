@@ -557,11 +557,14 @@ footer .bottom-bar {
     font-size: 1rem;
 }
 
-.product-card p {
-    margin: 4px 0 8px;
-    font-size: 0.9rem;
-    color: #444;
+/* Make product cards match the search bar styling */
+.product-card {
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 12px !important;
+    padding: 15px;
+    background-color: #fff;
 }
+
 
 .variant-label {
     display: block;
@@ -603,10 +606,12 @@ footer .bottom-bar {
 
 .btn-wishlist:hover {
     background-color: #FFDF4D;
+    transition: all 0.3s ease-in;
 }
 
 .btn-quote:hover {
     background-color: #2F3BB7;
+    transition: all 0.3s ease-in;
 }
 
 /* Pagination styling */
@@ -654,3 +659,144 @@ footer .bottom-bar {
 /* 8888888888888888888888888888888888888888888 */
 /*      Andrew- drop down menu for browse      */
 /* 8888888888888888888888888888888888888888888 */
+
+
+
+/* 888888888888888888888888888888888888888888888 */
+/*      Andrew- search bar stuff for browse      */
+/* 888888888888888888888888888888888888888888888 */
+/* --- Search Bar Styling --- */
+
+/* Center the search bar area */
+.product-search {
+    display: flex;
+    justify-content: center;   /* horizontally center items */
+    align-items: center;        /* vertically align them */
+    gap: 10px;                  /* space between input + buttons */
+    margin-bottom: 25px;        /* keeps the gap above products */
+    width: 100%;
+    text-align: center;
+}
+
+/* Normal state */
+.product-search input[type="text"] {
+    border: 2px solid #f2c300;      /* Yellow outline */
+    padding: 6px 10px;
+    border-radius: 4px;
+    outline: none;
+}
+
+/* When active / clicked / focused */
+.product-search input[type="text"]:focus {
+    border-color: #f2c300;          /* Darker yellow */
+    box-shadow: 0 0 3px #f2c300;
+}
+
+//* --- Search Bar Styling Override --- */
+
+/* Search bar border colours */
+.product-search input[type="text"] {
+    border: 2px solid #f2c300 !important;      /* Yellow outline */
+    padding: 6px 10px;
+    border-radius: 4px;
+    outline: none;
+}
+
+/* When focused */
+.product-search input[type="text"]:focus {
+    border-color: #f2c300 !important;          /* Darker yellow */
+    box-shadow: 0 0 3px #f2c300;
+}
+
+/* --- Search Button Styling Override --- */
+
+.product-search button[type="submit"] {
+    background-color: #1D215E !important;      /* Navy blue */
+    color: white !important;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;    /* Smooth hover */
+}
+
+/* Hover state */
+.product-search button[type="submit"]:hover {
+    background-color: #2F3BB7 !important;      /* Lighter navy */
+    transition: all 0.3s ease-in;
+}
+
+/* Add spacing below the search bar */
+.product-search {
+    margin-bottom: 25px;   /* increase this value if you want more space */
+}
+
+/* --- Clear Button Styling (Yellow version of search button) --- */
+
+.product-search .clear-search {
+    display: inline-block;
+    background-color: #f2c300 !important;   /* TilePlan yellow */
+    color: #000 !important;                 /* Black text */
+    padding: 7px 14px;
+    border-radius: 4px;
+    text-decoration: none !important;
+    margin-left: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Hover state */
+.product-search .clear-search:hover {
+    background-color: #FFDF4D !important;   /* Darker yellow */
+    transition: all 0.3s ease-in;
+}
+
+/* Wrap input + Search + Clear into an evenly spaced flex row */
+.search-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;     /* perfect equal spacing */
+}
+
+/* Put label above controls instead of beside them */
+.product-search {
+    flex-direction: column;
+    gap: 6px;      /* space between label and controls */
+}
+
+.product-search .clear-search {
+    display: inline-block;
+    background-color: #f2c300 !important;
+    color: #000 !important;
+    padding: 7px 14px;
+    border-radius: 4px;
+    text-decoration: none !important;
+    margin-left: 0;          /* 👈 changed from 10px to 0 */
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Full search bar container with curved box */
+.product-search {
+    background: #FFFFFF;          /* light grey background */
+    padding: 20px;
+    border-radius: 12px;          /* curved edges */
+    border: 2px solid #e0e0e0;    /* subtle border */
+    width: fit-content;           /* shrink to content width */
+    margin: 0 auto 25px auto;     /* centered horizontally */
+    display: flex;
+    justify-content: center;
+}
+
+/* Ensure the inside controls stay centered */
+.search-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 888888888888888888888888888888888888888888888 */
+/*      Andrew- search bar stuff for browse      */
+/* 888888888888888888888888888888888888888888888 */

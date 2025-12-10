@@ -1,0 +1,45 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+// andrews changes
+//session_start();
+require_once __DIR__ . "/../Model/Auth.php";
+require_once __DIR__ . "/../Model/database.php";
+include __DIR__ . "/template/header.phtml";
+?>
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <link href="/Views/css/update_account.css" rel="stylesheet">
+
+    <title>Account Settings</title>
+
+</head>
+<body>
+
+<h2>Update Account Settings</h2>
+
+<?php if (!empty($message)) : ?>
+    <div class="msg"><?= htmlspecialchars($message) ?></div>
+<?php endif; ?>
+
+<form method="POST">
+    <label>Email</label>
+    <input type="email" name="email" required value="<?= htmlspecialchars($currentUser['account_email']) ?>">
+
+    <label>Full Name</label>
+    <input type="text" name="full_name" required value="<?= htmlspecialchars($currentUser['full_name']) ?>">
+
+    <label>Phone Number</label>
+    <input type="text" name="phone" required value="<?= htmlspecialchars($currentUser['account_phone']) ?>">
+
+    <label>New Password (leave empty if unchanged)</label>
+    <input type="password" name="password">
+
+    <button type="submit">Save Changes</button>
+</form>
+
+
+</body>
+</html>

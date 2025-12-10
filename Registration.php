@@ -108,7 +108,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 include __DIR__ . "/Views/template/header.phtml";
 ?>
-<main class="registration-section" xmlns="http://www.w3.org/1999/html">
+<main class="registration-section" xmlns="http://www.w3.org/1999/html"> <link href="/Views/css/regstration.css" rel="stylesheet">
+
+
+
     <h2>Register New Account</h2>
 
     <form method="POST" action="Registration.php" class="registration-form">

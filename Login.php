@@ -1,6 +1,5 @@
 <?php
 session_start();
-$userId = $_SESSION['user_id'];
 require_once __DIR__ . "/Model/Auth.php";
 require_once __DIR__ . "/Model/database.php";
 
@@ -42,7 +41,8 @@ if (isset($_GET['logout'])){
 include __DIR__ . "/Views/template/header.phtml";
 ?>
 
-<main class="login-section">
+<main class="login-section"> <link href="/Views/css/login.css" rel="stylesheet">
+
     <h2>Log In</h2>
     <?php if (!Authentication::isLoggedIn()): ?>
         <form method="POST" action="Login.php" class="login-form">

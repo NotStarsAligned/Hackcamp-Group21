@@ -1,6 +1,5 @@
 <?php
 session_start();
-$userId = $_SESSION['user_id'];
 require_once __DIR__ . "/Model/Auth.php";
 require_once __DIR__ . "/Model/database.php";
 

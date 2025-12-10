@@ -1,0 +1,108 @@
+/* ===== Registration Page Styling (TEK Version) ===== */
+
+/* Whole registration area */
+.registration-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+}
+
+/* Title */
+.registration-section h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1D215E; /* dark blue from your team palette */
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Yellow underline under title */
+.registration-section h2::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background-color: #F2C300; /* YELLOW */
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 3px;
+}
+
+/* Form card */
+.registration-form {
+    width: 480px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 3px solid #F2C300; /* Yellow border */
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Label text */
+.registration-form label {
+    font-weight: 600;
+    color: #1D215E;
+    margin-top: 10px;
+}
+
+/* Input fields */
+.registration-form input[type="text"],
+.registration-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #F4F7FF; /* light blue field */
+}
+
+/* Focus border (green like your bootstrap theme) */
+.registration-form input:focus {
+    border-color: #4CAF50;
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* Password eye icon */
+.fa-eye, .fa-eye-slash {
+    margin-left: -30px;
+    cursor: pointer;
+    color: #2F3BB7;
+}
+
+/* Length text */
+#password-length, #confirm-length {
+    font-size: 13px;
+    color: #1D215E;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Submit button */
+.registration-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #F2C300; /* Yellow */
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+/* Button hover */
+.registration-form button:hover {
+    background-color: #FFDF4D; /* lighter yellow */
+}
+
+/* Error or success messages */
+.registration-form .message {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: red;
+    text-align: center;
+}

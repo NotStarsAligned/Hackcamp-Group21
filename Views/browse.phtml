@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- Made by Andrew -->
-<?php require ("Views/template/header.phtml");?>
+<?php
+require_once __DIR__ . "/../Model/Auth.php";
+require_once __DIR__ . "/../Model/database.php";
+require ("Views/template/header.phtml");
+?>
+
 <head>
     <meta charset="UTF-8">
     <title>Browse Products</title>
@@ -22,7 +27,7 @@
         <div class="product-grid">
             <?php foreach ($view->tiles as $tile): ?>
                 <?php
-                $img = $tile['thumbnail_url'] ?: 'placeholder_image.png';
+                $img = $tile['thumbnail_url'] ?: '\images\placeholder_image.png';
                 $variants = $tile['variants'];
                 ?>
                 <div class="product-card">

@@ -1,5 +1,6 @@
 <?php
 session_start();
+$userId = $_SESSION['user_id'];
 require_once __DIR__ . "/Model/Auth.php";
 require_once __DIR__ . "/Model/database.php";
 
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 //log out
 if (isset($_GET['logout'])){
   Authentication::logout();
-  header("Location: Login.php");
+  header("Location: index.php");
    exit;
 }
 include __DIR__ . "/Views/template/header.phtml";

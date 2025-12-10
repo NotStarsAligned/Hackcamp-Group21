@@ -1,5 +1,7 @@
 {
     "require": {
-        "dompdf/dompdf": "^3.1"
+        "dompdf/dompdf": "^3.1",
+      "ext-mysqli": "*",
+      "ext-pdo": "*"
     }
 }

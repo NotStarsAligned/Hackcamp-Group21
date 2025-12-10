@@ -1,0 +1,51 @@
+/* --- TEAM COLOUR PALETTE --- */
+:root {
+    --yellow-main: #F2C300;
+    --yellow-hover: #FFDF4D;
+
+    --blue-main: #1D215E;
+    --blue-hover: #2F3BB7;
+
+    --black: #000;
+    --white: #fff;
+}
+
+/* --- LOGIN PAGE --- */
+.login-section h2 {
+    color: var(--blue-main);
+}
+
+.login-form button {
+    background-color: var(--yellow-main);
+    color: var(--black);
+    border: none;
+}
+
+.login-form button:hover {
+    background-color: var(--yellow-hover);
+}
+
+/* Inputs */
+.login-form input {
+    border: 1px solid var(--blue-main);
+}
+
+/* --- REGISTRATION PAGE --- */
+.registration-section h2 {
+    color: var(--blue-main);
+}
+
+.registration-form button {
+    background-color: var(--blue-main);
+    color: var(--white);
+    border: none;
+}
+
+.registration-form button:hover {
+    background-color: var(--blue-hover);
+}
+
+/* Inputs */
+.registration-form input {
+    border: 1px solid var(--yellow-main);
+}

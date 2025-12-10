@@ -7,17 +7,14 @@ require_once __DIR__ . "/../Model/database.php";
 include __DIR__ . "/template/header.phtml";
 ?>
 <!DOCTYPE html>
+
+
 <html>
 <head>
+    <link href="/Views/css/update_account.css" rel="stylesheet">
+
     <title>Account Settings</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif; margin: 20px; }
-        form { max-width: 400px; }
-        input { width: 100%; padding: 10px; margin: 8px 0; }
-        button { padding: 10px 15px; }
-        .msg { background: #e0ffe0; padding: 10px; border: 1px solid #60c060; }
-    </style>
+
 </head>
 <body>
 
@@ -42,6 +39,7 @@ include __DIR__ . "/template/header.phtml";
 
     <button type="submit">Save Changes</button>
 </form>
+
 
 </body>
 </html>

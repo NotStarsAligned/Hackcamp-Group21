@@ -25,6 +25,7 @@ class Authentication {
             return false; //wrong password
         }
 
+        $_SESSION['user_id'] = $user['id'];
         $_SESSION['email'] = $user['account_email'];
         $_SESSION['username'] = $user['full_name'];
         $_SESSION['role'] = strtolower($user['role']); // admin, staff, etc.aaaaaaaaaaaaa

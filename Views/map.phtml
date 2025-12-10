@@ -1,16 +1,33 @@
 <?php require ("Views/template/header.phtml"); ?>
 
-    <div class="row">
-        <div class="col-12">
-            <p id="coordinates">Getting your location...</p>
-            <div id="map" style="width: 100%; height: 500px; border: 2px solid red;"></div>
+    <!-- Load Leaflet HERE instead of waiting for footer -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        #map {
+            width: 80%;
+            height: 500px;
+            margin: 50px auto;
+            border: 2px solid #333;
+            display: block;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p id="coordinates">Getting your location...</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div id="map"></div>
+            </div>
         </div>
     </div>
 
     <script type="text/javascript">
-        console.log("Script starting...");
-        console.log("Leaflet available?", typeof L !== 'undefined');
-
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 const lat = position.coords.latitude;
@@ -18,20 +35,15 @@
                 document.getElementById('coordinates').textContent =
                     `${lat.toFixed(6)}°, ${lng.toFixed(6)}°`;
 
-                console.log("Creating map...");
-
-                // Initialize map
                 const map = L.map('map').setView([lat, lng], 15);
 
-                console.log("Map created, adding tiles...");
+                setTimeout(function(){ map.invalidateSize()}, 400);
 
-                // Add OpenStreetMap tile layer
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '© OpenStreetMap contributors'
                 }).addTo(map);
 
-                // Add marker
-                const marker = L.marker([lat, lng]).addTo(map)
+                L.marker([lat, lng]).addTo(map)
                     .bindPopup("Your Current Location").openPopup();
             });
         }

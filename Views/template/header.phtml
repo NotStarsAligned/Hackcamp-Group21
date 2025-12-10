@@ -1,6 +1,10 @@
+
 <?php
-require_once __DIR__ . "/../../Model/Auth.php";
-require_once __DIR__ . "/../../Model/database.php";
+// 确保包含 Authentication 类
+if (!class_exists('Authentication')) {
+    // Auth.php 文件路径（根据你的文件结构）
+    require_once 'Model/Auth.php';
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,19 +19,15 @@ require_once __DIR__ . "/../../Model/database.php";
     <meta name="author" content="TilePlan">
 
     <!-- Bootstrap core CSS -->
-    <link href="/Views/css/bootstrap.css" rel="stylesheet">
-    <!-- Bootstrap theme -->
-    <link href="/Views/css/bootstrap-theme.css" rel="stylesheet">
-    <link href="/Views/css/my-style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/Views/css/theme-TEK.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- OpenLayers CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <link href="style.css" rel="stylesheet">
     <title>TilePlan Survey</title>
 </head>
 

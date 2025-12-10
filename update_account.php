@@ -36,33 +36,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = trim($_POST['password']);
 
 
-    $sql = "UPDATE users SET account_email = :email, full_name = :fullname, account_phone = :phone";
-    $params = [
+    try {
+        // Start transaction
+        $db->beginTransaction();
+
+        $sql = "UPDATE users SET account_email = :email, full_name = :fullname, account_phone = :phone";
+        $params = [
             ":email"    => $email,
             ":fullname" => $name,
             ":phone"    => $phone,
             ":id"       => $userId
         ];
 
-
-    if (!empty($password)) {
-        $sql .= ", password_hashed = :password_hashed";
-        $params[":password_hashed"] = password_hash($password, PASSWORD_DEFAULT);
-    }
+        if (!empty($password)) {
+            $sql .= ", password_hashed = :password_hashed";
+            $params[":password_hashed"] = password_hash($password, PASSWORD_DEFAULT);
+        }
 
         $sql .= " WHERE id = :id";
 
         $stmt = $db->prepare($sql);
         $stmt->execute($params);
 
+        // Commit the transaction
         $db->commit();
         $message = "Account details updated successfully!";
 
         // Refresh currentUser data
         $currentUser = Authentication::getCurrentUser();
 
+    } catch (Exception $e) {
+        // Roll back if something went wrong
+        if ($db->inTransaction()) {
+            $db->rollBack();
+        }
+        $message = "Update failed: " . $e->getMessage();
     }
-
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ANDREWS CHANGES:
 require_once("Views/update_account.phtml");

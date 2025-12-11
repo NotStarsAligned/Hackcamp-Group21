@@ -4,7 +4,7 @@
 <?php
 require_once __DIR__ . "/../Model/Auth.php";
 require_once __DIR__ . "/../Model/database.php";
-require ("Views/template/header.phtml");
+require("Views/template/header.phtml");
 ?>
 
 <head>
@@ -15,11 +15,24 @@ require ("Views/template/header.phtml");
 <body>
 
 <div id="title">
-    <h1>TilePlan – Browse Products</h1>
+    <h1 style="text-align: center">Browsing Page</h1>
 </div>
 
 <div id="content">
-    <h2>Products</h2>
+
+    <!-- Search bar -->
+    <form method="get" class="product-search">
+
+        <div class="search-controls">
+            <input type="text" name="q"
+                   value="<?php echo htmlspecialchars($view->searchTerm ?? '', ENT_QUOTES); ?>"
+                   placeholder="Search by name, colour, description...">
+
+            <button type="submit">Search</button>
+            <a href="browse.php" class="clear-search">Clear</a>
+        </div>
+    </form>
+
 
     <?php if (empty($view->tiles)): ?>
         <p>No products found.</p>
@@ -27,7 +40,7 @@ require ("Views/template/header.phtml");
         <div class="product-grid">
             <?php foreach ($view->tiles as $tile): ?>
                 <?php
-                $img = $tile['thumbnail_url'] ?: '\images\placeholder_image.png';
+                $img = $tile['thumbnail_url'] ?: '\\images\\placeholder_image.png';
                 $variants = $tile['variants'];
                 ?>
                 <div class="product-card">
@@ -39,7 +52,7 @@ require ("Views/template/header.phtml");
                     <?php if (!empty($variants)): ?>
                         <label>
                             <span class="variant-label">Colour / Polish:</span>
-                            <select class="variant-select">
+                            <select class="variant-select" name="variant_id">
                                 <?php foreach ($variants as $variant): ?>
                                     <?php
                                     $colour = $variant['colour'] ?: 'Unknown colour';
@@ -71,8 +84,15 @@ require ("Views/template/header.phtml");
 
         <!-- Pagination -->
         <div class="pagination">
+            <?php
+            $searchQueryPart = '';
+            if (!empty($view->searchTerm)) {
+                $searchQueryPart = '&amp;q=' . urlencode($view->searchTerm);
+            }
+            ?>
+
             <?php if ($view->page > 1): ?>
-                <a href="?page=<?php echo $view->page - 1; ?>">&laquo; Prev</a>
+                <a href="?page=<?php echo $view->page - 1; ?><?php echo $searchQueryPart; ?>">&laquo; Prev</a>
             <?php else: ?>
                 <span class="disabled">&laquo; Prev</span>
             <?php endif; ?>
@@ -81,12 +101,14 @@ require ("Views/template/header.phtml");
                 <?php if ($p == $view->page): ?>
                     <span class="current"><?php echo $p; ?></span>
                 <?php else: ?>
-                    <a href="?page=<?php echo $p; ?>"><?php echo $p; ?></a>
+                    <a href="?page=<?php echo $p; ?><?php echo $searchQueryPart; ?>">
+                        <?php echo $p; ?>
+                    </a>
                 <?php endif; ?>
             <?php endfor; ?>
 
             <?php if ($view->page < $view->totalPages): ?>
-                <a href="?page=<?php echo $view->page + 1; ?>">Next &raquo;</a>
+                <a href="?page=<?php echo $view->page + 1; ?><?php echo $searchQueryPart; ?>">Next &raquo;</a>
             <?php else: ?>
                 <span class="disabled">Next &raquo;</span>
             <?php endif; ?>
@@ -94,10 +116,6 @@ require ("Views/template/header.phtml");
     <?php endif; ?>
 </div>
 
-<div id="footer">
-    <p>&copy; <?php echo date('Y'); ?> TilePlan</p>
-</div>
-
 </body>
-<?php require ("Views/template/footer.phtml");?>
+<?php require("Views/template/footer.phtml"); ?>
 </html>

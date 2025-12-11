@@ -18,6 +18,7 @@
         <div class="row">
             <div class="col-12 text-center">
                 <p id="coordinates">Getting your location...</p>
+                <p><?php echo $view->latitude; ?></p>
             </div>
         </div>
         <div class="row">
@@ -43,8 +44,25 @@
                     attribution: '© OpenStreetMap contributors'
                 }).addTo(map);
 
-                L.marker([lat, lng]).addTo(map)
-                    .bindPopup("Your Current Location").openPopup();
+                const locations = [
+                    {lat: 53.488, lng: -2.274, title: "Location 1", description: "First marker"},
+                    {lat: 53.490, lng: -2.276, title: "Location 2", description: "Second marker"},
+                    {lat: 53.492, lng: -2.278, title: "Location 3", description: "Third marker"}
+                ];
+
+                locations.forEach(function(location) {
+                    L.marker([location.lat, location.lng]).addTo(map)
+                        .bindPopup(
+                            '<div class="card" style="width: 18rem;">' +
+                            '<img src="..." class="card-img-top" alt="...">' +
+                            '<div class="card-body">' +
+                            '<h5 class="card-title">Card title</h5>' +
+                            '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>' +
+                            '<a href="#" class="btn btn-primary">Go somewhere</a>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                            });
             });
         }
     </script>

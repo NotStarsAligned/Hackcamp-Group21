@@ -32,10 +32,17 @@ class Authentication {
         return true;
     }
 
-//check if user is logged in, only logged in user can have access by id
+//check if user is logged in, only logged in user can have access by
     public static function isLoggedIn(): bool {
         return isset($_SESSION['email']);
     }
+    public static function requireLogin(): void {
+        if (!self::isLoggedIn()) {
+            header("Location: login.php");
+            exit;
+        }
+    }
+
     //get user by id
     public static function getCurrentUser(){
         if (!isset($_SESSION['user_id'])) {

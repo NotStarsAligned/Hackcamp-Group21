@@ -3,9 +3,23 @@
 
 session_start();
 
+// use the existing authentication helper so we can find the logged-in user
+require_once __DIR__ . '/Model/Auth.php';
+
 $view = new stdClass();
 $view->username = null;   // you can wire this up to session later
-$view->isLogged = false;
+$view->isLogged = Authentication::isLoggedIn();  // reflect actual logged-in state
+
+// if logged in, store the display name (useful for header templates etc.)
+if ($view->isLogged) {
+    $view->username = Authentication::full_name();
+}
+
+// simple flash message system so we can show "Added to wish list" etc.
+// (used as a non-JavaScript fallback – AJAX will usually show messages on the client side)
+$view->flashMessage = $_SESSION['flash_message'] ?? null;
+$view->flashType    = $_SESSION['flash_type'] ?? 'success'; // success or error
+unset($_SESSION['flash_message'], $_SESSION['flash_type']);
 
 // --- DB SETUP ---
 $dbPath = __DIR__ . '/database.sqlite';
@@ -15,6 +29,94 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die('DB connection failed: ' . htmlspecialchars($e->getMessage()));
+}
+
+// --- HANDLE "ADD TO WISHLIST" FROM BROWSING PAGE ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_wishlist'])) {
+
+    // ensure only logged-in users can modify their wishlist
+    Authentication::requireLogin(); // redirects to login.php and exits if not logged in
+
+    $currentUser = Authentication::getCurrentUser();
+
+    $message = '';
+    $type    = 'success'; // success or error
+
+    if ($currentUser !== null && isset($_POST['variant_id'])) {
+        $userId    = (int)$currentUser['id'];
+        $variantId = (int)$_POST['variant_id'];
+
+        if ($variantId > 0) {
+
+            // First check if this item is already in the wishlist for this user
+            $checkStmt = $pdo->prepare("
+                SELECT id
+                FROM wishlist_items
+                WHERE user_id = :user_id
+                  AND product_variant_id = :variant_id
+            ");
+            $checkStmt->execute([
+                ':user_id'    => $userId,
+                ':variant_id' => $variantId,
+            ]);
+
+            if ($checkStmt->fetch()) {
+                // Already exists -> show a red error message instead of inserting again
+                $message = 'This item is already in your wish list';
+                $type    = 'error';
+            } else {
+                // Not in wishlist yet -> insert a new row
+                $stmt = $pdo->prepare("
+                    INSERT INTO wishlist_items (user_id, product_variant_id, added_at)
+                    VALUES (:user_id, :variant_id, :added_at)
+                ");
+                $stmt->execute([
+                    ':user_id'    => $userId,
+                    ':variant_id' => $variantId,
+                    ':added_at'   => date('Y-m-d H:i:s'),   // current time when added
+                ]);
+
+                $message = 'Added to wish list';
+                $type    = 'success';
+            }
+        } else {
+            // No variant selected (e.g. user didn't choose all three options)
+            $message = 'Please choose a Colour, Finish and Polish before adding to your wish list.';
+            $type    = 'error';
+        }
+    } else {
+        $message = 'User not recognised';
+        $type    = 'error';
+    }
+
+    // detect if this is an AJAX request (we explicitly send ajax=1 from JS)
+    $isAjax = isset($_POST['ajax']) && $_POST['ajax'] === '1';
+
+    if ($isAjax) {
+        // For AJAX requests we return JSON instead of reloading the whole page
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status'  => $type,    // "success" or "error"
+            'message' => $message,
+        ]);
+        exit;
+    }
+
+    // Fallback: non-JS behaviour still uses the traditional redirect with flash message
+    $_SESSION['flash_message'] = $message;
+    $_SESSION['flash_type']    = $type;
+
+    // keep paging and search term when we redirect back to browsing
+    $page  = isset($_POST['page']) ? (int)$_POST['page'] : 1;
+    $query = isset($_POST['q']) ? trim($_POST['q']) : '';
+
+    $redirectUrl = 'browse.php?page=' . max(1, $page);
+    if ($query !== '') {
+        $redirectUrl .= '&q=' . urlencode($query);
+    }
+
+    header('Location: ' . $redirectUrl);
+    exit;
 }
 
 // --- SEARCH TERM ---
@@ -95,12 +197,13 @@ if (!empty($products)) {
     $productIds = array_column($products, 'id');
     $placeholders = implode(',', array_fill(0, count($productIds), '?'));
 
+    // NOTE: adjust "finish" if your schema uses a different column name
     $variantStmt = $pdo->prepare("
-        SELECT id, product_id, colour, polish, price_trade
+        SELECT id, product_id, colour, finish, polish, price_trade
         FROM product_variants
         WHERE product_id IN ($placeholders)
           AND is_active = 1
-        ORDER BY colour, polish
+        ORDER BY colour, finish, polish
     ");
 
     foreach ($productIds as $i => $pid) {

@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="my-style.css">
 </head>
 <body>
-<!-- dima if u looking at this measurement page what i need u do is make sure user can only allow to access this page after they loggin-->
-<!-- check the my measurement.php if u ever need it-->
-<!--额i don't write any comment in this page cuz im lazy if any one looking this page just throw this to AI pls-->
+
 <?php require ("Views/template/header.phtml");?>
 
 <div class="measurement-container">
@@ -22,8 +20,6 @@
             <div class="progress-segment-1of5" style="background-color: #F44336;"></div>
             <div class="progress-segment-1of5" style="background-color: #F44336;"></div>
         </div>
-        <!--this part of measurement had issue with moblie users i don't know how to fix it even with gpd -->
-        <!--fixed the aligment issue in moblie if u could otherwise told moblie users fuck themself-->
         <div class="d-flex justify-content-between p-2 pt-0 w-100" style="color: #444; font-size: 0.9rem;">
             <span>Measurements</span>
             <span>Page 1 of 5</span>
@@ -83,65 +79,100 @@
 <?php require ("Views/template/footer.phtml");?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    document.getElementById('calculateBtn').addEventListener('click', function() {
-        const lengthInput = document.getElementById('inputLength');
-        const widthInput = document.getElementById('inputWidth');
-        const unitToggle = document.getElementById('unitToggle');
-        const display = document.getElementById('calculatedAreaDisplay');
 
+<script>
+    // =======================================================
+    // 自动换算模型 (引用自 PHP 后端模型逻辑: 1 ft = 0.3048 m)
+    // =======================================================
+    const UnitConverter = {
+        FEET_TO_METRES: 0.3048,
+
+        // ft -> m
+        toMetres: function(feet) {
+            return feet * this.FEET_TO_METRES;
+        },
+
+        // m -> ft
+        toFeet: function(metres) {
+            return metres / this.FEET_TO_METRES;
+        },
+
+        // 确保数值有效，并保留两位小数
+        formatValue: function(value) {
+            const parsed = parseFloat(value);
+            return isNaN(parsed) ? '' : parsed.toFixed(2);
+        }
+    };
+
+    const lengthInput = document.getElementById('inputLength');
+    const widthInput = document.getElementById('inputWidth');
+    const unitToggle = document.getElementById('unitToggle');
+    const calculateBtn = document.getElementById('calculateBtn');
+    const display = document.getElementById('calculatedAreaDisplay');
+
+
+    // 绑定单位切换事件：实现自动换算
+    unitToggle.addEventListener('change', function() {
+        const isMetres = unitToggle.checked; // true = metres, false = feet
+
+        // 获取当前值
+        let lengthValue = parseFloat(lengthInput.value);
+        let widthValue = parseFloat(widthInput.value);
+
+        if (isNaN(lengthValue) && isNaN(widthValue)) {
+            // 如果两个输入框都是空的或无效的，则不进行换算
+            calculateBtn.click(); // 触发计算以更新单位显示
+            return;
+        }
+
+        // 仅在输入框有有效数值时进行换算
+        if (!isNaN(lengthValue)) {
+            let newValue;
+            if (isMetres) {
+                // 当前是 Feet，切换到 Metres (Feet -> Metres)
+                newValue = UnitConverter.toMetres(lengthValue);
+            } else {
+                // 当前是 Metres，切换到 Feet (Metres -> Feet)
+                newValue = UnitConverter.toFeet(lengthValue);
+            }
+            lengthInput.value = UnitConverter.formatValue(newValue);
+        }
+
+        if (!isNaN(widthValue)) {
+            let newValue;
+            if (isMetres) {
+                // 当前是 Feet，切换到 Metres (Feet -> Metres)
+                newValue = UnitConverter.toMetres(widthValue);
+            } else {
+                // 当前是 Metres，切换到 Feet (Metres -> Feet)
+                newValue = UnitConverter.toFeet(widthValue);
+            }
+            widthInput.value = UnitConverter.formatValue(newValue);
+        }
+
+        // 切换单位后，重新计算面积并更新显示
+        calculateBtn.click();
+    });
+
+    // 绑定计算按钮事件
+    calculateBtn.addEventListener('click', function() {
         const length = parseFloat(lengthInput.value);
         const width = parseFloat(widthInput.value);
-        // 如果开关被选中（checked），则使用 metres，否则使用 feet
         const isMetres = unitToggle.checked;
+        const unit = isMetres ? 'm²' : 'ft²';
 
         if (isNaN(length) || isNaN(width) || length <= 0 || width <= 0) {
-            display.textContent = "Error: Please enter valid, positive Length and Width values.";
+            display.textContent = `Error: Please enter valid, positive Length and Width values. Current Unit: ${unit}`;
             display.classList.remove('text-success');
             display.classList.add('text-danger');
             return;
         }
 
         const area = length * width;
-        const unit = isMetres ? 'm²' : 'ft²';
 
         display.textContent = `Calculated Area: ${area.toFixed(2)} ${unit}`;
         display.classList.remove('text-danger');
         display.classList.add('text-success');
-
-        // TODO: 在实际项目中，您需要使用 AJAX 将这些数据发送到 measurement.php 控制器进行复杂的计算。
-        // 示例：
-        /*
-        fetch('measurement.php', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                room_length: length,
-                room_width: width,
-                unit: isMetres ? 'metres' : 'feet',
-                // ... 其他数据如瓷砖尺寸
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                display.textContent = `Room Area: ${data.room_area_m2} m²`;
-                // ... 显示更多结果
-            } else {
-                display.textContent = `Calculation Error: ${data.message}`;
-            }
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-            display.textContent = 'Network or system error during calculation.';
-        });
-        */
-    });
-
-    // 简单地更新单位，并重新计算（保持显示结果与当前单位一致）
-    document.getElementById('unitToggle').addEventListener('change', function() {
-        // 自动触发计算以更新单位和数值
-        document.getElementById('calculateBtn').click();
     });
 </script>
 </body>

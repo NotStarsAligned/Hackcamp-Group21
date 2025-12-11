@@ -20,7 +20,7 @@ $html = str_replace("{{name}}", $pdfName, $html);
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-$dompdf->stream($pdfName, array("Attachment" => false
+$dompdf->stream($pdfName, array("Attachment" => false));
 $pdfString = $dompdf->output();
 // --- CONFIGURATION / BEST PRACTICE ---
 // CRITICAL SECURITY WARNING: Do NOT use your primary Gmail password here.
@@ -29,7 +29,7 @@ $pdfString = $dompdf->output();
 //
 // For production code, these values MUST be loaded securely from environment variables
 // or a secure configuration file, NOT hardcoded.
-$smtp_username = "jumbonzerhema@gmail.com"; // Set to your account as requested
+$smtp_username = "jumbonzerhema@gmail.co22m"; // Set to your account as requested
 $smtp_password = "dyju lihd avdr ilky"; // <<< IMPORTANT: REPLACE THIS WITH YOUR GENERATED APP PASSWORD
 
 // -------------------------------------

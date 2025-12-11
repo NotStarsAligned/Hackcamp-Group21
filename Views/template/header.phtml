@@ -1,4 +1,12 @@
-<!doctype html>
+<?php
+// 确保包含 Authentication 类
+if (!class_exists('Authentication')) {
+    // Auth.php 文件路径（根据你的文件结构）
+    require_once 'Model/Auth.php';
+}
+?>
+
+    <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">

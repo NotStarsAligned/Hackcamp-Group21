@@ -199,17 +199,39 @@ footer .bottom-bar {
     margin: auto;
 }
 
+
 /* ===== MEASUREMENT PAGE STYLES ===== by我*/
 
+/* 1. 修复：调整主容器以避免与固定头部/底部重叠 */
 .measurement-container {
-    min-height: calc(100vh - 150px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* 移除 min-height: calc(100vh - 150px);, display: flex 等，
+       只保留基本的内边距和定位相关属性 */
+    position: relative;
+    min-height: 100vh;
+    padding-top: 100px; /* 为固定的头部（导航栏+进度条）留出空间 (修复重叠问题) */
+    padding-bottom: 80px; /* 为固定的底部导航留出空间 */
     text-align: center;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
+
+/* 新增：固定顶部的进度条和Page 1 of 5信息 */
+/* 优化后的 .top-header-info 样式 (my-style.css) */
+.top-header-info {
+    position: fixed;
+    top: 79px;
+    left: 0;
+    width: 100%;
+    z-index: 1020;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,.05);
+    padding: 0;
+
+    /* 核心修复：强制浏览器硬件加速渲染 */
+    -webkit-transform: translateZ(0); /* 针对 iOS 和 Safari */
+    transform: translateZ(0);
+}
+
 
 .toggle-unit {
     display: flex;
@@ -294,19 +316,20 @@ footer .bottom-bar {
     font-size: 1.25rem;
 }
 
+/* 计算结果显示 */
 .calc-value {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #0b0f3a;
-    margin-bottom: 100px;
+    color: #0b0f3a; /* 使用您的主题色作为默认颜色 */
+    margin-bottom: 50px; /* 调整 margin-bottom */
 }
+
+/* 修复：将 .page-indicator 从 absolute 调整为配合底部固定导航的样式 */
+/* 底部导航现在由 measurement.phtml 中的 div.d-flex position-fixed 容器控制 */
 
 /* page indicator for measurement */
 .page-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    /* 移除所有定位属性，让其在 flex 容器中自然居中 */
     display: flex;
     gap: 15px;
 }
@@ -329,7 +352,7 @@ footer .bottom-bar {
     display: flex;
     width: 100%;
     height: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 0; /* 移除 margin-bottom，让下方的 Page 1 of 5 靠上来 */
 }
 
 /* Page 1 of 5 调整 */
@@ -341,6 +364,7 @@ footer .bottom-bar {
 .progress-segment-1of5:nth-child(1) {
     background-color: #4CAF50;
 }
+
 /* 未完成的步骤 (红色) - 第 2 到 第 5 份 uncompleted part 2/5*/
 .progress-segment-1of5:nth-child(n+2) {
     background-color: #F44336;
@@ -482,6 +506,174 @@ footer .bottom-bar {
 
 
 
+/* 8888888888888888888888888888888888888888888 */
+/*      Andrew- drop down menu for browse      */
+/* 8888888888888888888888888888888888888888888 */
+#title {
+    margin-top: 12px;
+    background-color: #fff;
+    color: #000;
+}
+
+#menu {
+    border-top: solid 6px #1D215E;
+    background-color: #1D215E;
+    color: #fff;
+    height: 400px;
+}
+
+#menu a {
+    background-color: #1D215E;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+#menu a:hover {
+    background-color: #1D215E;
+    color: #ddd;
+    text-decoration: underline;
+    display: block;
+}
+
+#content {
+    background-color: #fff;
+    border-top: solid 6px #1D215E;
+    padding: 20px;
+    min-height: 400px;
+}
+
+#footer {
+    margin_top: 20px; /* (typo but keeping your original) */
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+}
+
+/* --- Browse page specific styles --- */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+* Make product cards match the search bar styling *
+.product-card {
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 12px !important;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.product-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background-color: #f5f5f5;
+}
+
+.product-card h3 {
+    margin: 4px 0;
+    font-size: 1rem;
+}
+
+.product-card p {
+    margin: 4px 0 8px;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.variant-label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+.variant-select {
+    width: 100%;
+    padding: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.product-card-buttons {
+    margin-top: auto;
+    display: flex;
+    gap: 8px;
+}
+
+.product-card-buttons button {
+    flex: 1;
+    padding: 8px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-wishlist {
+    background-color: #f2c300;
+    color: #000;
+}
+
+.btn-quote {
+    background-color: #1D215E;
+    color: #fff;
+}
+
+.btn-wishlist:hover {
+    background-color: #FFDF4D;
+}
+
+.btn-quote:hover {
+    background-color: #2F3BB7;
+}
+
+/* Pagination styling */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.pagination a,
+.pagination span {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+}
+
+.pagination .current {
+    background-color: #1D215E;
+    color: #fff;
+    border-color: #1D215E;
+}
+
+.pagination .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Responsive: 2 columns then 1 column on small screens */
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
 /* 8888888888888888888888888888888888888888888 */
 /*      Andrew- drop down menu for browse      */
 /* 8888888888888888888888888888888888888888888 */
@@ -692,7 +884,7 @@ footer .bottom-bar {
     box-shadow: 0 0 3px #f2c300;
 }
 
-//* --- Search Bar Styling Override --- */
+/* --- Search Bar Styling Override --- */
 
 /* Search bar border colours */
 .product-search input[type="text"] {

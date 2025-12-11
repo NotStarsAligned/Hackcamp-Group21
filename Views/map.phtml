@@ -1,0 +1,52 @@
+<?php require ("Views/template/header.phtml"); ?>
+
+    <!-- Load Leaflet HERE instead of waiting for footer -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        #map {
+            width: 80%;
+            height: 500px;
+            margin: 50px auto;
+            border: 2px solid #333;
+            display: block;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p id="coordinates">Getting your location...</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                document.getElementById('coordinates').textContent =
+                    `${lat.toFixed(6)}°, ${lng.toFixed(6)}°`;
+
+                const map = L.map('map').setView([lat, lng], 15);
+
+                setTimeout(function(){ map.invalidateSize()}, 400);
+
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                L.marker([lat, lng]).addTo(map)
+                    .bindPopup("Your Current Location").openPopup();
+            });
+        }
+    </script>
+
+<?php require ("Views/template/footer.phtml"); ?>

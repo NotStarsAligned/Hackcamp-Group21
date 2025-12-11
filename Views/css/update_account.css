@@ -1,0 +1,100 @@
+/* ===== Update Account Settings – TEK Style ===== */
+
+/* Page background */
+body {
+    background-color: #f5f6fa;
+}
+
+/* Page heading */
+h2 {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #1D215E; /* dark blue */
+    position: relative;
+}
+
+/* Yellow underline under heading */
+h2::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background-color: #F2C300; /* yellow */
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 3px;
+}
+
+/* Message box (errors / success) */
+.msg {
+    max-width: 480px;
+    margin: 15px auto;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background: #FFECEC;
+    border: 1px solid #e57373;
+    color: #b71c1c;
+    font-size: 14px;
+}
+
+/* Form card */
+form {
+    max-width: 480px;
+    margin: 25px auto 60px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 3px solid #F2C300; /* yellow border */
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels */
+form label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: #1D215E;
+}
+
+/* Inputs */
+form input[type="email"],
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #F4F7FF; /* light blue */
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Focus state */
+form input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    background-color: #ffffff;
+}
+
+/* Save button */
+form button[type="submit"] {
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1D215E; /* dark blue */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* Hover */
+form button[type="submit"]:hover {
+    background-color: #2F3BB7; /* lighter blue */
+}

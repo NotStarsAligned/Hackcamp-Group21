@@ -1,0 +1,808 @@
+[33mcommit b8dd823fb5276943b718c1493f9e915e46e8f207[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/map[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: fb623e4 cbb16c4
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Wed Dec 10 12:50:55 2025 +0000
+
+    Merge pull request #31 from NotStarsAligned/update-account-details
+    
+    updated db passwords + add id in customer table
+
+[33mcommit cbb16c41e19e77de6c98ba0d4459d1e4004135e8[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Wed Dec 10 12:30:43 2025 +0000
+
+    updated db passwords + add id in customer table
+
+[33mcommit fb623e4606587a3a71f3ec33988d8e3c6500bf68[m
+Merge: f6cfada 6115ade
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Wed Dec 10 11:04:32 2025 +0000
+
+    Merge pull request #30 from NotStarsAligned/update-account-details
+    
+    updated db passwords + add id in customer table
+
+[33mcommit 6115adecb05c21cae69f967b86cdef25fb99ad04[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Wed Dec 10 10:59:36 2025 +0000
+
+    updated db passwords + add id in customer table
+
+[33mcommit f6cfadad704b6cfb55a3ac9dedc9a9364d94e802[m
+Merge: 20bb7fc d5a6448
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Wed Dec 10 10:46:53 2025 +0000
+
+    Merge pull request #29 from NotStarsAligned/wishlist
+    
+    browser patch fix
+
+[33mcommit d5a6448e70eeed416ee10396e6721b774618a447[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Wed Dec 10 10:43:41 2025 +0000
+
+    browser patch fix
+
+[33mcommit 20bb7fc199c640ded0da04fa9dce7542295b3a77[m
+Merge: c8cac7b 9aa3152
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 14:48:46 2025 +0000
+
+    Merge pull request #28 from NotStarsAligned/browse
+    
+    Browse
+
+[33mcommit 9aa3152f0c228e597fe8f3423286da991ae0c464[m
+Merge: cf9affe 4e78d7a
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Tue Dec 9 14:47:20 2025 +0000
+
+    Merge remote-tracking branch 'origin/browse' into browse
+
+[33mcommit cf9affe020ca7cc939dec88d6989b63b83bde977[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Tue Dec 9 14:43:46 2025 +0000
+
+    browser patch fix
+
+[33mcommit c8cac7b3809f98f431066fe4c888e9a972de837c[m
+Merge: 03888e3 4e78d7a
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 14:39:15 2025 +0000
+
+    Merge pull request #27 from NotStarsAligned/browse
+    
+    Browse
+
+[33mcommit 4e78d7ac222345c9e7c3c88106df0f40250948bd[m
+Merge: f63f269 03888e3
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 14:37:50 2025 +0000
+
+    Merge branch 'main' into browse
+    
+    # Conflicts:
+    #       database.sqlite
+
+[33mcommit f63f269a5dc0ee6cabf7f0643c4bd6df6eb2d1e0[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Tue Dec 9 14:33:16 2025 +0000
+
+    browser patch fix
+
+[33mcommit 03888e333ed0d82adf0c889b7428b477e2014c2c[m
+Author: RyanDCXL <166342252+RyanDCXL@users.noreply.github.com>
+Date:   Tue Dec 9 14:02:35 2025 +0000
+
+    Update TrackingMap.php
+
+[33mcommit 94a3bad88d764ece49b6bd1962016e076cd38d83[m
+Merge: 1088d1e e073dfe
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 13:24:25 2025 +0000
+
+    Merge pull request #26 from NotStarsAligned/feature/accessor-method
+    
+    Feature/accessor method
+
+[33mcommit e073dfe28b06ba3f8fd8ac67e9e9892e44bb4e87[m
+Merge: 0e83251 1088d1e
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 13:23:37 2025 +0000
+
+    Merge branch 'main' of https://github.com/NotStarsAligned/Hackcamp-Group21 into feature/accessor-method
+    
+    # Conflicts:
+    #       .idea/data_source_mapping.xml
+    #       database.sqlite
+
+[33mcommit 1088d1e94e2141f911926a4d4f33b1e58e71dd8b[m
+Merge: 7edec16 33b26ca
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 13:18:05 2025 +0000
+
+    Merge pull request #25 from NotStarsAligned/browse
+    
+    Browse
+
+[33mcommit 33b26ca386617d27ba687a1a40ff5f98caea61ed[m
+Merge: 3b48a90 7edec16
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 13:17:23 2025 +0000
+
+    Merge branch 'main' of https://github.com/NotStarsAligned/Hackcamp-Group21 into browse
+    
+    # Conflicts:
+    #       .idea/php.xml
+    #       Views/css/my-style.css
+    #       database.sqlite
+
+[33mcommit 7edec16bde278f50df50829111bf570cd9b9e4df[m
+Author: RyanDCXL <166342252+RyanDCXL@users.noreply.github.com>
+Date:   Tue Dec 9 13:08:58 2025 +0000
+
+    mappy
+
+[33mcommit 0e8325194818802c4aaa6422bc7edf60ef9df9ee[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Tue Dec 9 13:04:49 2025 +0000
+
+    updated db passwords + add id in customer table
+
+[33mcommit 3b48a90f4d9c08ada4ccf22d237cb713d9646e8b[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Tue Dec 9 13:04:26 2025 +0000
+
+    created the browsing page. wishlist and quote function not added yet
+
+[33mcommit b36c65c09276e2c85c9b147e77d6ad5424a55088[m
+Merge: 615f277 e39f664
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 13:00:39 2025 +0000
+
+    Merge pull request #24 from NotStarsAligned/feature/headerfixes2
+    
+    the quote page html and css updated
+
+[33mcommit 615f277c21f77243cae9bdbc9cddb60287aaeed2[m
+Merge: a7a59c9 575cda5
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 12:58:46 2025 +0000
+
+    Merge pull request #23 from NotStarsAligned/feature/pagebase
+    
+    Feature/pagebase
+
+[33mcommit 575cda5c05def20c3a35b908ea3fed3d5e924229[m
+Merge: 9a58b21 a7a59c9
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 12:56:16 2025 +0000
+
+    Merge branch 'main' of https://github.com/NotStarsAligned/Hackcamp-Group21 into feature/pagebase
+
+[33mcommit e39f664a8e83a8a46cc96ea89a553bbe4797eb39[m
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Tue Dec 9 12:54:59 2025 +0000
+
+    the quote page html and css updated
+
+[33mcommit 9a58b21c1ee608a8e0c004565587f50cd061f354[m
+Author: Riadh <ryadmk88@gmail.com>
+Date:   Tue Dec 9 12:40:28 2025 +0000
+
+    “My calculation module and base pages are fully completed and tested. Everything works correctly.” TEK
+
+[33mcommit a7a59c9c0e137ff81408b3c5f577a93a0333b98c[m
+Merge: 9b38a32 3e8ceb2
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 11:55:24 2025 +0000
+
+    Merge pull request #22 from NotStarsAligned/revert-21-feature/headers
+    
+    Revert "Feature/headers"
+
+[33mcommit 3e8ceb2e018fb393f1e24dfea33859a846b1c91b[m
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 11:55:03 2025 +0000
+
+    Revert "Feature/headers"
+
+[33mcommit 9b38a3222b55e45c523c202db6f8d74172e94bd2[m
+Merge: eac29c7 57b24d8
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 11:48:40 2025 +0000
+
+    Merge pull request #21 from NotStarsAligned/feature/headers
+    
+    Feature/headers
+
+[33mcommit 57b24d816eebc5c246e347b83cc09f415c9e2c18[m
+Merge: c9d020b eac29c7
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Tue Dec 9 11:43:21 2025 +0000
+
+    Merge branch 'main' of https://github.com/NotStarsAligned/Hackcamp-Group21 into feature/headers
+    
+    # Conflicts:
+    #       Views/css/my-style.css
+    #       Views/template/footer.phtml
+    #       Views/template/header.phtml
+
+[33mcommit eac29c7c845e0928088cdb5adae32ccbd6cd6cba[m
+Merge: 530a497 d44035e
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 11:34:35 2025 +0000
+
+    Merge pull request #20 from NotStarsAligned/database
+    
+    Database
+
+[33mcommit d44035e946593994c1dc47cd7b86c1557ea84f24[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Tue Dec 9 11:28:19 2025 +0000
+
+    added staff to staff_profiles table
+
+[33mcommit 530a4978b9b819593a153031bb21a545e55e1644[m
+Merge: b03b0f0 92e1b59
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 11:17:20 2025 +0000
+
+    Merge pull request #19 from NotStarsAligned/registration-and-login-pages
+    
+    Registration and login pages
+
+[33mcommit c9d020b7e8c5f314bf4a9a84222a9f6cbae8831f[m
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Tue Dec 9 11:17:05 2025 +0000
+
+    the quote page html and css updated
+
+[33mcommit 92e1b5911db6a9b5a78c984b10870e95c3a24793[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Tue Dec 9 11:10:58 2025 +0000
+
+    input fields validation+ show password
+
+[33mcommit bc0bcb510761daef980d39482e96423a411698c1[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Tue Dec 9 11:07:39 2025 +0000
+
+    added customer users to customer table via left join
+
+[33mcommit 4e1cc549cba840a646293be18af98738d2f4d3b3[m
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Tue Dec 9 11:04:05 2025 +0000
+
+    the quote page html and css updated
+
+[33mcommit 25f5437f30057efdf9871f01dd01913fba06f761[m
+Merge: 5b3a366 3f0a968
+Author: dymmk <dymmkka@gmail.com>
+Date:   Tue Dec 9 11:04:04 2025 +0000
+
+    Merge remote-tracking branch 'origin/registration-and-login-pages' into registration-and-login-pages
+    
+    # Conflicts:
+    #       .idea/php.xml
+    #       Views/template/footer.phtml
+    #       Views/template/header.phtml
+
+[33mcommit 5b3a3664797ec1460e17a20ca307568ee9f932a9[m
+Merge: 929e928 f40a8ae
+Author: dymmk <dymmkka@gmail.com>
+Date:   Tue Dec 9 11:03:16 2025 +0000
+
+    Merge branch 'main' of https://github.com/NotStarsAligned/Hackcamp-Group21 into registration-and-login-pages
+    
+    # Conflicts:
+    #       .idea/php.xml
+    #       Views/template/footer.phtml
+    #       Views/template/header.phtml
+    #       database.sqlite
+
+[33mcommit 4cb9edcd045b52cf47a74aa80ddf615c042f3a43[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Tue Dec 9 11:02:40 2025 +0000
+
+    added test products
+
+[33mcommit b03b0f0af408b02dbd6c6972145d30e0b9e45987[m
+Merge: f40a8ae 47151f1
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 9 10:48:53 2025 +0000
+
+    Merge pull request #18 from NotStarsAligned/database
+    
+    Database
+
+[33mcommit 47151f14153f6e79253853956610720232550244[m
+Merge: b66693e 2e74fac
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Tue Dec 9 10:46:38 2025 +0000
+
+    database products are now filled
+
+[33mcommit b66693e694ce573aad9bd747b3c43276dfb4c390[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Mon Dec 8 20:59:28 2025 +0000
+
+    database products are now filled
+
+[33mcommit 929e928fa0a43cdc8149f34d296787f5982ce2d5[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Tue Dec 9 10:42:29 2025 +0000
+
+    input fields validation+ show password
+
+[33mcommit f40a8aecd2cb0a8dedf3117edf661e7ea1026bb1[m
+Merge: a35bf70 2e74fac
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Mon Dec 8 21:45:01 2025 +0000
+
+    Merge pull request #17 from NotStarsAligned/database
+    
+    Database
+
+[33mcommit 2e74fac7ff4c6ffacdb7d7db7cb5cd81a67098c6[m
+Merge: 9a13277 a35bf70
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Mon Dec 8 21:42:20 2025 +0000
+
+    Merge branch 'main' of https://github.com/NotStarsAligned/Hackcamp-Group21 into database
+    
+    # Conflicts:
+    #       .idea/php.xml
+
+[33mcommit 9a13277074715c69e846a1787d33c25e46b4040f[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Mon Dec 8 20:59:28 2025 +0000
+
+    database products are now filled
+
+[33mcommit a35bf704667c567ca255cca2346fd4922ed71c3f[m
+Merge: 2990605 4a9ce91
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Mon Dec 8 19:42:50 2025 +0000
+
+    Merge pull request #16 from NotStarsAligned/feature/map
+    
+    Feature/map
+
+[33mcommit 4a9ce918c3d3b6bff76f030b95618df76d4d6e21[m[33m ([m[1;31morigin/feature/map[m[33m)[m
+Merge: bba5f25 2990605
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Mon Dec 8 19:32:08 2025 +0000
+
+    lets try again
+
+[33mcommit bba5f258d9278a27e7c377a994ef59474f1e0e42[m
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Mon Dec 8 19:30:32 2025 +0000
+
+    Initial Map Works, I can now spy on you all x
+
+[33mcommit 4134fea55fa1d7bb2dd94a73c7740c5a3422048f[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Mon Dec 8 19:04:19 2025 +0000
+
+    2: updated database as per updated client requirements. please note that the data itself has not yet been added. but the test users are still present and usable.
+
+[33mcommit 2990605d4423620e8faa6df4a3c8bb918ee49ad6[m
+Merge: 2922570 75d1813
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Mon Dec 8 18:57:47 2025 +0000
+
+    Merge pull request #15 from NotStarsAligned/database
+    
+    updated database as per updated client requirements. please note that…
+
+[33mcommit 2922570e770ddb221fd2d3c06bee7537432522b8[m
+Merge: a38d00c c8c84f5
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Mon Dec 8 18:55:29 2025 +0000
+
+    Merge pull request #14 from NotStarsAligned/feature/map
+    
+    Feature/map - Rhema
+
+[33mcommit c8c84f53287bbe0bed461463cb618ce04886b85f[m
+Merge: 23f53a0 a38d00c
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Mon Dec 8 18:34:10 2025 +0000
+
+    Resolved conflict issues
+
+[33mcommit a38d00cdf7dc2e86db7306d564e62703383c861d[m
+Merge: 10f365d 5a84ffb
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Mon Dec 8 18:29:17 2025 +0000
+
+    Merge pull request #13 from NotStarsAligned/feature/headers
+    
+    the quote page html and css updated - Chengwu
+
+[33mcommit 75d1813ff0cc4e19e4f73c70f46ae9ce2318f006[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Mon Dec 8 18:15:55 2025 +0000
+
+    updated database as per updated client requirements. please note that the data itself has not yet been added. but the test users are still present and usable.
+
+[33mcommit 23f53a0842d8ecce3d30bceab4346287acc90d20[m
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Mon Dec 8 17:39:50 2025 +0000
+
+    Updated header and footer, feel free to change as needed
+
+[33mcommit 5a84ffbd324448dcd74cefbddcb1471309c86c71[m
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Mon Dec 8 14:43:25 2025 +0000
+
+    the quote page html and css updated
+
+[33mcommit 3f0a96840c869903de0aae6f39e26e23685b12d7[m
+Merge: fca643e 10f365d
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Fri Dec 5 18:14:41 2025 +0000
+
+    Merged the main branch onto the registration branch. Because people can't be bothered making branches for new features.
+
+[33mcommit 10f365d7fe4a9440ef8c6744ff7f070257bab5f7[m[33m ([m[1;32mfeature/email[m[33m)[m
+Merge: 3dfb7fc 6c349c3
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Fri Dec 5 17:56:12 2025 +0000
+
+    Merge pull request #12 from NotStarsAligned/feature/email
+    
+    email service works now, sends emailnwith attached pdf, later can do …
+
+[33mcommit 6c349c39e55ad5b06ce01de75deac581ee78c8e7[m[33m ([m[1;31morigin/feature/email[m[33m)[m
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Fri Dec 5 16:28:55 2025 +0000
+
+    email service works now, sends emailnwith attached pdf, later can do logic to seperate viewing pdf and sending email or bun that and just send it
+
+[33mcommit 3dfb7fc0bb62257de0933b0292ff9b0bd2e2f14f[m
+Merge: 043b386 bc11a80
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Fri Dec 5 14:55:47 2025 +0000
+
+    Merge pull request #11 from NotStarsAligned/feature/headers
+    
+    if this doesnt merge properly, im going to show up on the news
+
+[33mcommit bc11a80aee2e112544b5a1f27098b212aa4160c2[m
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Fri Dec 5 14:51:11 2025 +0000
+
+    the quote page html and css updated
+
+[33mcommit 5736a645ce86db6264be1106b7f8da5db70e2364[m
+Merge: 7f25685 043b386
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Fri Dec 5 14:29:19 2025 +0000
+
+    Merge branch 'main' of https://github.com/NotStarsAligned/Hackcamp-Group21 into feature/headers
+    
+    because idkf
+
+[33mcommit 7339a4df05647d8768ac96395bff22b1e1237975[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Fri Dec 5 14:27:08 2025 +0000
+
+    login section  authentication
+
+[33mcommit e7a0d5eb33894947f3786814d0e9aaaf85f3fb87[m
+Merge: fca643e 043b386
+Author: dymmk <dymmkka@gmail.com>
+Date:   Fri Dec 5 14:21:30 2025 +0000
+
+    Merge branch 'main' of https://github.com/NotStarsAligned/Hackcamp-Group21 into registration-and-login-pages
+    
+    # Conflicts:
+    #       .idea/php.xml
+
+[33mcommit 043b386ad8e7d90437dc400d52a130120ec21884[m
+Merge: 16700d7 e60806f
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Fri Dec 5 13:52:23 2025 +0000
+
+    Merge pull request #10 from NotStarsAligned/feature/initialPDFCreation
+    
+    Feature/initial pdf creation
+
+[33mcommit e60806f39d1d081c94b7899e6595e959feb9387f[m
+Merge: 470d0ec 16700d7
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Fri Dec 5 13:47:02 2025 +0000
+
+    Merge remote-tracking branch 'origin/main' into feature/initialPDFCreation
+    
+    # Conflicts:
+    #       .idea/php.xml
+
+[33mcommit fca643ee1cee6c6793a16862ca6f4726842a0382[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Fri Dec 5 13:17:58 2025 +0000
+
+    login section  authentication
+
+[33mcommit 16700d7d094f5a17264424b13fff0530a216eb0b[m
+Merge: 8d540e9 8f1487f
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Fri Dec 5 12:56:21 2025 +0000
+
+    Merge pull request #9 from NotStarsAligned/bugfix/compatabilityhell
+    
+    Made it so IT ACTUALLY LETS ME COMMIT.
+
+[33mcommit 8f1487f0d6e2c9cb5238dfe4ccb7486b264cdfe2[m
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Fri Dec 5 12:45:35 2025 +0000
+
+    Made it so IT ACTUALLY LETS ME COMMIT.
+
+[33mcommit 7f256850c8db0610d4af7697fe8ada723a9a94b5[m
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Fri Dec 5 12:42:47 2025 +0000
+
+    Created Headers and Footers
+
+[33mcommit 8ae76085195ac44f2d88448066df996c4258e66e[m
+Merge: 4a3bbd3 8d540e9
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Fri Dec 5 12:04:07 2025 +0000
+
+    Merge branch 'main' of https://github.com/NotStarsAligned/Hackcamp-Group21 into feature/headers
+    # Please enter a commit message to explain why this merge is necessary,
+    # especially if it merges an updated upstream into a topic branch.
+    #
+    # Lines starting with '#' will be ignored, and an empty message aborts
+    # the commit.
+
+[33mcommit 4a3bbd32eae1cce29a297d68be66629132a31c17[m
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Fri Dec 5 12:02:17 2025 +0000
+
+    Created Headers and Footers
+
+[33mcommit 470d0ec4ea1b56ad41731ad42d56d2f33e65b1a4[m[33m ([m[1;31morigin/feature/initialPDFCreation[m[33m, [m[1;32mfeature/initialPDFCreation[m[33m)[m
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Fri Dec 5 11:46:17 2025 +0000
+
+    Template has been done, css hardcoded in so that it actually works x
+
+[33mcommit 8d540e99f3df3ede795cbf36980378795b49f27f[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Fri Dec 5 11:35:57 2025 +0000
+
+    completed index page design. and added images folder
+
+[33mcommit ce76d81f0f63b774ac60c271f26a8402f9962f55[m
+Merge: 830b7f1 d20611f
+Author: dymmk <dymmkka@gmail.com>
+Date:   Fri Dec 5 11:34:22 2025 +0000
+
+    Merge remote-tracking branch 'origin/registration-and-login-pages' into registration-and-login-pages
+    
+    # Conflicts:
+    #       .idea/php.xml
+
+[33mcommit 830b7f12cb67437807b2c77071944cc69bb0ade5[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Fri Dec 5 11:28:33 2025 +0000
+
+    login section  authentication
+
+[33mcommit be0635c72c60be23b8d73997c4a5bbc3d2372042[m
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Fri Dec 5 11:13:11 2025 +0000
+
+    Created Headers and Footers
+
+[33mcommit 5cf4f4ea0ca4c561895d5f4f863f403c09395076[m
+Merge: 815abbf 7f7a158
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Fri Dec 5 11:09:28 2025 +0000
+
+    Merge branch 'main' of https://github.com/NotStarsAligned/Hackcamp-Group21 into feature/headers
+    
+    # Conflicts:
+    #       Views/template/footer.phtml
+    #       Views/template/header.phtml
+
+[33mcommit 815abbff1002818982fd0b0eb7ab35684967412f[m
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Fri Dec 5 11:06:21 2025 +0000
+
+    Created Headers and Footers
+
+[33mcommit 7f7a158d0b230a4d7c03af3fb11aba10e9d12efc[m
+Merge: b7ef8ae d20611f
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Fri Dec 5 10:51:27 2025 +0000
+
+    Merge pull request #8 from NotStarsAligned/registration-and-login-pages
+    
+    Registration and login pages as well as saving myself a bigger future headache (organized files a tad bit better)
+
+[33mcommit d20611f6eb59bce600fe94d7a5c2518c6a5e160f[m
+Merge: cfc84b2 dd4f49c
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Fri Dec 5 10:45:50 2025 +0000
+
+    Merge branch 'bugfix/compatabilityhell' into registration-and-login-pages
+    
+    # Conflicts:
+    #       .idea/dataSources.xml
+    #       .idea/php.xml
+
+[33mcommit dd4f49c28fc3efa4a120502ce4dd5a1758bf4385[m
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Thu Dec 4 23:36:46 2025 +0000
+
+    Updated database.php to link to the database, Implemented basic index.php
+
+[33mcommit cfc84b207cc69f9f57d526a38f494393bed71e7e[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Thu Dec 4 23:26:40 2025 +0000
+
+    login section  authentication
+
+[33mcommit b238f5e5b5d05f7cd00566c9d114e0e458ec69db[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Thu Dec 4 23:06:55 2025 +0000
+
+    login section  authentication
+
+[33mcommit 75ef6917d5e1111ab6c418cd4022dda2ba40414b[m
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Thu Dec 4 13:59:15 2025 +0000
+
+    Partial fix of the hell hole that is this amalgamation.
+
+[33mcommit b7ef8ae0e958cfcc9e8e5c14fe7783a2e1da1108[m
+Merge: 23bd61d 8b67856
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Thu Dec 4 12:59:26 2025 +0000
+
+    Merge pull request #7 from NotStarsAligned/feature/initialPDFCreation
+    
+    Feature/initial pdf creation
+
+[33mcommit 8b67856a3a6cdb20d25db91a9031c8fad51f4b57[m
+Merge: b3a692a 23bd61d
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Thu Dec 4 12:54:18 2025 +0000
+
+    PDF implementation added
+
+[33mcommit b3a692a01e5cf48cadd0aedb2a47b5f98e5357c7[m
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Thu Dec 4 12:46:40 2025 +0000
+
+    dompdf
+
+[33mcommit 722353b4c6509d6b5756ae3d806a41a26b4383fd[m
+Author: Riadh <ryadmk88@gmail.com>
+Date:   Thu Dec 4 12:43:44 2025 +0000
+
+    updated logic made empty pages and class and test it
+
+[33mcommit 23bd61d3ca84c9129e1dcde4aa62330337c5b9fa[m
+Merge: 2be5ab1 722353b
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Thu Dec 4 12:43:38 2025 +0000
+
+    Merge pull request #6 from NotStarsAligned/feature/pagebase
+    
+    updated logic made empty pages and class and test it
+
+[33mcommit 2be5ab1cd0039ebf066b17e907985b4d2df9a9b2[m
+Merge: 642739a 409ae1f
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Thu Dec 4 12:39:55 2025 +0000
+
+    Merge pull request #5 from NotStarsAligned/feature/headers
+    
+    Created Headers and Footers
+
+[33mcommit 409ae1f8881d5bc73887c94616ef0272b67a4256[m
+Author: debug-cod <chengwuwang4@gmail.com>
+Date:   Thu Dec 4 12:37:26 2025 +0000
+
+    Created Headers and Footers
+
+[33mcommit 642739aaadaa7d644883100efa0e64d2da50948a[m
+Merge: 574530f 04c9f45
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Thu Dec 4 12:26:19 2025 +0000
+
+    Merge pull request #4 from NotStarsAligned/feature/logins
+    
+    Implemented the login changes and seems like a decent enough implementation.
+
+[33mcommit 04c9f45dbff0713d41818f8ef24853af489c73bd[m
+Author: dymmk <dymmkka@gmail.com>
+Date:   Wed Dec 3 15:48:16 2025 +0000
+
+    login section  authentication
+
+[33mcommit 574530f146c2fe032cfcc2fc9c52b75a06dbbf43[m
+Merge: 1b0b26e d97e757
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Wed Dec 3 14:48:11 2025 +0000
+
+    Merge pull request #3 from NotStarsAligned/feature/database
+    
+    implemented database(type shiii)
+
+[33mcommit d97e757596bb1922bb04fb584eba3f01cb3176f9[m
+Author: andywildy124-lang <andywildy124@icloud.com>
+Date:   Wed Dec 3 14:45:50 2025 +0000
+
+    jeffery epstien didnt kill himself
+
+[33mcommit 1b0b26e94e2aedc6bb5a970f6d0232bcee97e386[m[33m ([m[1;32mfirstBranch[m[33m)[m
+Merge: edb733b 1386777
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Wed Dec 3 13:53:27 2025 +0000
+
+    Merge pull request #2 from NotStarsAligned/feature/calculations
+    
+    Updated Logic
+
+[33mcommit 13867771522e78bb50e3e60b496684b72f0e7816[m[33m ([m[1;31morigin/feature/calculations[m[33m)[m
+Author: Riadh <ryadmk88@gmail.com>
+Date:   Wed Dec 3 13:31:57 2025 +0000
+
+    Updated Logic
+
+[33mcommit edb733b9ae8260348763d61a510368dc90d4414a[m
+Merge: fb5116f c6263b7
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Wed Dec 3 12:37:22 2025 +0000
+
+    Merge pull request #1 from NotStarsAligned/firstBranch
+
+[33mcommit c6263b799b0a9ecba28c4a93d84aaebfba499b7d[m[33m ([m[1;31morigin/firstBranch[m[33m)[m
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Wed Dec 3 12:32:22 2025 +0000
+
+    index file
+
+[33mcommit f2cdfb57925c94cdfdcdb2b9e13d0b7fe373824d[m
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Wed Dec 3 11:33:43 2025 +0000
+
+    Removed pics x
+
+[33mcommit 7a8d978e4b69a8023171736c39a0c4a3f148301b[m
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Wed Dec 3 11:32:19 2025 +0000
+
+    Brought in Lees stuff so should look better pretty sure theres some sorta index
+
+[33mcommit db3c03cd8ffbffe1a99e9ff5cf2be39f4dd2c316[m
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Wed Dec 3 11:25:07 2025 +0000
+
+    Template Stuff/Bootstrap etc
+
+[33mcommit 29660f39564d8cfa9707daf41281dea72b59a8bc[m
+Author: DiscountSponge <156786512+DiscountSponge@users.noreply.github.com>
+Date:   Wed Dec 3 09:56:30 2025 +0000
+
+    Added 2 folders for views and models, test run to make sure this all works fine
+
+[33mcommit fb5116fe454aeb43eb645560446b29d5669a280f[m[33m ([m[1;32mmain[m[33m)[m
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 2 13:49:41 2025 +0000
+
+    Update README.md
+
+[33mcommit a5fe3f097151f0d2c16233827e532b1ff94c4647[m
+Author: StarsAligned <ahmedradhi365@gmail.com>
+Date:   Tue Dec 2 13:25:03 2025 +0000
+
+    First Commit

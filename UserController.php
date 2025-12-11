@@ -4,6 +4,8 @@
 
 // Include the model file (assuming you have a proper autoloader in a real framework)
 // 包含模型文件
+Authentication::requireLogin();
+//add this in the page so only authorized user can have access
 require_once 'Model/UserModel.php';
 
 class UserController {

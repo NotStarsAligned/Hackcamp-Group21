@@ -44,6 +44,7 @@ if (!class_exists('Authentication')) {
                     <a class="nav-link" href="page1.php">Start Survey</a>
                     <a class="nav-link" href="page2.php">Site Information</a>
 
+
                     <div class="ms-lg-4 mt-2 mt-lg-0">
                         <?php if (Authentication::isLoggedIn()): ?>
                             <span class="navbar-text text-dark">Welcome: <strong><?= htmlspecialchars(Authentication::full_name()) ?></strong></span>

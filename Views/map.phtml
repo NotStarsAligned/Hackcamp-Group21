@@ -1,6 +1,5 @@
 <?php require ("Views/template/header.phtml"); ?>
 
-    <!-- Load Leaflet HERE instead of waiting for footer -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -17,8 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <p id="coordinates">Getting your location...</p>
-                <p><?php echo $view->latitude; ?></p>
+                <h2>TilePlan Site Locations</h2>
             </div>
         </div>
         <div class="row">
@@ -29,42 +27,118 @@
     </div>
 
     <script type="text/javascript">
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const lat = position.coords.latitude;
-                const lng = position.coords.longitude;
-                document.getElementById('coordinates').textContent =
-                    `${lat.toFixed(6)}°, ${lng.toFixed(6)}°`;
+        // Convert PHP array to JavaScript
+        const locations = <?php echo json_encode($view->staffLocations); ?>;
+        console.log("Loaded staff locations:", locations);
+        console.log("Number of staff locations:", locations.length);
 
-                const map = L.map('map').setView([lat, lng], 15);
+        // Define colored icons
+        const redIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
 
-                setTimeout(function(){ map.invalidateSize()}, 400);
+        const greenIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
 
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap contributors'
-                }).addTo(map);
+        const blueIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
 
-                const locations = [
-                    {lat: 53.488, lng: -2.274, title: "Location 1", description: "First marker"},
-                    {lat: 53.490, lng: -2.276, title: "Location 2", description: "Second marker"},
-                    {lat: 53.492, lng: -2.278, title: "Location 3", description: "Third marker"}
-                ];
+        // UK Site Locations (random across UK)
+        const siteLocations = [
+            {lat: 51.5074, lng: -0.1278, title: "London Site", description: "Garage in central London"},
+            {lat: 53.4808, lng: -2.2426, title: "Manchester Site", description: "Restaurant in Rusholme"},
+            {lat: 55.9533, lng: -3.1883, title: "Edinburgh Office", description: "Car showroom in Glasgow"},
+            {lat: 52.4862, lng: -1.8904, title: "Birmingham Office", description: "Festival flooring in Birmingham"},
 
-                locations.forEach(function(location) {
-                    L.marker([location.lat, location.lng]).addTo(map)
-                        .bindPopup(
-                            '<div class="card" style="width: 18rem;">' +
-                            '<img src="..." class="card-img-top" alt="...">' +
-                            '<div class="card-body">' +
-                            '<h5 class="card-title">Card title</h5>' +
-                            '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>' +
-                            '<a href="#" class="btn btn-primary">Go somewhere</a>' +
-                            '</div>' +
-                            '</div>'
-                        );
-                            });
-            });
-        }
+              ];
+
+        // Enquiry locations
+        const enquiryLocations = [
+            {lat: 53.488, lng: -2.274, title: "Enquiry Site 1", description: "Customer enquiry location"},
+            {lat: 53.490, lng: -2.276, title: "Enquiry Site 2", description: "Potential project site"},
+            {lat: 53.492, lng: -2.278, title: "Enquiry Site 3", description: "Survey request location"}
+        ];
+
+        // Initialize map centered on UK
+        const map = L.map('map').setView([54.5, -3.5], 6);
+
+        setTimeout(function(){ map.invalidateSize()}, 400);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add site location markers (blue)
+        siteLocations.forEach(function(site) {
+            L.marker([site.lat, site.lng], {icon: blueIcon}).addTo(map)
+                .bindPopup(`
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">${site.title}</h5>
+                        <p class="card-text">
+                            ${site.description}<br>
+                            <strong>Coordinates:</strong> ${site.lat.toFixed(4)}, ${site.lng.toFixed(4)}
+                        </p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            `);
+        });
+
+        // Add staff location markers (red)
+        locations.forEach(function(location, index) {
+            console.log(`Staff Location ${index}:`, location);
+
+            if (location.lat && location.lng) {
+                console.log(`Adding staff marker at: ${location.lat}, ${location.lng}`);
+                L.marker([location.lat, location.lng], {icon: redIcon}).addTo(map)
+                    .bindPopup(`
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Staff ID: ${location.user_id}</h5>
+                            <p class="card-text">
+                                <strong>Skills:</strong> ${location.skills}<br>
+                                <strong>Status:</strong> ${location.status}<br>
+                                <strong>Coordinates:</strong> ${location.lat.toFixed(6)}, ${location.lng.toFixed(6)}
+                            </p>
+                        </div>
+                    </div>
+                `);
+            } else {
+                console.log(`Skipping staff location ${index} - missing coordinates`);
+            }
+        });
+
+        // Add enquiry markers (green)
+        enquiryLocations.forEach(function(location) {
+            L.marker([location.lat, location.lng], {icon: greenIcon}).addTo(map)
+                .bindPopup(`
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">${location.title}</h5>
+                        <p class="card-text">${location.description}</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            `);
+        });
     </script>
 
 <?php require ("Views/template/footer.phtml"); ?>

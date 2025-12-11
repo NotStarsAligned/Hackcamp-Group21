@@ -17,25 +17,73 @@ try {
     die('DB connection failed: ' . htmlspecialchars($e->getMessage()));
 }
 
+// --- SEARCH TERM ---
+$searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
+$view->searchTerm = $searchTerm;
+
 // --- PAGINATION SETTINGS ---
 $itemsPerPage = 9; // 3 wide grid x 3 rows
 $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $offset = ($page - 1) * $itemsPerPage;
 
-// --- COUNT TOTAL TILE PRODUCTS ---
-$totalStmt = $pdo->query("SELECT COUNT(*) FROM products WHERE category = 'tile'");
-$view->totalProducts = (int)$totalStmt->fetchColumn();
+// --- COUNT TOTAL TILE PRODUCTS (WITH OPTIONAL SEARCH) ---
+if ($searchTerm !== '') {
+    $countSql = "
+        SELECT COUNT(*)
+        FROM products
+        WHERE category = 'tile'
+          AND is_active = 1
+          AND (
+              name           LIKE :term
+              OR description LIKE :term
+              OR colour      LIKE :term
+          )
+    ";
+    $countStmt = $pdo->prepare($countSql);
+    $countStmt->bindValue(':term', '%' . $searchTerm . '%', PDO::PARAM_STR);
+    $countStmt->execute();
+} else {
+    $countStmt = $pdo->query("
+        SELECT COUNT(*)
+        FROM products
+        WHERE category = 'tile'
+          AND is_active = 1
+    ");
+}
+
+$view->totalProducts = (int)$countStmt->fetchColumn();
 $view->totalPages = max(1, (int)ceil($view->totalProducts / $itemsPerPage));
 $view->page = $page;
 
-// --- FETCH PRODUCTS FOR CURRENT PAGE ---
-$productStmt = $pdo->prepare("
-    SELECT id, name, description, thumbnail_url
+// --- FETCH PRODUCTS FOR CURRENT PAGE (WITH OPTIONAL SEARCH) ---
+$productSql = "
+    SELECT id, name, description, thumbnail_url, colour
     FROM products
     WHERE category = 'tile'
+      AND is_active = 1
+";
+
+if ($searchTerm !== '') {
+    $productSql .= "
+      AND (
+          name           LIKE :term
+          OR description LIKE :term
+          OR colour      LIKE :term
+      )
+    ";
+}
+
+$productSql .= "
     ORDER BY id
     LIMIT :limit OFFSET :offset
-");
+";
+
+$productStmt = $pdo->prepare($productSql);
+
+if ($searchTerm !== '') {
+    $productStmt->bindValue(':term', '%' . $searchTerm . '%', PDO::PARAM_STR);
+}
+
 $productStmt->bindValue(':limit', $itemsPerPage, PDO::PARAM_INT);
 $productStmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 $productStmt->execute();

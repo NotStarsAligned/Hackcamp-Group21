@@ -1,26 +1,67 @@
 <?php
-require 'wishlist.php';
-$userId = $_SESSION['user_id'] ?? 0;
 
+session_start();
+
+require 'Model/database.php';
+require '../wishlist.php';
+
+$userId = $_SESSION['user_id'] ?? 0;
 if ($userId === 0) {
     die("Please log in to view your wishlist.");
 }
 
-$wishlistItems = getUserWishlist($pdo, $userId);
+//get the pdo connection
+$pdo = Database::getInstance()->getConnection();
+$view = new stdClass();
+$view->tiles = getUserWishlist($pdo, $userId);
+include __DIR__ . "/template/header.phtml";
 ?>
-<?php if (empty($wishlistItems)): ?>
-    <p>Your wishlist is empty.</p>
-<?php else: ?>
-    <?php foreach ($wishlistItems as $item): ?>
-        <div class="product">
-            <strong><?= htmlspecialchars($item['product_name']) ?> - <?= htmlspecialchars($item['variant_name']) ?></strong><br>
-            Price: £<?= number_format($item['price'], 2) ?>
-            <form method="POST" action="/wishlist.php">
-                <input type="hidden" name="variant_id" value="<?= $item['variant_id'] ?>">
-                <button type="submit" name="remove_wishlist" class="btn btn-remove">Remove</button>
-            </form>
+
+<div id="content">
+    <?php if (empty($view->tiles)): ?>
+        <p>Your wishlist is empty.</p>
+    <?php else: ?>
+        <div class="product-grid">
+            <?php foreach ($view->tiles as $tile): ?>
+                <?php
+                $img = $tile['thumbnail_url'] ?: '\\images\\placeholder_image.png';
+                $variants = $tile['variants'];
+                ?>
+                <div class="product-card">
+                    <img src="<?= htmlspecialchars($img) ?>" alt="Product image">
+
+                    <h3><?= htmlspecialchars($tile['name']) ?></h3>
+                    <p><?= htmlspecialchars($tile['description']) ?></p>
+
+                    <?php if (!empty($variants)): ?>
+                        <label>
+                            <span class="variant-label">Colour / Polish:</span>
+                            <select class="variant-select" name="variant_id">
+                                <?php foreach ($variants as $variant): ?>
+                                    <?php
+                                    $colour = $variant['colour'] ?: 'Unknown';
+                                    $polish = $variant['polish'] ?: 'Standard';
+                                    $price  = $variant['price_trade'];
+                                    $label  = $colour . ' / ' . $polish . ' (£' . number_format($price, 2) . ')';
+                                    ?>
+                                    <option value="<?= (int)$variant['id'] ?>">
+                                        <?= htmlspecialchars($label) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </label>
+                    <?php else: ?>
+                        <p><em>No variants available</em></p>
+                    <?php endif; ?>
+
+                    <div class="product-card-buttons">
+                        <form method="POST" action="/wishlist.php">
+                            <input type="hidden" name="variant_id" value="<?= $tile['id'] ?>">
+                            <button type="submit" name="remove_wishlist" class="btn btn-remove">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
-<?php endif; ?>
-</body>
-</html>
+    <?php endif; ?>
+</div>

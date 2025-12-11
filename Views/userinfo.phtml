@@ -1,9 +1,5 @@
 <?php
-// userinfo.phtml
-// NOTE: This file assumes that the data variables ($name, $user_type, $email, $phone, $address, $member_since)
-// are available and populated by the UserController before this file is included.
-// 注意：本文件假定数据变量（$name, $user_type, $email, $phone, $address, $member_since）
-// 已在控制器（UserController）中准备好，并在此文件被包含时可用。
+// 这是一个视图文件，用于展示用户资料。
 
 // Placeholder variables for testing without running the full controller/model (REMOVE IN PRODUCTION)
 // 用于在没有运行完整控制器/模型时进行测试的占位符变量（在生产环境中移除）
@@ -17,150 +13,54 @@ if (!isset($name)) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TilePlan Profile Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="my-style.css" />
-</head>
-<body>
-<header>
-    <div class="logo">
-        <img src="logo.png" alt="TilePlan Logo" height="50" />
-    </div>
+<?php require ("Views/template/header.phtml");?>
 
-    <nav class="nav-links" style="margin-left: 40px;">
-        <span><a href="#" style="text-decoration: none; color: #444;">Home</a></span>
-        <span><a href="#" style="text-decoration: none; color: #444;">Projects</a></span>
-        <span><a href="#" style="text-decoration: none; color: #444;">Profile</a></span>
-    </nav>
+    <div class="container userinfo-container">
+        <div class="row justify-content-center align-items-center">
 
-    <div class="user-section" style="margin-left:auto;">
-        <span><i class="fas fa-user-circle" style="font-size: 24px; color: #444;"></i></span>
-        <button class="logout-btn">Logout</button>
-    </div>
-</header>
+            <div class="col-md-4 text-center">
+                <div class="profile-pic">
+                    <i class="fas fa-user"></i>
+                </div>
 
-<div class="container userinfo-container">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-md-4 text-center">
-            <div class="profile-pic">
-                <i class="fas fa-user"></i>
+                <h4 class="mt-3"><?php echo htmlspecialchars($name); ?></h4>
+                <p>dd/mm/yyyy</p>
+
+                <p>User Type: <?php echo htmlspecialchars($user_type); ?></p>
             </div>
 
-            <h4 class="mt-3"><?php echo htmlspecialchars($name); ?></h4>
-            <p>dd/mm/yyyy</p>
+            <div class="col-md-1 d-flex justify-content-center">
+                <div class="divider-line d-none d-md-block"></div>
+            </div>
 
-            <p>User Type: <?php echo htmlspecialchars($user_type); ?></p>
-        </div>
+            <div class="col-md-6 mt-4 mt-md-0">
+                <h4 class="text-center mb-3">Personal Information</h4>
+                <div class="info-card">
+                    <div>
+                        <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
 
-        <div class="col-md-1 d-flex justify-content-center">
-            <div class="divider-line d-none d-md-block"></div>
-        </div>
+                        <p><strong>Phone:</strong> <?php echo htmlspecialchars($phone); ?></p>
 
-        <div class="col-md-6 mt-4 mt-md-0">
-            <h4 class="text-center mb-3">Personal Information</h4>
-            <div class="info-card">
-                <div>
-                    <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
+                        <p><strong>Address:</strong> <?php echo htmlspecialchars($address); ?></p>
 
-                    <p><strong>Phone:</strong> <?php echo htmlspecialchars($phone); ?></p>
+                        <p><strong>Member Since:</strong> <?php echo htmlspecialchars($member_since); ?></p>
 
-                    <p><strong>Address:</strong> <?php echo htmlspecialchars($address); ?></p>
-
-                    <p><strong>Member Since:</strong> <?php echo htmlspecialchars($member_since); ?></p>
-
+                    </div>
                 </div>
             </div>
+        </div>
 
+        <div class="row mt-5 text-center">
+            <div class="col-md-4 mb-3">
+                <button class="btn-darkblue home-btn">Home</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn-yellow change-password-btn">Change Password</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn-darkblue edit-profile-btn">Edit Profile</button>
+            </div>
         </div>
     </div>
 
-    <div class="row mt-5 text-center">
-        <div class="col-md-4 mb-3">
-            <button class="btn-darkblue home-btn">Home</button>
-        </div>
-        <div class="col-md-4 mb-3">
-            <button class="btn-yellow change-password-btn">Change Password</button>
-        </div>
-        <div class="col-md-4 mb-3">
-            <button class="btn-darkblue edit-profile-btn">Edit Profile</button>
-        </div>
-    </div>
-</div>
-
-<footer>
-    <div class="logo">
-        <img src="/mnt/data/efd83fe5-f1b0-4851-983f-92dad9bfda45.png" alt="TilePlan Logo" />
-    </div>
-
-    <div class="social">
-        <i class="fab fa-facebook"></i>
-        <i class="fab fa-x-twitter"></i>
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-youtube"></i>
-        <i class="fab fa-linkedin"></i>
-    </div>
-
-    <div class="nav-section">
-        <span><a href="#" style="text-decoration: none; color: inherit;">Home</a></span>
-        <span><a href="#" style="text-decoration: none; color: inherit;">Projects</a></span>
-        <span><a href="#" style="text-decoration: none; color: inherit;">Services</a></span>
-        <span><a href="#" style="text-decoration: none; color: inherit;">Contact</a></span>
-    </div>
-
-    <div class="contact">
-        <div><i class="fa-regular fa-envelope"></i> info@tileplan.com</div>
-        <div>
-            <p>London & South: Tel: 020 3397 2997</p>
-            <p>Midlands: Tel: 0121 663 0832</p>
-            <p>North: Tel: 0161 883 0027</p>
-        </div>
-    </div>
-
-    <div class="bottom-bar">
-        <div><a href="#" style="text-decoration: none; color: white;">Privacy Policy</a></div>
-        <div><a href="#" style="text-decoration: none; color: white;">News</a></div>
-        <div><a href="#" style="text-decoration: none; color: white;">About Us</a></div>
-    </div>
-</footer>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    // Simple logout button functionality
-    document.querySelector('.logout-btn').addEventListener('click', function() {
-        if (confirm('Are you sure you want to logout?')) {
-            alert('Logging out...');
-            // In a real application, you would redirect to logout endpoint
-            // window.location.href = '/logout';
-        }
-    });
-
-    // Home button functionality
-    document.querySelector('.home-btn').addEventListener('click', function() {
-        window.location.href = 'index.html';
-    });
-
-    // Change Password button functionality
-    document.querySelector('.change-password-btn').addEventListener('click', function() {
-        alert('Change password functionality would open here');
-    });
-
-    // Edit Profile button functionality (specific request handling)
-    // Edit Profile 按钮功能（处理特定请求）
-    document.querySelector('.edit-profile-btn').addEventListener('click', function() {
-        // Prompt user that photo features are disabled
-        // 提示用户照片修改和上传功能暂时失效
-        alert('Photo modification and upload features are temporarily disabled. You can proceed with other profile edits.');
-        // In a real application, you might redirect to an edit form here
-        // 在实际应用中，您可能会在此处重定向到一个编辑表单
-    });
-</script>
-</body>
-</html>
+<?php require ("Views/template/footer.phtml");?>

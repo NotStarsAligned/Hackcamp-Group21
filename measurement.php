@@ -14,6 +14,8 @@ require_once 'Views/measurement.phtml';
  * 这个控制器处理瓷砖计算相关的请求
  * This controller handles tile calculation requests
  */
+//
+Authentication::requireLogin();
 class TileController
 {
     /**

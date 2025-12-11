@@ -1,6 +1,5 @@
 <?php require ("Views/template/header.phtml"); ?>
 
-    <!-- Load Leaflet HERE instead of waiting for footer -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -18,7 +17,6 @@
         <div class="row">
             <div class="col-12 text-center">
                 <p id="coordinates">Getting your location...</p>
-                <p><?php echo $view->latitude; ?></p>
             </div>
         </div>
         <div class="row">
@@ -29,6 +27,27 @@
     </div>
 
     <script type="text/javascript">
+        // Convert PHP array to JavaScript - ONLY ONCE
+        const locations = <?php echo json_encode($view->staffLocations); ?>;
+        console.log("Loaded locations:", locations);
+        console.log("Number of locations:", locations.length);
+        const redIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        const greenIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 const lat = position.coords.latitude;
@@ -36,33 +55,49 @@
                 document.getElementById('coordinates').textContent =
                     `${lat.toFixed(6)}°, ${lng.toFixed(6)}°`;
 
-                const map = L.map('map').setView([lat, lng], 15);
-
+                // Initialize map
+                const map = L.map('map').setView([lat, lng], 6);
                 setTimeout(function(){ map.invalidateSize()}, 400);
 
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '© OpenStreetMap contributors'
                 }).addTo(map);
 
-                const locations = [
-                    {lat: 53.488, lng: -2.274, title: "Location 1", description: "First marker"},
-                    {lat: 53.490, lng: -2.276, title: "Location 2", description: "Second marker"},
-                    {lat: 53.492, lng: -2.278, title: "Location 3", description: "Third marker"}
-                ];
+                // Add YOUR location marker
+                L.marker([lat, lng]).addTo(map)
+                    .bindPopup(`
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Your Current Location</h5>
+                            <p class="card-text">Lat: ${lat.toFixed(6)}°<br>Lng: ${lng.toFixed(6)}°</p>
+                        </div>
+                    </div>
+                `).openPopup();
 
-                locations.forEach(function(location) {
-                    L.marker([location.lat, location.lng]).addTo(map)
-                        .bindPopup(
-                            '<div class="card" style="width: 18rem;">' +
-                            '<img src="..." class="card-img-top" alt="...">' +
-                            '<div class="card-body">' +
-                            '<h5 class="card-title">Card title</h5>' +
-                            '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>' +
-                            '<a href="#" class="btn btn-primary">Go somewhere</a>' +
-                            '</div>' +
-                            '</div>'
-                        );
-                            });
+                // Add ALL staff location markers from database
+                locations.forEach(function(location, index) {
+                    console.log(`Location ${index}:`, location);
+
+                    // Use lat and lng (matching your PHP array keys)
+                    if (location.lat && location.lng) {
+                        console.log(`Adding marker at: ${location.lat}, ${location.lng}`);
+                        L.marker([location.lat, location.lng], {icon: redIcon}).addTo(map)
+                            .bindPopup(`
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Staff ID: ${location.user_id}</h5>
+                                    <p class="card-text">
+                                        <strong>Skills:</strong> ${location.skills}<br>
+                                        <strong>Status:</strong> ${location.status}<br>
+                                        <strong>Coordinates:</strong> ${location.lat.toFixed(6)}, ${location.lng.toFixed(6)}
+                                    </p>
+                                </div>
+                            </div>
+                        `);
+                    } else {
+                        console.log(`Skipping location ${index} - missing coordinates`);
+                    }
+                });
             });
         }
     </script>

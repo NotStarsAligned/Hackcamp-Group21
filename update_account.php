@@ -8,13 +8,9 @@ $message = "";
 // ------------------------------
 // GET CURRENT USER
 // ------------------------------
-$currentUser = Authentication::getCurrentUser();
+Authentication::requireLogin();  // Protects page
 
-if (!$currentUser) {
-    // Not logged in or user not found
-    header("Location: login.php");
-    exit;
-}
+$currentUser = Authentication::getCurrentUser();
 
 $userId = $currentUser['id'];
 

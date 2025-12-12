@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<?php
+include __DIR__ . "/template/header.phtml";
+?>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wish List</title>
+    <link rel="stylesheet" href="../my-style.css">
+</head>
+
+<body>
+
+<!-- Simple flash message system to confirm wishlist actions -->
+<?php if (!empty($view->flashMessage)): ?>
+    <?php
+    // Choose a different CSS class depending on success vs error
+    $flashClass = ($view->flashType === 'error')
+            ? 'wishlist-flash wishlist-flash-error'
+            : 'wishlist-flash wishlist-flash-success';
+    ?>
+    <div class="<?php echo $flashClass; ?>">
+        <?php echo htmlspecialchars($view->flashMessage); ?>
+    </div>
+<?php endif; ?>
+
+<div id="title">
+    <h1 style="text-align: center">Wish List</h1>
+</div>
+
+<div id="content">
+
+    <!-- Search bar -->
+    <form method="get" class="product-search">
+        <div class="search-controls">
+            <input type="text" name="q"
+                   value="<?php echo htmlspecialchars($view->searchTerm ?? '', ENT_QUOTES); ?>"
+                   placeholder="Search by name, colour, description...">
+            <button type="submit">Search</button>
+            <a href="wishlist.php" class="clear-search">Clear</a>
+        </div>
+    </form>
+
+    <div id="wishlist-empty-message" style="<?php echo empty($view->items) ? '' : 'display:none;'; ?>">
+        <p style="text-align: center">Your wishlist is empty.</p>
+    </div>
+
+    <?php if (!empty($view->items)): ?>
+        <div class="product-grid" id="wishlist-grid">
+            <?php foreach ($view->items as $item): ?>
+                <?php
+                $img = $item['thumbnail_url'] ?: '\\images\\placeholder_image.png';
+                ?>
+                <div class="product-card">
+                    <form method="post"
+                          action="wishlist.php"
+                          class="wishlist-card-form">
+
+                        <img src="<?php echo htmlspecialchars($img); ?>" alt="Product image">
+
+                        <h3><?php echo htmlspecialchars($item['name']); ?></h3>
+                        <p><?php echo htmlspecialchars($item['description']); ?></p>
+
+                        <!-- Fixed options (no dropdowns on wishlist page) -->
+                        <div class="variant-selectors">
+                            <p><strong>Colour:</strong> <?php echo htmlspecialchars($item['colour'] ?? ''); ?></p>
+                            <p><strong>Finish:</strong> <?php echo htmlspecialchars($item['finish'] ?? ''); ?></p>
+                            <p><strong>Polish:</strong> <?php echo htmlspecialchars($item['polish'] ?? ''); ?></p>
+                        </div>
+
+                        <input type="hidden" name="variant_id" value="<?php echo (int)$item['variant_id']; ?>">
+
+                        <!-- Keep track of where the user is so we can redirect back correctly -->
+                        <input type="hidden" name="page" value="<?php echo (int)($view->page ?? 1); ?>">
+                        <?php if (!empty($view->searchTerm)): ?>
+                            <input type="hidden" name="q"
+                                   value="<?php echo htmlspecialchars($view->searchTerm, ENT_QUOTES); ?>">
+                        <?php endif; ?>
+
+                        <div class="product-card-buttons">
+                            <button type="submit" name="remove_wishlist" class="btn-wishlist btn-remove">
+                                Remove from wishlist
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <?php
+            $searchQueryPart = '';
+            if (!empty($view->searchTerm)) {
+                $searchQueryPart = '&amp;q=' . urlencode($view->searchTerm);
+            }
+            ?>
+
+            <?php if ($view->page > 1): ?>
+                <a href="?page=<?php echo $view->page - 1; ?><?php echo $searchQueryPart; ?>">&laquo; Prev</a>
+            <?php else: ?>
+                <span class="disabled">&laquo; Prev</span>
+            <?php endif; ?>
+
+            <?php for ($p = 1; $p <= $view->totalPages; $p++): ?>
+                <?php if ($p == $view->page): ?>
+                    <span class="current"><?php echo $p; ?></span>
+                <?php else: ?>
+                    <a href="?page=<?php echo $p; ?><?php echo $searchQueryPart; ?>">
+                        <?php echo $p; ?>
+                    </a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($view->page < $view->totalPages): ?>
+                <a href="?page=<?php echo $view->page + 1; ?><?php echo $searchQueryPart; ?>">Next &raquo;</a>
+            <?php else: ?>
+                <span class="disabled">Next &raquo;</span>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+</div>
+
+<!-- Confirmation modal (custom yes/no) -->
+<div id="wishlist-confirm-overlay" style="display:none;">
+    <div id="wishlist-confirm-box">
+        <p id="wishlist-confirm-text">Are you sure you want to remove this item from your wishlist?</p>
+        <div class="wishlist-confirm-buttons">
+            <button type="button" id="wishlist-confirm-yes">Yes</button>
+            <button type="button" id="wishlist-confirm-no">No</button>
+        </div>
+    </div>
+</div>
+
+<!-- Small script to handle remove-from-wishlist via AJAX and show confirmation -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Helper to show a temporary flash message in the centre of the screen
+        function showFlash(message, type) {
+            // Remove any existing flash first so we don't stack them
+            const existing = document.querySelector('.wishlist-flash');
+            if (existing) {
+                existing.remove();
+            }
+
+            const div = document.createElement('div');
+            div.className = 'wishlist-flash ' + (type === 'error'
+                ? 'wishlist-flash-error'
+                : 'wishlist-flash-success');
+
+            div.textContent = message;
+            document.body.appendChild(div);
+
+            // Force reflow so CSS animations restart correctly
+            void div.offsetWidth;
+
+            // Remove the element after the fade-out has finished (a bit longer than the CSS animation)
+            setTimeout(function () {
+                if (div.parentNode) {
+                    div.parentNode.removeChild(div);
+                }
+            }, 3000);
+        }
+
+        // Simple confirmation modal wiring
+        const overlay = document.getElementById('wishlist-confirm-overlay');
+        const btnYes  = document.getElementById('wishlist-confirm-yes');
+        const btnNo   = document.getElementById('wishlist-confirm-no');
+
+        let pendingForm = null;
+
+        function openConfirm(form) {
+            pendingForm = form;
+            overlay.style.display = 'flex';
+        }
+
+        function closeConfirm() {
+            pendingForm = null;
+            overlay.style.display = 'none';
+        }
+
+        btnNo.addEventListener('click', function () {
+            closeConfirm();
+        });
+
+        btnYes.addEventListener('click', function () {
+            if (!pendingForm) return;
+
+            // Keep references before we clear the modal state
+            const formToSend = pendingForm;
+            const cardToRemove = formToSend.closest('.product-card');
+
+            const formData = new FormData(formToSend);
+            formData.append('ajax', '1');
+            formData.append('remove_wishlist', '1');
+
+            fetch('wishlist.php', {
+                method: 'POST',
+                body: formData,
+                credentials: 'same-origin'
+            })
+                .then(function (response) { return response.json(); })
+                .then(function (data) {
+                    closeConfirm();
+
+                    if (data && data.message) {
+                        const type = (data.status === 'error') ? 'error' : 'success';
+                        showFlash(data.message, type);
+
+                        if (data.status !== 'error') {
+                            // Remove the card from the UI after successful removal
+                            if (cardToRemove) {
+                                cardToRemove.remove();
+                            }
+
+                            // If no cards left, show "wishlist empty"
+                            const grid = document.getElementById('wishlist-grid');
+                            if (!grid || grid.querySelectorAll('.product-card').length === 0) {
+                                const emptyMsg = document.getElementById('wishlist-empty-message');
+                                if (emptyMsg) emptyMsg.style.display = 'block';
+                            }
+                        }
+                    }
+                })
+                .catch(function () {
+                    closeConfirm();
+                    showFlash('Something went wrong, please try again.', 'error');
+                });
+        });
+
+        // Intercept form submit so we can show custom confirm popup first
+        const forms = document.querySelectorAll('.wishlist-card-form');
+        forms.forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                openConfirm(form);
+            });
+        });
+    });
+</script>
+
+<?php
+include __DIR__ . "/template/footer.phtml";
+?>
+
+</body>
+</html>

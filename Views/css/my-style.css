@@ -1008,3 +1008,115 @@ footer .bottom-bar {
 /* 888888888888888888888888888888888888888888888 */
 /*      Andrew- search bar stuff for browse      */
 /* 888888888888888888888888888888888888888888888 */
+
+
+
+/* 888888888888888888888888888888888888888888888 */
+/*            Andrew- wishlist stuff             */
+/* 888888888888888888888888888888888888888888888 */
+
+/* vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+ This is used in the browse page. it is the pop up for when
+ the user tries to add something to their wishlist*/
+/* Base flash style */
+.wishlist-flash {
+    position: fixed;
+    top: 50%;                  /* center vertically */
+    left: 50%;                 /* center horizontally */
+    transform: translate(-50%, -50%); /* adjust for element size */
+
+    z-index: 2000;
+
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+
+    opacity: 1;
+    animation: fadeOut 2.5s ease-in forwards;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
+
+
+/* Gold success message */
+.wishlist-flash-success {
+    background-color: #4CAF50;
+    color: #000;
+}
+
+/* Red error message for duplicates */
+.wishlist-flash-error {
+    background-color: #d32f2f;
+    color: #fff;
+}
+
+/* Already added earlier, but included here for clarity */
+@keyframes fadeOut {
+    0%   { opacity: 1; }
+    60%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/*  This is used in the browse page. it is the pop up for when
+ the user tries to add something to their wishlist
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+
+/* vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+ CSS for confirmation box*/
+#wishlist-confirm-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+#wishlist-confirm-box{
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 18px;
+    min-width: 320px;
+    max-width: 440px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    text-align: center;
+}
+/* YES button – green */
+#wishlist-confirm-yes {
+    background-color: #2e7d32;      /* same green as success popup */
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#wishlist-confirm-yes:hover {
+    background-color: #43a047;      /* lighter green on hover */
+    transition: all 0.3s ease-in;
+}
+
+/* NO button – red */
+#wishlist-confirm-no {
+    background-color: #c62828;      /* same red as error popup */
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#wishlist-confirm-no:hover {
+    background-color: #e53935;      /* lighter red on hover */
+    transition: all 0.3s ease-in;
+}
+/*  CSS for confirmation box
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+
+/* 888888888888888888888888888888888888888888888 */
+/*            Andrew- wishlist stuff             */
+/* 888888888888888888888888888888888888888888888 */

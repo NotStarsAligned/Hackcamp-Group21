@@ -40,12 +40,23 @@ class StaffDataSet {
         return $latitude !== false ? (string)$latitude : "";
     }
 
+    public function getAllStaffLocations(): array {
+        $query = "SELECT id, user_id, skills, current_status, 
+              last_latitude, last_longitude, last_updated_at 
+              FROM staff_profiles 
+              WHERE last_latitude IS NOT NULL 
+              AND last_longitude IS NOT NULL";
+
+        $statement = $this->_dbHandle->prepare($query);
+        $statement->execute();
+
+        $dataSet = [];
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $dataSet[] = new StaffData($row);
+        }
+        return $dataSet;
+    }
+
+
 
 }
-// --- Example Usage ---
-
-// $staffData = new StaffDataSet();
-// $latitude = $staffData->getLat(101);
-// echo "Staff Latitude: " . $latitude;
-
-?>

@@ -2,8 +2,8 @@
 <html lang="en">
 <!-- Made by Andrew -->
 <?php
-require_once __DIR__ . "/../Model/Auth.php";
-require_once __DIR__ . "/../Model/database.php";
+// Only need to include the header template here.
+// Session and model files are already loaded in browse.php.
 require("Views/template/header.phtml");
 ?>
 
@@ -13,6 +13,19 @@ require("Views/template/header.phtml");
     <link rel="stylesheet" href="../my-style.css">
 </head>
 <body>
+
+<!-- Simple flash message system to confirm wishlist actions -->
+<?php if (!empty($view->flashMessage)): ?>
+    <?php
+    // Choose a different CSS class depending on success vs error
+    $flashClass = ($view->flashType === 'error')
+            ? 'wishlist-flash wishlist-flash-error'
+            : 'wishlist-flash wishlist-flash-success';
+    ?>
+    <div class="<?php echo $flashClass; ?>">
+        <?php echo htmlspecialchars($view->flashMessage); ?>
+    </div>
+<?php endif; ?>
 
 <div id="title">
     <h1 style="text-align: center">Browsing Page</h1>
@@ -40,44 +53,116 @@ require("Views/template/header.phtml");
         <div class="product-grid">
             <?php foreach ($view->tiles as $tile): ?>
                 <?php
-                $img = $tile['thumbnail_url'] ?: '\\images\\placeholder_image.png';
+                $img      = $tile['thumbnail_url'] ?: '\\images\\placeholder_image.png';
                 $variants = $tile['variants'];
+
+                // Build unique lists of colours, finishes and polishes for this product
+                $colours  = [];
+                $finishes = [];
+                $polishes = [];
+
+                foreach ($variants as $variant) {
+                    if (!empty($variant['colour']) && !in_array($variant['colour'], $colours, true)) {
+                        $colours[] = $variant['colour'];
+                    }
+                    // NOTE: adjust "finish" if your schema uses a different column name
+                    if (!empty($variant['finish']) && !in_array($variant['finish'], $finishes, true)) {
+                        $finishes[] = $variant['finish'];
+                    }
+                    if (!empty($variant['polish']) && !in_array($variant['polish'], $polishes, true)) {
+                        $polishes[] = $variant['polish'];
+                    }
+                }
                 ?>
                 <div class="product-card">
-                    <img src="<?php echo htmlspecialchars($img); ?>" alt="Product image">
+                    <!-- Each product card posts back to browse.php so we can add items to the wishlist -->
+                    <form method="post"
+                          action="browse.php"
+                          class="product-card-form"
+                          data-variants="<?php echo htmlspecialchars(json_encode($variants), ENT_QUOTES); ?>">
+                        <img src="<?php echo htmlspecialchars($img); ?>" alt="Product image">
 
-                    <h3><?php echo htmlspecialchars($tile['name']); ?></h3>
-                    <p><?php echo htmlspecialchars($tile['description']); ?></p>
+                        <h3><?php echo htmlspecialchars($tile['name']); ?></h3>
+                        <p><?php echo htmlspecialchars($tile['description']); ?></p>
 
-                    <?php if (!empty($variants)): ?>
-                        <label>
-                            <span class="variant-label">Colour / Polish:</span>
-                            <select class="variant-select" name="variant_id">
-                                <?php foreach ($variants as $variant): ?>
-                                    <?php
-                                    $colour = $variant['colour'] ?: 'Unknown colour';
-                                    $polish = $variant['polish'] ?: 'Standard';
-                                    $price  = $variant['price_trade'];
-                                    $label  = $colour . ' / ' . $polish . ' (£' . number_format($price, 2) . ')';
-                                    ?>
-                                    <option value="<?php echo (int)$variant['id']; ?>">
-                                        <?php echo htmlspecialchars($label); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </label>
-                    <?php else: ?>
-                        <p><em>No variants available</em></p>
-                    <?php endif; ?>
+                        <?php if (!empty($variants)): ?>
+                            <div class="variant-selectors">
+                                <!-- Colour selector -->
+                                <label>
+                                    <span class="variant-label">Colour:</span>
+                                    <select class="variant-select variant-colour">
+                                        <option value="">Any colour</option>
+                                        <?php foreach ($colours as $colour): ?>
+                                            <option value="<?php echo htmlspecialchars($colour, ENT_QUOTES); ?>">
+                                                <?php echo htmlspecialchars($colour); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </label>
 
-                    <div class="product-card-buttons">
-                        <button type="button" class="btn-wishlist">
-                            Add to wishlist
-                        </button>
-                        <button type="button" class="btn-quote">
-                            Add to quote
-                        </button>
-                    </div>
+                                <!-- Finish selector (if there are any finishes for this product) -->
+                                <?php if (!empty($finishes)): ?>
+                                    <label>
+                                        <span class="variant-label">Finish:</span>
+                                        <select class="variant-select variant-finish">
+                                            <option value="">Any finish</option>
+                                            <?php foreach ($finishes as $finish): ?>
+                                                <option value="<?php echo htmlspecialchars($finish, ENT_QUOTES); ?>">
+                                                    <?php echo htmlspecialchars($finish); ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </label>
+                                <?php endif; ?>
+
+                                <!-- Polish selector (if present) -->
+                                <?php if (!empty($polishes)): ?>
+                                    <label>
+                                        <span class="variant-label">Polish:</span>
+                                        <select class="variant-select variant-polish">
+                                            <option value="">Any polish</option>
+                                            <?php foreach ($polishes as $polish): ?>
+                                                <option value="<?php echo htmlspecialchars($polish, ENT_QUOTES); ?>">
+                                                    <?php echo htmlspecialchars($polish); ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </label>
+                                <?php endif; ?>
+
+                                <!-- Short help text so the user understands what is going on -->
+                                <p class="variant-help">
+                                    Options update automatically – you can leave a choice blank
+                                    to see all matching options in the other lists. To add to your
+                                    wish list, please choose a Colour, Finish and Polish.
+                                </p>
+
+                                <!-- Price display updates when different combinations are chosen -->
+                                <!-- (Price output removed on public-facing website) -->
+                            </div>
+
+                            <!-- This hidden field will be filled in by JS once a valid combination is chosen -->
+                            <input type="hidden" name="variant_id" value="">
+                        <?php else: ?>
+                            <p><em>No variants available</em></p>
+                        <?php endif; ?>
+
+                        <!-- Keep track of where the user is so we can redirect back correctly -->
+                        <input type="hidden" name="page" value="<?php echo (int)($view->page ?? 1); ?>">
+                        <?php if (!empty($view->searchTerm)): ?>
+                            <input type="hidden" name="q"
+                                   value="<?php echo htmlspecialchars($view->searchTerm, ENT_QUOTES); ?>">
+                        <?php endif; ?>
+
+                        <div class="product-card-buttons">
+                            <button type="submit" name="add_wishlist" class="btn-wishlist">
+                                Add to wishlist
+                            </button>
+                            <button type="button" class="btn-quote">
+                                Add to quote
+                            </button>
+                        </div>
+                    </form>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -115,6 +200,264 @@ require("Views/template/header.phtml");
         </div>
     <?php endif; ?>
 </div>
+
+<!-- Small script to handle wishlist actions via AJAX instead of full page reloads
+     and to map Colour / Finish / Polish selections to a specific product_variant_id -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Helper to show a temporary flash message in the centre of the screen
+        function showFlash(message, type) {
+            // Remove any existing flash first so we don't stack them
+            const existing = document.querySelector('.wishlist-flash');
+            if (existing) {
+                existing.remove();
+            }
+
+            const div = document.createElement('div');
+            div.className = 'wishlist-flash ' + (type === 'error'
+                ? 'wishlist-flash-error'
+                : 'wishlist-flash-success');
+
+            div.textContent = message;
+            document.body.appendChild(div);
+
+            // Force reflow so CSS animations restart correctly
+            void div.offsetWidth;
+
+            // Remove the element after the fade-out has finished (a bit longer than the CSS animation)
+            setTimeout(function () {
+                if (div.parentNode) {
+                    div.parentNode.removeChild(div);
+                }
+            }, 3000);
+        }
+
+        // Connect each product card form to its variants and AJAX behaviour
+        const forms = document.querySelectorAll('.product-card-form');
+
+        forms.forEach(function (form) {
+
+            // ---- Variant mapping: Colour + Finish + Polish -> variant_id + price ----
+            const variantsJson = form.getAttribute('data-variants');
+            let variants = [];
+
+            try {
+                if (variantsJson) {
+                    variants = JSON.parse(variantsJson);
+                }
+            } catch (e) {
+                console.error('Could not parse variants JSON', e);
+            }
+
+            const colourSelect = form.querySelector('.variant-colour');
+            const finishSelect = form.querySelector('.variant-finish');
+            const polishSelect = form.querySelector('.variant-polish');
+            const hiddenVariantId = form.querySelector('input[name="variant_id"]');
+            const wishlistBtn = form.querySelector('.btn-wishlist');
+
+            // Helper: rebuild options for a <select> based on an array of allowed values
+            function rebuildOptions(select, values, placeholderText) {
+                if (!select) return;
+                const currentValue = select.value;
+                let newValueToSelect = null;
+
+                // Clear existing options
+                while (select.firstChild) {
+                    select.removeChild(select.firstChild);
+                }
+
+                // Always include a blank "Any" option
+                const placeholder = document.createElement('option');
+                placeholder.value = '';
+                placeholder.textContent = placeholderText || 'Any';
+                select.appendChild(placeholder);
+
+                values.forEach(function (val) {
+                    if (!val) return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                    if (val === currentValue) {
+                        newValueToSelect = val;
+                    }
+                });
+
+                if (currentValue === '') {
+                    select.value = '';
+                } else if (newValueToSelect !== null) {
+                    select.value = newValueToSelect;
+                } else {
+                    select.value = '';
+                }
+            }
+
+            // Recompute which finishes & polishes are valid for current Colour / Finish selection
+            function refreshDependentOptions() {
+                const colour = colourSelect ? colourSelect.value : '';
+                const finish = finishSelect ? finishSelect.value : '';
+
+                const allowedFinishes = new Set();
+                const allowedPolishes = new Set();
+
+                variants.forEach(function (v) {
+                    const vColour = v.colour || '';
+                    const vFinish = v.finish || ''; // NOTE: adjust if your DB uses a different column name
+                    const vPolish = v.polish || '';
+
+                    // Any variant with this colour contributes finishes
+                    if (!colour || vColour === colour) {
+                        if (vFinish) {
+                            allowedFinishes.add(vFinish);
+                        }
+                    }
+
+                    // For polishes we consider both colour and (if selected) finish
+                    const colourMatches = !colour || vColour === colour;
+                    const finishMatches = !finish || vFinish === finish;
+
+                    if (colourMatches && finishMatches && vPolish) {
+                        allowedPolishes.add(vPolish);
+                    }
+                });
+
+                if (finishSelect) {
+                    rebuildOptions(finishSelect, Array.from(allowedFinishes), 'Any finish');
+                }
+                if (polishSelect) {
+                    rebuildOptions(polishSelect, Array.from(allowedPolishes), 'Any polish');
+                }
+            }
+
+            // function to find the matching variant row and update hidden field + price
+            function updateVariantSelection() {
+                if (!hiddenVariantId) return;
+
+                const colour = colourSelect ? colourSelect.value : '';
+                const finish = finishSelect ? finishSelect.value : '';
+                const polish = polishSelect ? polishSelect.value : '';
+
+                const missingColour = colourSelect && !colour;
+                const missingFinish = finishSelect && !finish;
+                const missingPolish = polishSelect && !polish;
+
+                // If any required choice is blank, no variant is selected
+                if (missingColour || missingFinish || missingPolish) {
+                    hiddenVariantId.value = '';
+                    // IMPORTANT: do NOT disable the button here; we want the click to show a popup
+                    return;
+                }
+
+                let match = null;
+
+                for (let i = 0; i < variants.length; i++) {
+                    const v = variants[i];
+
+                    const vColour = (v.colour || '');
+                    const vFinish = (v.finish || '');
+                    const vPolish = (v.polish || '');
+
+                    const colourMatches = vColour === colour;
+                    const finishMatches = !finishSelect || vFinish === finish;
+                    const polishMatches = !polishSelect || vPolish === polish;
+
+                    if (colourMatches && finishMatches && polishMatches) {
+                        match = v;
+                        break;
+                    }
+                }
+
+                if (match) {
+                    hiddenVariantId.value = match.id;
+                } else {
+                    hiddenVariantId.value = '';
+                }
+            }
+
+            // Attach change listeners so changing any dropdown recalculates the variant
+            if (colourSelect) colourSelect.addEventListener('change', function () {
+                refreshDependentOptions();
+                updateVariantSelection();
+            });
+            if (finishSelect) finishSelect.addEventListener('change', function () {
+                refreshDependentOptions();
+                updateVariantSelection();
+            });
+            if (polishSelect) polishSelect.addEventListener('change', function () {
+                updateVariantSelection();
+            });
+
+            // Run once to set initial options and variant
+            refreshDependentOptions();
+            updateVariantSelection();
+
+            // ---- AJAX submit for "Add to wishlist" ----
+            form.addEventListener('submit', function (event) {
+                // If JavaScript is disabled this code never runs,
+                // and the normal non-AJAX form submit + redirect behaviour still works.
+                event.preventDefault();
+
+                const colour = colourSelect ? colourSelect.value : '';
+                const finish = finishSelect ? finishSelect.value : '';
+                const polish = polishSelect ? polishSelect.value : '';
+
+                const missingColour = colourSelect && !colour;
+                const missingFinish = finishSelect && !finish;
+                const missingPolish = polishSelect && !polish;
+
+                // If any are blank, show a specific red alert
+                if (missingColour || missingFinish || missingPolish) {
+                    showFlash('Please choose a Colour, Finish and Polish before adding to your wish list.', 'error');
+                    return;
+                }
+
+                // Ensure a valid variant_id is present before sending the request
+                if (!hiddenVariantId || !hiddenVariantId.value) {
+                    showFlash('Please choose a valid colour / finish / polish combination.', 'error');
+                    return;
+                }
+
+                const formData = new FormData(form);
+                formData.append('ajax', '1');          // tell PHP this is an AJAX request
+                formData.append('add_wishlist', '1');  // ensure the handler runs
+
+                fetch('browse.php', {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'same-origin'
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        if (!data) return;
+
+                        // If the server says login is required, prompt and redirect
+                        if (data.status === 'login') {
+                            showFlash(data.message, 'error');
+
+                            // Send the user to the login page after showing the message
+                            setTimeout(function () {
+                                window.location.href = 'login.php';
+                            }, 1500);
+
+                            return;
+                        }
+
+                        // Normal success / error handling
+                        if (data.message) {
+                            const type = (data.status === 'error') ? 'error' : 'success';
+                            showFlash(data.message, type);
+                        }
+                    })
+                    .catch(function () {
+                        // Fallback: if anything unexpected happens
+                        showFlash('Something went wrong, please try again.', 'error');
+                    });
+            });
+        });
+    });
+</script>
 
 </body>
 <?php require("Views/template/footer.phtml"); ?>

@@ -35,7 +35,7 @@ if (!class_exists('Authentication')) {
     <header class="navbar navbar-expand-lg border-bottom shadow-sm bg-white" id="title">
         <div class="container-fluid">
             <a href="../../index.php?page=home" class="navbar-brand me-4">
-                <img src="images/logo-image/TilePlan.png" alt="TilePlan Logo" class="logo-img" style="height: 58px; width: 58px; border-radius: 6px;" />
+                <img src="/images/TILEPLAN-LOGO.webp" alt="TilePlan Logo" class="logo-img" style="width: 158px; border-radius: 6px;" />
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#responsiveNavbar" aria-controls="responsiveNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,22 +43,28 @@ if (!class_exists('Authentication')) {
             </button>
 
             <div class="collapse navbar-collapse" id="responsiveNavbar">
-                <nav class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
-                    <a class="nav-link active" href="../../index.php?page=home">Home <span class="visually-hidden">(current)</span></a>
-
-                    <a class="nav-link" href="/browse.php">Browse Tiles</a>
-                    <?php if (Authentication::isLoggedIn() && in_array(Authentication::getUserRole(), ['admin','operator','staff'])): ?>
-                    <a class="nav-link" href="/quote.php"> Quotes</a>
-                    <a class="nav-link" href="/map.php">Map</a>
-                    <?php endif; ?>
-
-
-                    <div class="ms-lg-4 mt-2 mt-lg-0">
-                        <?php if (Authentication::isLoggedIn()): ?>
-                            <span class="navbar-text text-dark">Welcome: <strong><?= htmlspecialchars(Authentication::full_name()) ?></strong></span>
+                <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center w-100">
+                    <nav class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <a class="nav-link active" href="../../index.php?page=home">Home</a>
+                        <a class="nav-link" href="/browse.php">Browse Tiles</a>
+                        <?php if (Authentication::isLoggedIn() && in_array(Authentication::getUserRole(), ['admin','operator','staff'])): ?>
+                            <a class="nav-link" href="/quote.php">Quotes</a>
+                            <a class="nav-link" href="/map.php">Map</a>
                         <?php endif; ?>
-                    </div>
-                </nav>
+
+                            <?php if (Authentication::isLoggedIn()): ?>
+                                <span class="navbar-text text-dark "><strong>Welcome- <?= htmlspecialchars(Authentication::full_name()) ?></strong></span>
+                            <?php endif; ?>
+
+                    </nav>
+
+
+                </div>
+            </div>
+
+
+
+
 
                 <div class="d-flex align-items-center ms-auto">
 
@@ -66,6 +72,7 @@ if (!class_exists('Authentication')) {
                             <button class="account-trigger icon-button" id="accountTriggerBtn">
                                 <i class="fa fa-user-circle" style="font-size: 48px;"></i>
                             </button>
+
 
                             <ul class="account-dropdown" id="accountDropdownList">
                                <?php if (Authentication::isLoggedIn()): ?>
@@ -86,7 +93,7 @@ if (!class_exists('Authentication')) {
         </div>
     </header>
 </div>
-
+</body>
 
 <?php /* 请确保您的主页模板在 </body> 标签前包含以下脚本：
 

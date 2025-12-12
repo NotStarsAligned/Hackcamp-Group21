@@ -98,3 +98,15 @@ form button[type="submit"] {
 form button[type="submit"]:hover {
     background-color: #2F3BB7; /* lighter blue */
 }
+/* the css chengwua add for button*/
+.button-style {
+    display: inline-block; /* 让其拥有块级属性，能设置宽高 */
+    padding: 10px 160px;
+    background-color: #2F3BB7; /* 按钮背景色 */
+    color: white; /* 文本颜色 */
+    text-align: center;
+    text-decoration: none; /* 移除下划线 */
+    border-radius: 5px; /* 圆角 */
+    border: none;
+    cursor: pointer;
+}

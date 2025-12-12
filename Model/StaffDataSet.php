@@ -1,4 +1,6 @@
 <?php
+//TEK
+
 session_start();
 // Assuming "database.php" contains your first Database class (Code 1)
 require_once ("database.php");

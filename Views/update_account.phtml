@@ -27,18 +27,22 @@ include __DIR__ . "/template/header.phtml";
 <form method="POST">
     <label>Email</label>
     <input type="email" name="email" required value="<?= htmlspecialchars($currentUser['account_email']) ?>">
-
+    <!--
     <label>Full Name</label>
     <input type="text" name="full_name" required value="<?= htmlspecialchars($currentUser['full_name']) ?>">
 
     <label>Phone Number</label>
     <input type="text" name="phone" required value="<?= htmlspecialchars($currentUser['account_phone']) ?>">
-
+    -->
     <label>New Password (leave empty if unchanged)</label>
     <input type="password" name="password">
+    <!-- when users click this button is rediect user back to the user info pages -->
+    <a href="UserController.php" class="button-style">
+        save change
+    </a>
 
-    <button type="submit">Save Changes</button>
 </form>
+
 
 
 </body>

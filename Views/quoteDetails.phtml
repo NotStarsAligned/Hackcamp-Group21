@@ -1,0 +1,119 @@
+<?php require("template/header.phtml"); ?>
+
+    <div class="container my-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="quote.php" class="btn btn-outline-secondary">&laquo; Back to Dashboard</a>
+            <div>
+                <button class="btn btn-primary"><i class="fas fa-envelope"></i> Email to Customer</button>
+                <button class="btn btn-success"><i class="fas fa-file-pdf"></i> Download PDF</button>
+            </div>
+        </div>
+
+        <div class="card shadow-sm p-5" style="max-width: 900px; margin: 0 auto;">
+
+            <div class="row mb-4 border-bottom pb-3">
+                <div class="col-6">
+                    <h2 class="text-primary fw-bold">SALFORD FLOORING</h2>
+                    <p class="text-muted">Official Quotation</p>
+                </div>
+                <div class="col-6 text-end">
+                    <h3 class="fw-bold">QUOTE #<?php echo htmlspecialchars($view->quote['reference_code']); ?></h3>
+                    <p class="text-muted">Date: <?php echo date('d/m/Y', strtotime($view->quote['created_at'])); ?></p>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-6">
+                    <h5 class="fw-bold text-info border-start border-4 border-info ps-2">Client Details</h5>
+                    <p class="mb-0 fw-bold"><?php echo htmlspecialchars($view->quote['customer_name']); ?></p>
+                    <p class="mb-0"><?php echo htmlspecialchars($view->quote['account_email']); ?></p>
+                </div>
+                <div class="col-6 text-end">
+                    <h5 class="fw-bold text-info border-end border-4 border-info pe-2">Job Description</h5>
+                    <p class="mb-0" style="white-space: pre-line;"><?php echo htmlspecialchars($view->quote['notes_internal']); ?></p>
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <h5 class="fw-bold mb-3">Room Dimensions</h5>
+                <table class="table table-bordered table-sm">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Room Name</th>
+                        <th>Length</th>
+                        <th>Width</th>
+                        <th>Area</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($view->rooms as $room): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($room['name']); ?></td>
+                            <td><?php echo number_format($room['length'], 2); ?>m</td>
+                            <td><?php echo number_format($room['width'], 2); ?>m</td>
+                            <td><?php echo number_format($room['area_sqm'], 2); ?> m²</td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mb-4">
+                <h5 class="fw-bold mb-3">Materials & Costs</h5>
+                <table class="table table-striped">
+                    <thead class="bg-info text-white">
+                    <tr>
+                        <th>Room / Location</th>
+                        <th>Item Description</th>
+                        <th class="text-center">Qty</th>
+                        <th class="text-end">Unit Price</th>
+                        <th class="text-end">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($view->items as $item): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($item['room_name']); ?></td>
+                            <td><?php echo htmlspecialchars($item['description']); ?></td>
+                            <td class="text-center">
+                                <?php echo number_format($item['quantity'], 0); ?>
+                                <?php
+                                // Determine unit label logic roughly
+                                echo strpos($item['description'], 'tile') !== false ? ' tiles' : ' units';
+                                ?>
+                            </td>
+                            <td class="text-end">£<?php echo number_format($item['unit_price'], 2); ?></td>
+                            <td class="text-end fw-bold">£<?php echo number_format($item['line_total'], 2); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row justify-content-end">
+                <div class="col-md-5">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Subtotal (Net):</span>
+                                <span class="fw-bold">£<?php echo number_format($view->totalMaterials, 2); ?></span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>VAT (20%):</span>
+                                <span class="text-danger fw-bold">£<?php echo number_format($view->vat, 2); ?></span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 mb-0">Grand Total:</span>
+                                <span class="h4 mb-0 text-primary fw-bold">£<?php echo number_format($view->grandTotal, 2); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<?php require("template/footer.phtml"); ?>

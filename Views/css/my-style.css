@@ -1120,3 +1120,190 @@ footer .bottom-bar {
 /* 888888888888888888888888888888888888888888888 */
 /*            Andrew- wishlist stuff             */
 /* 888888888888888888888888888888888888888888888 */
+
+
+
+/* 8888888888888888888888888888888888888888888888 */
+/*             Andrew- home page stuff            */
+/* 8888888888888888888888888888888888888888888888 */
+/* ===== HOME PAGE ===== */
+.home {
+    padding: 20px;
+}
+
+/* HERO split layout */
+.home-hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+    padding: 30px 0 10px;
+}
+
+.home-kicker {
+    margin: 0 0 8px;
+    font-weight: 700;
+    color: #1D215E;
+    letter-spacing: 0.3px;
+}
+
+.home-hero h1 {
+    margin: 0 0 12px;
+    font-size: 2.1rem;
+    line-height: 1.2;
+    color: #0b0f3a;
+}
+
+.home-lead {
+    margin: 0 0 18px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.home-hero__media img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    display: block;
+}
+
+/* CTA buttons */
+.home-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 10px 0 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.btn-primary {
+    background: #1D215E;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #2F3BB7;
+}
+
+.btn-outline {
+    border: 2px solid #1D215E;
+    color: #1D215E;
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background: #e8f7ff;
+}
+
+.btn-yellow {
+    background: #f2c300;
+    color: #000;
+    border: 2px solid #000;
+}
+
+.btn-yellow:hover {
+    background: #FFDF4D;
+}
+
+/* link out */
+.home-linkout {
+    margin-top: 8px;
+    color: #444;
+}
+.home-linkout a {
+    color: #1b75bc;
+    font-weight: 700;
+}
+
+/* Dark blue band */
+.home-band {
+    margin-top: 40px;
+    padding: 34px 20px;
+}
+
+/* Full-width dark blue band */
+.home-band--blue {
+    background: #1D215E;
+    color: #fff;
+
+    /* force full viewport width */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+
+.home-band__content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.home-band__content h2 {
+    margin: 0 0 10px;
+    font-size: 1.6rem;
+}
+
+.home-band__content p {
+    margin: 0 0 14px;
+    line-height: 1.6;
+    max-width: 70ch;
+}
+
+/* Steps/cards */
+.home-steps {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 0 10px;
+}
+
+.home-steps h2 {
+    margin: 0 0 16px;
+    color: #0b0f3a;
+}
+
+.home-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.home-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 14px;
+    padding: 16px;
+    background: #fff;
+}
+
+.home-card h3 {
+    margin: 0 0 8px;
+    color: #1D215E;
+}
+
+.home-card p {
+    margin: 0;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .home-hero {
+        grid-template-columns: 1fr;
+    }
+    .home-cards {
+        grid-template-columns: 1fr;
+    }
+}
+/* 8888888888888888888888888888888888888888888888 */
+/*             Andrew- home page stuff            */
+/* 8888888888888888888888888888888888888888888888 */

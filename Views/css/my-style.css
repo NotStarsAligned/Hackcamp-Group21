@@ -81,6 +81,13 @@ body {
     padding: 8px 12px;
     text-decoration: none;
 }
+@media (max-width: 1000px) {
+    .account-dropdown {
+        left: 0;
+        right: auto;
+        min-width: 160px;
+    }
+}
 
 /* ===== FOOTER STYLES ===== by 偶*/
 footer {
@@ -727,7 +734,7 @@ footer .bottom-bar {
 }
 
 #footer {
-    margin_top: 20px; /* (typo but keeping your original) */
+    margin-top: 20px; /* (typo but keeping your original) */
     text-align: center;
     background-color: #000;
     color: #fff;
@@ -735,7 +742,7 @@ footer .bottom-bar {
 }
 
 /* --- Browse page specific styles --- */
-
+/**/
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

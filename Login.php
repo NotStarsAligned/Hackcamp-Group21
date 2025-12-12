@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
      $email = trim($_POST["email"]);
      $password = $_POST["password"];
 /*
- * //prepare database and execute
+ * prepare database and execute
     $stmt =$conn->prepare("SELECT * FROM users WHERE email=?");
     $stmt->bindParam(":account_email", $email);
     $stmt->execute();
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
 
      if (Authentication::login($email, $password)) {
-         header("Location: Login.php");//refresh the page after logging in
+         header("Location: index.php");//refresh the page after logging in
          exit;
      } else {
          $message = "Wrong email or password";
@@ -61,11 +61,6 @@ include __DIR__ . "/Views/template/header.phtml";
             <?php endif; ?>
         </form>
 
-    <?php else: ?>
-        <div class="logout-container">
-            <p>Welcome: <?= htmlspecialchars(Authentication::full_name()) ?> </p>
-            <a href="/Login.php?logout=1" class="logout-btn">Logout</a>
-        </div>
     <?php endif; ?>
     <p class="register-link">
         Don't have an account?

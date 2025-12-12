@@ -5,6 +5,7 @@ session_start();
 
 // use the existing authentication helper so we can find the logged-in user
 require_once __DIR__ . '/Model/Auth.php';
+require_once __DIR__ . '/Model/database.php';
 
 $view = new stdClass();
 $view->username = null;   // you can wire this up to session later

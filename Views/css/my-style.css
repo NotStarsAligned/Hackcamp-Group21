@@ -81,6 +81,26 @@ body {
     padding: 8px 12px;
     text-decoration: none;
 }
+@media (max-width: 1000px) {
+    .account-menu{
+        margin-top: auto;
+    }
+    .account-dropdown {
+            /* align dropdown to left of the container */
+        left: auto; /* remove right alignment */
+        min-width: 160px;
+    }
+}
+@media (max-width: 768px) {
+    .navbar-nav {
+        width: 100%;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px 15px;
+        display: block;
+    }
+}
 
 /* ===== FOOTER STYLES ===== by 偶*/
 footer {
@@ -864,6 +884,7 @@ footer .bottom-bar {
         grid-template-columns: 1fr;
     }
 }
+
 /* 8888888888888888888888888888888888888888888 */
 /*      Andrew- drop down menu for browse      */
 /* 8888888888888888888888888888888888888888888 */

@@ -1,10 +1,9 @@
-
-
 <?php
-// 这是一个视图文件，用于展示用户资料。
+// userinfo.phtml
+// This is a view file used to display the user profile. (这是一个视图文件，用于展示用户资料)
 
-// Placeholder variables for testing without running the full controller/model (text the funtion of shown stuff)
-// 用于在没有运行完整控制器/模型时进行测试的占位符变量（在生产环境中移除）
+// Placeholder variables for testing (REMOVE IN PRODUCTION)
+// 用于在没有运行完整控制器/模型时进行测试的占位符变量
 if (!isset($name)) {
     $name = "Test User Full Name";
     $user_type = "Customer";
@@ -13,56 +12,185 @@ if (!isset($name)) {
     $address = "Example County, EX1 1XX";
     $member_since = "February 2024";
 }
+
+// Ensure the $message variable is available
+// 确保 $message 变量在视图中可用
+global $message;
+$message = $message ?? '';
 ?>
 
 <?php require ("Views/template/header.phtml");?>
 
-    <div class="container userinfo-container">
-        <div class="row justify-content-center align-items-center">
+<div class="container userinfo-container">
+    <div class="row justify-content-center align-items-center">
 
-            <div class="col-md-4 text-center">
-                <div class="profile-pic">
-                    <i class="fas fa-user"></i>
-                </div>
-
-                <h4 class="mt-3"><?php echo htmlspecialchars($name); ?></h4>
-                <p>dd/mm/yyyy</p>
-
-                <p>User Type: <?php echo htmlspecialchars($user_type); ?></p>
+        <div class="col-md-4 text-center">
+            <div class="profile-pic">
+                <i class="fas fa-user"></i>
             </div>
 
-            <div class="col-md-1 d-flex justify-content-center">
-                <div class="divider-line d-none d-md-block"></div>
-            </div>
+            <h4 class="mt-3">
+                <span id="name-display-left" class="profile-display-mode"><?php echo htmlspecialchars($name); ?></span>
+            </h4>
 
-            <div class="col-md-6 mt-4 mt-md-0">
-                <h4 class="text-center mb-3">Personal Information</h4>
-                <div class="info-card">
-                    <div>
-                        <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
+            <p>
+                <span id="dob-display" class="profile-display-mode">dd/mm/yyyy (DOB TBD)</span>
 
-                        <p><strong>Phone:</strong> <?php echo htmlspecialchars($phone); ?></p>
+                <small id="unavailability-message" class="text-danger profile-edit-mode" style="display:none;">
+                    Photo and DOB features are temporarily unavailable.
+                </small>
+            </p>
 
-                        <p><strong>Address:</strong> <?php echo htmlspecialchars($address); ?></p>
-
-                        <p><strong>Member Since:</strong> <?php echo htmlspecialchars($member_since); ?></p>
-
-                    </div>
-                </div>
-            </div>
+            <p>User Type: <?php echo htmlspecialchars($user_type); ?></p>
         </div>
 
-        <div class="row mt-5 text-center">
-            <div class="col-md-4 mb-3">
-                <button class="btn-darkblue home-btn">Home</button>
-            </div>
-            <div class="col-md-4 mb-3">
-                <button class="btn-yellow change-password-btn">Change Password</button>
-            </div>
-            <div class="col-md-4 mb-3">
-                <button class="btn-darkblue edit-profile-btn">Edit Profile</button>
-            </div>
+        <div class="col-md-1 d-flex justify-content-center">
+            <div class="divider-line d-none d-md-block"></div>
+        </div>
+
+        <div class="col-md-6 mt-4 mt-md-0">
+            <h4 class="text-center mb-3">Personal Information</h4>
+
+            <?php if ($message): ?>
+                <div class="alert alert-<?php echo strpos($message, 'Error') !== false ? 'danger' : 'success'; ?> text-center" role="alert">
+                    <?php echo htmlspecialchars($message); ?>
+                </div>
+            <?php endif; ?>
+
+            <form id="profile-form" method="POST" action="">
+
+                <div class="info-card">
+
+                    <div class="form-group mb-3">
+                        <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <strong>Name:</strong>
+                        <span id="name-display-right" class="profile-display-mode"><?php echo htmlspecialchars($name); ?></span>
+                        <input type="text" id="name-input" name="name" class="form-control profile-edit-mode" value="<?php echo htmlspecialchars($name); ?>" style="display:none;" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <strong>Phone:</strong>
+                        <span id="phone-display" class="profile-display-mode"><?php echo htmlspecialchars($phone); ?></span>
+                        <input type="text" id="phone-input" name="phone" class="form-control profile-edit-mode" value="<?php echo htmlspecialchars($phone); ?>" style="display:none;" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <strong>Address:</strong>
+                        <span id="address-display" class="profile-display-mode"><?php echo htmlspecialchars($address); ?></span>
+                        <input type="text" id="address-input" name="address" class="form-control profile-edit-mode" value="<?php echo htmlspecialchars($address); ?>" style="display:none;">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <p><strong>Member Since:</strong> <?php echo htmlspecialchars($member_since); ?></p>
+                    </div>
+
+                </div>
+
+            </form>
         </div>
     </div>
 
+    <div class="row mt-5 text-center">
+        <div class="col-md-4 mb-3">
+            <button class="btn btn-darkblue home-btn">Home</button>
+        </div>
+        <div class="col-md-4 mb-3">
+            <button class="btn btn-yellow change-password-btn">Change Password</button>
+        </div>
+        <div class="col-md-4 mb-3">
+            <button id="edit-toggle-btn" class="btn btn-darkblue edit-profile-btn">Edit Profile</button>
+        </div>
+    </div>
+</div>
+
 <?php require ("Views/template/footer.phtml");?>
+
+
+<script>
+    //all the javascript are generating by chat-gpd
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleBtn = document.getElementById('edit-toggle-btn');
+        const profileForm = document.getElementById('profile-form');
+        // Elements that are visible in display mode (显示模式下可见的元素)
+        const displayElements = document.querySelectorAll('.profile-display-mode');
+        // Elements that are visible in edit mode (编辑模式下可见的元素)
+        const editElements = document.querySelectorAll('.profile-edit-mode');
+
+        const nameInput = document.getElementById('name-input');
+        const phoneInput = document.getElementById('phone-input');
+        const addressInput = document.getElementById('address-input');
+        const nameDisplayLeft = document.getElementById('name-display-left');
+        const nameDisplayRight = document.getElementById('name-display-right');
+        const phoneDisplay = document.getElementById('phone-display');
+        const addressDisplay = document.getElementById('address-display');
+        const unavailabilityMessage = document.getElementById('unavailability-message');
+
+        let isEditing = false; // Initial state: Display mode (初始状态：显示模式)
+
+        function toggleEditMode(enable) {
+            isEditing = enable;
+
+            // Toggle display/edit elements visibility
+            // 切换 display/edit 元素的显示/隐藏状态
+            displayElements.forEach(el => el.style.display = enable ? 'none' : '');
+            // Use 'block' for inputs to ensure proper layout (使用 'block' 来确保输入框正确布局)
+            editElements.forEach(el => el.style.display = enable ? 'block' : 'none');
+
+            // Toggle button text, class, and message visibility
+            // 切换按钮文本、类名和消息可见性
+            if (enable) {
+                toggleBtn.textContent = 'Save Changes';
+                toggleBtn.classList.remove('btn-darkblue', 'edit-profile-btn');
+                toggleBtn.classList.add('btn-success', 'save-changes-btn'); // Change to success color
+                unavailabilityMessage.style.display = 'block'; // Show Photo/DOB message (显示 Photo/DOB 提示信息)
+            } else {
+                toggleBtn.textContent = 'Edit Profile';
+                toggleBtn.classList.remove('btn-success', 'save-changes-btn');
+                toggleBtn.classList.add('btn-darkblue', 'edit-profile-btn'); // Change back to original color
+                unavailabilityMessage.style.display = 'none'; // Hide Photo/DOB message (隐藏 Photo/DOB 提示信息)
+            }
+        }
+
+        // Initialize the view state
+        // 初始化视图状态
+        toggleEditMode(false);
+
+        toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            if (isEditing) {
+                // Currently in Edit Mode, user clicked "Save Changes"
+                // 当前是编辑模式，用户点击 "Save Changes"
+
+                // Update display elements temporarily (UX enhancement)
+                // 暂时更新显示区域的文本（改善用户体验）
+                nameDisplayLeft.textContent = nameInput.value;
+                nameDisplayRight.textContent = nameInput.value;
+                phoneDisplay.textContent = phoneInput.value;
+                addressDisplay.textContent = addressInput.value;
+
+                // Submit the form (Triggers POST request to UserController)
+                // 提交表单 (触发 POST 请求到 UserController)
+                profileForm.submit();
+
+            } else {
+                // Currently in Display Mode, user clicked "Edit Profile"
+                // 当前是显示模式，用户点击 "Edit Profile"
+                toggleEditMode(true);
+            }
+        });
+
+        // --- Other button functionality (其他按钮功能) ---
+        // (Keeping existing functionality from your uploaded file)
+        document.querySelector('.home-btn')?.addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        document.querySelector('.change-password-btn')?.addEventListener('click', function() {
+            alert('Change password functionality would open here');
+        });
+    });
+</script>

@@ -151,16 +151,32 @@ footer .bottom-bar {
 }
 
 /* card for personal info 我的作业*/
+/* card for personal info 我的作业*/
 .info-card {
     border: 3px solid #0b0f3a;
     border-radius: 20px;
-    height: 260px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* 移除固定高度 height: 260px; */
+    /* 移除 Flex 布局，允许内容自由堆叠 */
+    /* REMOVED: display: flex; */
+    /* REMOVED: justify-content: center; */
+    /* REMOVED: align-items: center; */
+    min-height: 200px; /* 设置最小高度 */
     font-size: 20px;
     padding: 20px;
-    text-align: center;
+    text-align: left; /* 文本靠左对齐，而不是居中 */
+}
+
+/* 新增：确保显示模式下的值（span）独占一行并与标签分隔 */
+.info-card .profile-display-mode {
+    display: block; /* 强制 span 成为块级元素，独占一行 */
+    margin-top: 5px; /* 在标签和值之间增加少许间距 */
+    /* 移除原来的 float-end 效果 */
+    float: none !important;
+}
+
+/* 确保编辑模式下的输入框也有垂直间距 */
+.info-card .profile-edit-mode {
+    margin-top: 5px; /* 确保输入框与上方的标签有间距 */
 }
 
 /* buttons 按钮样式*/

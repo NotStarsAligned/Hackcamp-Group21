@@ -1,66 +1,279 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TilePlan - Main Content</title>
-    <!-- 页面标题，告诉浏览器标签栏显示什么 / Title shown in browser tab -->
+<?php
+require("Views/template/header.phtml");
+?>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="my-style.css">
-    <!-- 引入 Bootstrap，方便快速排版 / Importing Bootstrap for easy layout and styling -->
-</head>
-<body class="bg-white">
+<style>
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+        .modal-dialog { margin: 0.5rem; }
+        .room-group .row { margin: 0; }
+        .room-group .col-sm-4, .room-group .col-sm-3, .room-group .col-sm-2 { padding: 0.5rem 0; }
+        .btn { font-size: 0.875rem; padding: 0.5rem; }
+    }
 
-<!-- 主体主要内容区域 / Main page content section -->
-<main class="container-fluid py-5">
+    /* Smooth scroll */
+    .modal-body {
+        max-height: 70vh;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+    }
 
-    <h3 class="text-center mb-5 text-secondary">Placeholder <!-- 中间大标题 / Main placeholder title --></h3>
+    /* Animation */
+    .room-group { animation: slideIn 0.3s ease-out; }
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideOut {
+        from { opacity: 1; transform: translateX(0); }
+        to { opacity: 0; transform: translateX(-20px); }
+    }
 
-    <div class="row justify-content-center">
+    /* Styles for the Wishlist Display Area */
+    #wishlist-selection-area {
+        max-height: 250px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #f8f9fa; /* Light grey background */
+    }
+    .wishlist-item-row {
+        padding: 8px 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+    .wishlist-item-row:last-child {
+        border-bottom: none;
+    }
+</style>
 
-        <!-- 左边方块 / Left placeholder card -->
-        <div class="col-lg-3 col-md-5 mb-4 mx-3">
-            <div class="content-card">
-                <div style="height: 300px; background-color: #ddd;">
-                    <!-- 这里未来可以放产品图 / Could place product image here later -->
-                </div>
-            </div>
+<div class="container-fluid p-3">
+    <div class="row">
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newQuoteModal">
+                <i class="fas fa-plus"></i> New Quote
+            </button>
         </div>
+    </div>
+</div>
 
-        <!-- 中间评论卡片 / Middle review card -->
-        <div class="col-lg-4 col-md-6 mb-4 mx-3">
-            <div class="content-card">
+<div class="modal fade" id="newQuoteModal" tabindex="-1" aria-labelledby="newQuoteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
 
-                <!-- 评论顶部信息栏 / Review header area -->
-                <div class="review-header">
-                    <div class="review-avatar"></div> <!-- 假头像 / fake avatar -->
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="newQuoteModalLabel">Create New Quote</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-                    <div>
-                        <h6 class="mb-0 fw-bold">Bryce Morley</h6> <!-- 用户名 / reviewer's name -->
-                        <small class="text-muted">3 days ago</small> <!-- 时间戳 / timestamp -->
+            <form id="newQuoteForm" action="quote.php" method="POST">
+
+                <div class="modal-body">
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="quoteTitle" class="form-label fw-bold">Quote Title *</label>
+                            <input type="text" class="form-control" id="quoteTitle" name="title" placeholder="e.g., Kitchen Renovation" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="clientName" class="form-label fw-bold">Client Name *</label>
+                            <input type="text" class="form-control" id="clientName" name="client" placeholder="e.g., John Smith" required>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="btn-group w-50" role="group" aria-label="Unit Toggle">
+                            <input type="radio" class="btn-check" name="unitOptions" id="optionFeet" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="optionFeet">Feet</label>
+
+                            <input type="radio" class="btn-check" name="unitOptions" id="optionMetres" autocomplete="off" checked>
+                            <label class="btn btn-outline-primary" for="optionMetres">Metres</label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3 bg-white py-2">
+                        <h4 class="mb-0">Room Dimensions <span id="currentUnitDisplay" class="text-muted fs-6">(metres)</span></h4>
+                        <button type="button" class="btn btn-success btn-sm" id="addRoomBtn">
+                            <i class="fas fa-plus"></i> Add Room
+                        </button>
+                    </div>
+
+                    <div id="roomsContainer">
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h4 class="mb-3">Materials to be Quoted (From Wishlist)</h4>
+
+                    <div id="wishlist-selection-area">
+                        <?php if (empty($view->wishlistItems)): ?>
+                            <p class="text-danger text-center m-0 fw-bold">
+                                <i class="fas fa-exclamation-circle"></i> Your wishlist is empty. Please add materials before creating a quote.
+                            </p>
+                        <?php else: ?>
+                            <?php foreach ($view->wishlistItems as $item): ?>
+                                <div class="wishlist-item-row d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong><?php echo htmlspecialchars($item['name']); ?></strong><br>
+                                        <small class="text-muted">
+                                            <?php echo htmlspecialchars($item['colour']); ?> |
+                                            <?php echo htmlspecialchars($item['finish']); ?> |
+                                            <?php echo htmlspecialchars($item['category'] ?? 'Item'); ?>
+                                        </small>
+                                    </div>
+                                    <span class="badge bg-success">Included</span>
+                                </div>
+                            <?php endforeach; ?>
+                            <div class="form-text text-primary mt-2">
+                                <i class="fas fa-info-circle"></i> Quantities for these items will be calculated automatically based on your room dimensions.
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="mb-3">
+                        <label for="quoteDescription" class="form-label fw-bold">Description / Notes</label>
+                        <textarea class="form-control" id="quoteDescription" name="description" rows="4" placeholder="Add any additional notes..."></textarea>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success" <?php echo empty($view->wishlistItems) ? 'disabled' : ''; ?>>
+                        Save Quote
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<?php
+require("Views/template/footer.phtml");
+?>
+
+<script>
+    const UnitConverter = {
+        FEET_TO_METRES: 0.3048,
+        toMetres: function(feet) { return feet * this.FEET_TO_METRES; },
+        toFeet: function(metres) { return metres / this.FEET_TO_METRES; },
+        formatValue: function(value) {
+            const parsed = parseFloat(value);
+            return isNaN(parsed) ? '' : parsed.toFixed(2);
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let roomIndex = 0;
+        const roomsContainer = document.getElementById('roomsContainer');
+        const addRoomBtn = document.getElementById('addRoomBtn');
+        const radioMetres = document.getElementById('optionMetres');
+        const radioFeet = document.getElementById('optionFeet');
+        const currentUnitDisplay = document.getElementById('currentUnitDisplay');
+
+        // --- Update Labels Function ---
+        function updateUnitLabels(isMetres) {
+            const unitText = isMetres ? '(m)' : '(ft)';
+            currentUnitDisplay.textContent = isMetres ? '(metres)' : '(feet)';
+            document.querySelectorAll('.unit-label').forEach(label => label.textContent = unitText);
+        }
+
+        // --- Conversion Function ---
+        function convertAllValues(toMetres) {
+            document.querySelectorAll('.room-group').forEach(group => {
+                const lengthInput = group.querySelector('.room-length');
+                const widthInput = group.querySelector('.room-width');
+
+                let lVal = parseFloat(lengthInput.value);
+                if (!isNaN(lVal)) {
+                    let newVal = toMetres ? UnitConverter.toMetres(lVal) : UnitConverter.toFeet(lVal);
+                    lengthInput.value = UnitConverter.formatValue(newVal);
+                }
+
+                let wVal = parseFloat(widthInput.value);
+                if (!isNaN(wVal)) {
+                    let newVal = toMetres ? UnitConverter.toMetres(wVal) : UnitConverter.toFeet(wVal);
+                    widthInput.value = UnitConverter.formatValue(newVal);
+                }
+            });
+        }
+
+        // --- Add Room Function ---
+        function addRoom() {
+            const isMetres = radioMetres.checked;
+            const unitLabel = isMetres ? '(m)' : '(ft)';
+
+            const newRoom = document.createElement('div');
+            newRoom.className = 'room-group border border-primary p-3 mb-3 rounded shadow-sm';
+            newRoom.innerHTML = `
+                <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                        <label class="form-label fw-bold">Room Name *</label>
+                        <input type="text" class="form-control" name="rooms[${roomIndex}][name]" placeholder="e.g., Kitchen" required>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label class="form-label fw-bold">Length <span class="unit-label">${unitLabel}</span> *</label>
+                        <input type="number" step="0.01" min="0" class="form-control room-length" name="rooms[${roomIndex}][length]" placeholder="0.0" required>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label class="form-label fw-bold">Width <span class="unit-label">${unitLabel}</span> *</label>
+                        <input type="number" step="0.01" min="0" class="form-control room-width" name="rooms[${roomIndex}][width]" placeholder="0.0" required>
+                    </div>
+                    <div class="col-12 col-md-2 d-flex align-items-end">
+                        <button type="button" class="btn btn-danger w-100 remove-room-btn"><i class="fas fa-trash"></i> Remove</button>
                     </div>
                 </div>
+            `;
+            roomsContainer.appendChild(newRoom);
+            roomIndex++;
+            newRoom.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
 
-                <!-- 评论文字内容 / Review text -->
-                <div class="review-text">
-                    <p class="mb-0">
-                        The tile purchase and quoting website is clean, easy to navigate, and makes comparing products simple. Getting a quote is quick and clear, with pricing updates that make planning easier. The free measuring tool is a nice extra, but the real strength is how smooth the whole process feels. Great for anyone starting a tiling project.
-                        <!-- 评价内容，未来可替换为真实用户反馈 / Review text that can be replaced later -->
-                    </p>
-                </div>
-            </div>
-        </div>
+        // --- Event Listeners ---
 
-        <!-- 右边方块 / Right placeholder card -->
-        <div class="col-lg-3 col-md-5 mb-4 mx-3">
-            <div class="content-card">
-                <div style="height: 300px; background-color: #ddd;">
-                    <!-- 未来可放图片，例如工人铺砖照片 / Could place image e.g. tiler laying tiles -->
-                </div>
-            </div>
-        </div>
+        if (addRoomBtn && document.querySelectorAll('.room-group').length === 0) {
+            addRoom();
+        }
+        addRoomBtn.addEventListener('click', addRoom);
 
-    </div>
+        [radioMetres, radioFeet].forEach(r => r.addEventListener('change', function() {
+            const isMetres = radioMetres.checked;
+            updateUnitLabels(isMetres);
+            convertAllValues(isMetres);
+        }));
 
-    <!-- 底部假滚动条 / Fake scrollbar at bottom for design -->
+        roomsContainer.addEventListener('click', function(e) {
+            const removeBtn = e.target.closest('.remove-room-btn');
+            if (removeBtn) {
+                const roomGroup = removeBtn.closest('.room-group');
+                if (document.querySelectorAll('.room-group').length > 1) {
+                    roomGroup.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => {
+                        roomGroup.remove();
+                        reIndexRooms();
+                    }, 300);
+                } else {
+                    alert("You need at least one room.");
+                }
+            }
+        });
+
+        function reIndexRooms() {
+            const rooms = document.querySelectorAll('.room-group');
+            rooms.forEach((room, index) => {
+                room.querySelectorAll('input').forEach(input => {
+                    const name = input.getAttribute('name');
+                    if (name) {
+                        input.setAttribute('name', name.replace(/\[\d+\]/, '[' + index + ']'));
+                    }
+                });
+            });
+            roomIndex = rooms.length;
+        }
+    });
+</script>

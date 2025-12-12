@@ -1,29 +1,41 @@
 <footer class="page-footer font-small footer-blue pt-4 mt-5">
     <div class="container-fluid text-center text-md-left">
         <div class="row">
-            <!-- Contact Information -->
-            <div class="col-md-6 mt-md-0 mt-3">
-                <h5 class="text-uppercase">TilePlan Survey</h5>
-                <p>Professional tile planning and measurement solutions</p>
+            <div class="footer-contact-block">
                 <ul class="list-unstyled">
-                    <li><i class="fas fa-map-marker-alt mr-2"></i> 123 Survey Street, Salford, UK</li>
-                    <li><i class="fas fa-phone mr-2"></i> +44 (0) 1234 567890</li>
-                    <li><i class="fas fa-envelope mr-2"></i> info@tileplansurvey.com</li>
-                </ul>
-            </div>
 
-            <!-- Quick Links -->
-            <div class="col-md-3 mb-md-0 mb-3">
+
+                    <li class="mt-2">
+                        <h5 class="text-uppercase">contact detail</h5>
+                    <li>
+                        <i class="fas fa-envelope mr-2"></i>
+                        info@tileplan.com
+                    </li>
+                        London & South: Tel: 020 3397 2997<br>
+                        Midlands: Tel: 0121 663 0832 <br>
+                        North: Tel: 0161 883 0027
+                    </li>
+                </ul>
+                <div class="get-in-touch mt-3">
+                    <h5 class="text-uppercase">Get In Touch</h5>
+
+                   <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div> <div class="col-md-3 mb-md-0 mb-3">
                 <h5 class="text-uppercase">Quick Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#!" class="text-white">Home</a></li>
-                    <li><a href="#!" class="text-white">Start Survey</a></li>
-                    <li><a href="#!" class="text-white">Site Information</a></li>
-                    <li><a href="#!" class="text-white">Login</a></li>
+                    <li><a href="#!" class="text-white">Home</a> </li>
+                    <li><a href="#!" class="text-white">Start Survey</a> </li>
+                    <li><a href="#!" class="text-white">Site Information</a> </li>
+                    <li><a href="#!" class="text-white">Login</a> </li>
                 </ul>
             </div>
 
-            <!-- Services -->
             <div class="col-md-3 mb-md-0 mb-3">
                 <h5 class="text-uppercase">Our Services</h5>
                 <ul class="list-unstyled">
@@ -35,27 +47,28 @@
             </div>
         </div>
     </div>
-
-    <!-- Copyright -->
+    <!--
+    <div class="footer-bottom-right-tek">
+        <p style="color: yellow; font-weight: bold; margin: 0;"></p>
+    </div>
+    -->
     <div class="footer-copyright text-center py-3">
-        <p>© 2025 TilePlan Survey | University of Salford Project |
+        <p>© 2025 TilePlan Survey |
+            University of Salford Project |
             Using MVC design pattern and Bootstrap CSS framework</p>
-        <p>Contact: support@tileplansurvey.com | Phone: +44 (0) 1234 567890</p>
+        <p>Contact: support@tileplansurvey.com |
+            Phone: +44 (0) 1234 567890 </p>
     </div>
 </footer>
 
 </div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-<!-- OpenLayers JS -->
 <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<!-- 打字效果脚本 -->
 <script>
     // 确保打字效果在页面加载后工作
     document.addEventListener('DOMContentLoaded', function() {
@@ -65,7 +78,7 @@
             typingText.style.animation = 'none';
             setTimeout(() => {
                 typingText.style.animation = '';
-            }, 10);
+                }, 10);
         }
 
         // 简单的按钮点击提示（后续可替换为实际功能）
@@ -74,10 +87,11 @@
                 if (this.getAttribute('href') === '#') {
                     e.preventDefault();
                     const buttonText = this.textContent.trim();
+
                     alert(`${buttonText} functionality will be implemented soon!`);
                 }
             });
-        });
+            });
     });
 </script>
 

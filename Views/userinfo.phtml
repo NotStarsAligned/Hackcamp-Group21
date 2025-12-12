@@ -83,10 +83,6 @@ $message = $message ?? '';
                         <input type="text" id="address-input" name="address" class="form-control profile-edit-mode" value="<?php echo htmlspecialchars($address); ?>" style="display:none;">
                     </div>
 
-                    <div class="form-group mb-3">
-                        <p><strong>Member Since:</strong> <?php echo htmlspecialchars($member_since); ?></p>
-                    </div>
-
                 </div>
 
             </form>
@@ -186,11 +182,11 @@ $message = $message ?? '';
         // --- Other button functionality (其他按钮功能) ---
         // (Keeping existing functionality from your uploaded file)
         document.querySelector('.home-btn')?.addEventListener('click', function() {
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
         });
 
         document.querySelector('.change-password-btn')?.addEventListener('click', function() {
-            alert('Change password functionality would open here');
+            window.location.href = 'update_account.php';
         });
     });
 </script>

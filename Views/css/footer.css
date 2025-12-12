@@ -1,0 +1,109 @@
+/*
+   FOOTER THEME (TEK)
+   Primary Blue: #1D215E
+   Yellow:       #F2C300
+   Yellow Hover: #FFDF4D
+ */
+
+footer.footer-blue {
+    background: #1D215E !important;
+    color: #ffffff !important;
+    position: relative;
+    padding-top: 28px;
+    padding-bottom: 18px;
+}
+
+footer.footer-blue::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: #F2C300;
+}
+
+footer.footer-blue h5,
+footer.footer-blue .text-uppercase {
+    color: #F2C300 !important;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    margin-bottom: 12px;
+}
+
+footer.footer-blue p,
+footer.footer-blue li {
+    color: #ffffff !important;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+footer.footer-blue ul.list-unstyled li {
+    margin-bottom: 8px;
+}
+
+footer.footer-blue i {
+    color: #F2C300 !important;
+}
+
+footer.footer-blue a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-weight: 600;
+}
+
+footer.footer-blue a:hover {
+    color: #FFDF4D !important;
+    text-decoration: underline !important;
+}
+
+footer.footer-blue .footer-copyright {
+    border-top: 1px solid rgba(242,195,0,0.35);
+    margin-top: 18px;
+    padding-top: 14px;
+}
+
+footer.footer-blue .footer-copyright p {
+    margin: 6px 0;
+    font-size: 14px;
+    opacity: 0.92;
+}
+
+
+/* --- 新增或修改的部分开始：实现水平排列 --- */
+
+/* 1. 使用Flexbox对主要行进行布局，确保在大屏幕上所有子内容块水平排列 */
+@media (min-width: 768px) {
+    footer.footer-blue .row {
+        display: flex;
+        flex-wrap: wrap; /* 允许换行，虽然我们主要希望它们在一行 */
+        justify-content: space-between; /* 均匀分布空间 */
+    }
+
+    /* 2. 为联系信息和社交图标块设置宽度，使其能和 col-md-3 占据相似空间 */
+    .footer-contact-block {
+        flex: 1; /* 占据剩余的可用空间 */
+        min-width: 250px; /* 设置最小宽度以防挤压太小 */
+        margin-bottom: 1rem;
+        padding-right: 15px; /* 模拟 col-md-3 的左右边距 */
+        padding-left: 15px;
+    }
+}
+
+/* 定位 "FOOTER TEST TEK" 元素到右下角（继承上一个问题的修改） */
+.footer-bottom-right-tek {
+    position: absolute;
+    bottom: 20px;   /* 距离页脚底部 20px */
+    right: 20px;    /* 距离页脚右侧 20px */
+    z-index: 50;    /* 确保它位于其他元素之上 */
+}
+
+/* --- 新增或修改的部分结束 --- */
+
+
+/* 移动端调整：在小于768px时，文本居中 */
+@media (max-width: 767px) {
+    footer.footer-blue {
+        text-align: center;
+    }
+}

@@ -992,3 +992,60 @@ footer .bottom-bar {
 /* 888888888888888888888888888888888888888888888 */
 /*      Andrew- search bar stuff for browse      */
 /* 888888888888888888888888888888888888888888888 */
+
+
+
+/* 888888888888888888888888888888888888888888888 */
+/*            Andrew- wishlist stuff             */
+/* 888888888888888888888888888888888888888888888 */
+
+/* vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+ This is used in the browse page. it is the pop up for when
+ the user tries to add something to their wishlist*/
+/* Base flash style */
+.wishlist-flash {
+    position: fixed;
+    top: 50%;                  /* center vertically */
+    left: 50%;                 /* center horizontally */
+    transform: translate(-50%, -50%); /* adjust for element size */
+
+    z-index: 2000;
+
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+
+    opacity: 1;
+    animation: fadeOut 2.5s ease-in forwards;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
+
+
+/* Gold success message */
+.wishlist-flash-success {
+    background-color: #4CAF50;
+    color: #000;
+}
+
+/* Red error message for duplicates */
+.wishlist-flash-error {
+    background-color: #d32f2f;
+    color: #fff;
+}
+
+/* Already added earlier, but included here for clarity */
+@keyframes fadeOut {
+    0%   { opacity: 1; }
+    60%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/*  This is used in the browse page. it is the pop up for when
+ the user tries to add something to their wishlist
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+
+/* 888888888888888888888888888888888888888888888 */
+/*            Andrew- wishlist stuff             */
+/* 888888888888888888888888888888888888888888888 */

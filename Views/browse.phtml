@@ -253,7 +253,6 @@ require("Views/template/header.phtml");
             const finishSelect = form.querySelector('.variant-finish');
             const polishSelect = form.querySelector('.variant-polish');
             const hiddenVariantId = form.querySelector('input[name="variant_id"]');
-            const priceSpan = form.querySelector('.variant-price'); // may be null now
             const wishlistBtn = form.querySelector('.btn-wishlist');
 
             // Helper: rebuild options for a <select> based on an array of allowed values
@@ -345,9 +344,7 @@ require("Views/template/header.phtml");
                 // If any required choice is blank, no variant is selected
                 if (missingColour || missingFinish || missingPolish) {
                     hiddenVariantId.value = '';
-                    if (priceSpan) {
-                        priceSpan.textContent = 'Select all options';
-                    }
+                    // IMPORTANT: do NOT disable the button here; we want the click to show a popup
                     return;
                 }
 
@@ -372,19 +369,8 @@ require("Views/template/header.phtml");
 
                 if (match) {
                     hiddenVariantId.value = match.id;
-                    if (priceSpan && match.price_trade !== undefined && match.price_trade !== null) {
-                        const priceNumber = Number(match.price_trade);
-                        if (!isNaN(priceNumber)) {
-                            priceSpan.textContent = '£' + priceNumber.toFixed(2);
-                        } else {
-                            priceSpan.textContent = '£' + match.price_trade;
-                        }
-                    }
                 } else {
                     hiddenVariantId.value = '';
-                    if (priceSpan) {
-                        priceSpan.textContent = 'Not available';
-                    }
                 }
             }
 
@@ -401,7 +387,7 @@ require("Views/template/header.phtml");
                 updateVariantSelection();
             });
 
-            // Run once to set initial options and variant + price
+            // Run once to set initial options and variant
             refreshDependentOptions();
             updateVariantSelection();
 
@@ -444,12 +430,28 @@ require("Views/template/header.phtml");
                         return response.json();
                     })
                     .then(function (data) {
-                        if (data && data.message) {
+                        if (!data) return;
+
+                        // If the server says login is required, prompt and redirect
+                        if (data.status === 'login') {
+                            showFlash(data.message, 'error');
+
+                            // Send the user to the login page after showing the message
+                            setTimeout(function () {
+                                window.location.href = 'login.php';
+                            }, 1500);
+
+                            return;
+                        }
+
+                        // Normal success / error handling
+                        if (data.message) {
                             const type = (data.status === 'error') ? 'error' : 'success';
                             showFlash(data.message, type);
                         }
                     })
                     .catch(function () {
+                        // Fallback: if anything unexpected happens
                         showFlash('Something went wrong, please try again.', 'error');
                     });
             });

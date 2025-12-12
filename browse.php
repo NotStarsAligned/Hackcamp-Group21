@@ -34,8 +34,24 @@ try {
 // --- HANDLE "ADD TO WISHLIST" FROM BROWSING PAGE ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_wishlist'])) {
 
-    // ensure only logged-in users can modify their wishlist
-    Authentication::requireLogin(); // redirects to login.php and exits if not logged in
+    // detect if this is an AJAX request (we explicitly send ajax=1 from JS)
+    $isAjax = isset($_POST['ajax']) && $_POST['ajax'] === '1';
+
+    // IMPORTANT: redirects do not work nicely with fetch/AJAX, so return JSON instead
+    if (!Authentication::isLoggedIn()) {
+
+        if ($isAjax) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status'  => 'login',
+                'message' => 'Please log in to add items to your wish list.',
+            ]);
+            exit;
+        }
+
+        // Non-AJAX fallback should still redirect properly
+        Authentication::requireLogin(); // redirects to login.php and exits if not logged in
+    }
 
     $currentUser = Authentication::getCurrentUser();
 
@@ -88,9 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_wishlist'])) {
         $message = 'User not recognised';
         $type    = 'error';
     }
-
-    // detect if this is an AJAX request (we explicitly send ajax=1 from JS)
-    $isAjax = isset($_POST['ajax']) && $_POST['ajax'] === '1';
 
     if ($isAjax) {
         // For AJAX requests we return JSON instead of reloading the whole page

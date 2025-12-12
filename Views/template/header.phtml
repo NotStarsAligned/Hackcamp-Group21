@@ -24,6 +24,7 @@ if (!class_exists('Authentication')) {
     <link href="/Views/css/my-style.css" rel="stylesheet">
 
     <link href="/Views/css/footer.css" rel="stylesheet">
+    <link href="/Views/css/footer.css" rel="stylesheet">
 
 
 </head>
@@ -44,8 +45,12 @@ if (!class_exists('Authentication')) {
             <div class="collapse navbar-collapse" id="responsiveNavbar">
                 <nav class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
                     <a class="nav-link active" href="../../index.php?page=home">Home <span class="visually-hidden">(current)</span></a>
-                    <a class="nav-link" href="page1.php">Start Survey</a>
-                    <a class="nav-link" href="page2.php">Site Information</a>
+
+                    <a class="nav-link" href="/browse.php">Browse Tiles</a>
+                    <?php if (Authentication::isLoggedIn() && in_array(Authentication::getUserRole(), ['admin','operator','staff'])): ?>
+                    <a class="nav-link" href="/quote.php"> Quotes</a>
+                    <a class="nav-link" href="/map.php">Map</a>
+                    <?php endif; ?>
 
 
                     <div class="ms-lg-4 mt-2 mt-lg-0">
@@ -56,23 +61,26 @@ if (!class_exists('Authentication')) {
                 </nav>
 
                 <div class="d-flex align-items-center ms-auto">
-                    <?php if (Authentication::isLoggedIn()): ?>
+
                         <div class="account-menu">
                             <button class="account-trigger icon-button" id="accountTriggerBtn">
-                                <img src="#" alt="Profile Menu" class="logo-img" style="width: 48px; height: 48px; border-radius: 6px;" />
+                                <i class="fa fa-user-circle" style="font-size: 48px;"></i>
                             </button>
+
                             <ul class="account-dropdown" id="accountDropdownList">
-                                <li><a href="#">Browse</a></li>
-                                <li><a href="#">Wish‑list</a></li>
-                                <li><a href="/Login.php">Log‑out</a></li>
-                                <li><a href="/UserController.php">User info</a> </li>
+                               <?php if (Authentication::isLoggedIn()): ?>
+                                   <li><a href="/wishlist.php">Wish-list</a></li>
+                                   <li><a href="/UserController.php">User info</a></li>
+                                   <li><a href="/Login.php?logout=1">Log-Out</a></li>
+                               <?php else: ?>
+                               <li></li>
+                                   <li><a href="/Login.php">Log-In</a></li>
+                               <?php endif; ?>
                             </ul>
                         </div>
-                    <?php else: ?>
-                        <a class="btn btn-outline-primary" href="/Login.php">
-                            <i class="fas fa-sign-in-alt me-1"></i> Login
-                        </a>
-                    <?php endif; ?>
+
+
+
                 </div>
             </div>
         </div>
@@ -85,3 +93,4 @@ if (!class_exists('Authentication')) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 */ ?>
+

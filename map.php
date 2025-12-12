@@ -1,5 +1,16 @@
 <?php
 require("Model/StaffDataSet.php");
+
+require_once __DIR__ . "/Model/Auth.php";
+require_once __DIR__ . "/Model/database.php";
+
+
+//D.D
+
+//protects the page from customer/ only staff admin operator role have access
+Authentication::requireStaff();
+Authentication::requireLogin();//protects the page/only customer role have access
+
 $view = new StdClass();
 $view->Title = "Live Map";
 

@@ -31,6 +31,35 @@ class Authentication {
         $_SESSION['role'] = strtolower($user['role']); // admin, staff, etc.aaaaaaaaaaaaa
         return true;
     }
+    // ckeck the user role to allow them to see specific pages depending on role admin staff operator can see all pages
+    //customers only few
+    public static function getUserRole(): ?string {
+        if (!self::isLoggedIn()) return null;
+        $db = Database::getInstance()->getConnection();
+
+        $stmt = $db->prepare("SELECT role FROM users WHERE role = :role LIMIT 1 ");
+        $stmt->execute(['role' => $_SESSION['role']]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row['role'] ?? null;
+    }
+    public static function requireRole(array $allowedRoles): void {
+        $role = self::getUserRole();
+
+        if ($role === null || !in_array($role, $allowedRoles)) {
+            // not allowed
+            http_response_code(403);
+            die("Access denied.");
+        }
+    }
+    //only the user with role: admin operator and staff. have acces to the page
+    public static function requireStaff(): void {
+        self::requireRole(['admin', 'operator', 'staff']);
+    }
+    public static function requireCustomer(): void {
+        self::requireRole(['customer']);
+    }
+
 
 //check if user is logged in, only logged in user can have access by
     public static function isLoggedIn(): bool {

@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Official Quotation Invoice</title>
-    <!-- Tailwind CSS script removed -->
+    <title>Official Quotation Invoice - Tile Plan UK</title>
     <style>
         /* Base styles and fonts */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f3f8; /* Light blue-grey background */
+            background-color: #f0f3f8;
+            /* Light blue-grey background */
             margin: 0;
             padding: 20px;
             color: #1f2937; /* Default dark grey text */
@@ -23,7 +23,8 @@
             background-color: white;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            padding: 40px 48px; /* Equivalent of p-8 md:p-12 */
+            padding: 40px 48px;
+            /* Equivalent of p-8 md:p-12 */
         }
 
         /* Header Styles */
@@ -37,15 +38,21 @@
         }
 
         .company-title {
-            font-size: 32px; /* text-4xl */
-            font-weight: 800; /* font-extrabold */
-            color: #0e7490; /* text-cyan-700 */
-            letter-spacing: -0.025em; /* tracking-tight */
+            font-size: 32px;
+            /* text-4xl */
+            font-weight: 800;
+            /* font-extrabold */
+            color: #0e7490;
+            /* text-cyan-700 */
+            letter-spacing: -0.025em;
+            /* tracking-tight */
         }
 
         .document-title {
-            font-size: 24px; /* text-3xl */
-            font-weight: 700; /* font-bold */
+            font-size: 24px;
+            /* text-3xl */
+            font-weight: 700;
+            /* font-bold */
         }
 
         /* Information Section (Client/Surveyor) */
@@ -61,9 +68,11 @@
             font-weight: 700;
             font-size: 18px; /* text-lg */
             margin-bottom: 8px;
-            color: #374151; /* text-gray-700 */
+            color: #374151;
+            /* text-gray-700 */
             padding-left: 8px;
-            border-left: 4px solid #22d3ee; /* border-cyan-400 */
+            border-left: 4px solid #22d3ee;
+            /* border-cyan-400 */
         }
         .info-block.right h2 {
             padding-left: 0;
@@ -88,7 +97,8 @@
         }
 
         .item-table thead {
-            background-color: #ecfeff; /* bg-cyan-50 */
+            background-color: #ecfeff;
+            /* bg-cyan-50 */
         }
 
         .item-table th, .item-table td {
@@ -98,14 +108,17 @@
         }
 
         .item-table th {
-            font-size: 12px; /* text-xs */
+            font-size: 12px;
+            /* text-xs */
             font-weight: 700;
             text-transform: uppercase;
-            color: #4b5563; /* text-gray-700 */
+            color: #4b5563;
+            /* text-gray-700 */
         }
 
         .item-table td {
-            font-size: 14px; /* text-sm */
+            font-size: 14px;
+            /* text-sm */
         }
 
         .item-table td.center {
@@ -141,7 +154,8 @@
             align-items: center;
             padding-top: 4px;
             padding-bottom: 4px;
-            font-size: 16px; /* text-base */
+            font-size: 16px;
+            /* text-base */
         }
 
         .summary-row.border-top {
@@ -166,16 +180,19 @@
             background-color: #0e7490; /* bg-cyan-700 */
             color: white;
             border-radius: 8px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            /* shadow-xl */
         }
 
         .grand-total .label {
-            font-size: 24px; /* text-2xl */
+            font-size: 24px;
+            /* text-2xl */
             font-weight: 700;
         }
 
         .grand-total .amount {
-            font-size: 36px; /* text-4xl */
+            font-size: 36px;
+            /* text-4xl */
             font-weight: 800;
         }
 
@@ -185,7 +202,8 @@
             padding-top: 24px;
             border-top: 1px solid #d1d5db;
             font-size: 12px; /* text-xs */
-            color: #6b7280; /* text-gray-500 */
+            color: #6b7280;
+            /* text-gray-500 */
             text-align: center;
         }
         .invoice-footer h4 {
@@ -224,119 +242,113 @@
 
 <div class="invoice-paper">
 
-    <!-- Header & Company Details -->
     <header class="invoice-header">
         <div>
-            <div class="company-title">SALFORD FLOORING</div>
-            <p style="font-size: 14px; color: #6b7280; margin-top: 4px;">Official Quotation & Invoice | Professional Flooring Suppliers</p>
+            <div class="company-title">Tile Plan UK</div>
+            <p style="font-size: 14px; color: #6b7280; margin-top: 4px;">Official Quotation & Invoice |
+                Premium Tile Specialists</p>
         </div>
         <div style="text-align: right;">
             <h1 class="document-title">QUOTATION</h1>
-            <p style="font-size: 12px; color: #4b5563;">ID: <span id="quote-id" style="font-weight: 600;">#QUO-2025-0042</span></p>
-            <p style="font-size: 12px; color: #4b5563;">Date: <span id="quote-date">25/11/2025</span></p>
+            <p style="font-size: 12px; color: #4b5563;">ID: <span id="quote-id" style="font-weight: 600;"><?php echo htmlspecialchars($view->quote['quote_ref']); // Assuming 'quote_ref' or similar is the ID ?></span></p>
+            <p style="font-size: 12px; color: #4b5563;">Date: <span id="quote-date"><?php echo date('d/m/Y', strtotime($view->quote['quote_date'])); ?></span></p>
         </div>
     </header>
 
-    <!-- Billing & Surveyor Info -->
     <section class="info-section">
         <div class="info-block">
+
             <h2>Client Details</h2>
-            <p style="font-weight: 600;">Mr. John Smith</p>
-            <p>Apartment 10, The Bridge Quay</p>
-            <p>Manchester, M5 4AP</p>
-            <p>john.smith@client.com</p>
+            <p style="font-weight: 600;"><?php echo htmlspecialchars($view->quote['client_name']); // Assuming client name field ?></p>
+            <p><?php echo nl2br(htmlspecialchars($view->quote['client_address'])); // Assuming client address field ?></p>
+            <p><?php echo htmlspecialchars($view->quote['client_email']); // Assuming client email field ?></p>
         </div>
         <div class="info-block right">
             <h2>Survey & Contact</h2>
-            <p style="font-weight: 600;">Surveyor: Jane Doe</p>
-            <p>Phone: (0161) 555-TILE</p>
-            <p>Email: surveyor@salfordflooring.co.uk</p>
+            <p style="font-weight: 600;">Surveyor: <?php echo htmlspecialchars($view->quote['surveyor_name']); // Assuming surveyor name field ?></p>
+
+            <p>Phone: <?php echo htmlspecialchars($view->quote['contact_phone']); // Assuming contact phone field ?></p>
+            <p>Email: <?php echo htmlspecialchars($view->quote['contact_email']); // Assuming contact email field ?></p>
             <p style="font-size: 12px; margin-top: 8px; color: #6b7280;">Quotation valid for 30 days.</p>
         </div>
     </section>
 
-    <!-- Itemized Breakdown Table -->
     <section style="margin-bottom: 40px;">
-        <h3 style="font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 16px;">Itemised Cost Breakdown (Kitchen - 22.50 m²)</h3>
+        <?php if (!empty($view->rooms)): ?>
+            <h3 style="font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 16px;">Itemised Cost Breakdown (<?php echo htmlspecialchars($view->rooms[0]['room_name'] . ' - ' . $view->rooms[0]['area'] . ' m²'); ?>)</h3>
+        <?php else: ?>
+            <h3 style="font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 16px;">Itemised Cost Breakdown (Materials & Consumables)</h3>
+        <?php endif; ?>
+
         <div class="item-table-container">
+
             <table class="item-table">
                 <thead>
                 <tr>
                     <th>Description</th>
                     <th class="center">Qty/Area</th>
                     <th class="right">Unit Price (£)</th>
+
                     <th class="right">Total (£)</th>
                 </tr>
                 </thead>
                 <tbody id="invoice-items">
-                <!-- Static Data for dompdf compatibility (pre-calculated values) -->
-                <tr style="background-color: #ffffff;">
-                    <td style="font-weight: 600;">Porcelain Tile - Coastal Grey (60x60cm)</td>
-                    <td class="center">18 box</td>
-                    <td class="right">£35.00</td>
-                    <td class="right">£630.00</td>
-                </tr>
-                <tr style="background-color: #f9fafb;">
-                    <td style="color: #4b5563;">High-Strength Flexible Adhesive</td>
-                    <td class="center">3 bag</td>
-                    <td class="right">£45.00</td>
-                    <td class="right">£135.00</td>
-                </tr>
-                <tr style="background-color: #ffffff;">
-                    <td style="color: #4b5563;">Grout & Sealant Kit - Mid-Grey</td>
-                    <td class="center">2 unit</td>
-                    <td class="right">£22.50</td>
-                    <td class="right">£45.00</td>
-                </tr>
-                <tr style="background-color: #f9fafb;">
-                    <td style="color: #4b5563;">Aluminium Edge Trim - Brushed Steel</td>
-                    <td class="center">19 metre</td>
-                    <td class="right">£8.50</td>
-                    <td class="right">£161.50</td>
-                </tr>
+                <?php foreach ($view->items as $index => $item): ?>
+                    <tr style="background-color: <?php echo ($index % 2 == 0) ? '#ffffff' : '#f9fafb'; ?>;">
+                        <td style="font-weight: 600;"><?php echo htmlspecialchars($item['item_description']); ?></td>
+                        <td class="center"><?php echo htmlspecialchars($item['quantity'] . ' ' . $item['unit']); ?></td>
+                        <td class="right"><?php echo '£' . number_format($item['unit_price'], 2); ?></td>
+                        <td class="right"><?php echo '£' . number_format($item['line_total'], 2); ?></td>
+                    </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
+
         </div>
     </section>
 
-    <!-- Totals and Summary Box -->
     <section class="summary-container">
         <div class="summary-box">
             <div class="summary-details">
                 <div class="summary-row">
-                    <span style="font-weight: 500; color: #374151;">Subtotal (Materials & Consumables):</span>
-                    <span id="subtotal" style="font-weight: 600;">£971.50</span>
+                    <span style="font-weight: 500;
+color: #374151;">Subtotal (Materials & Consumables):</span>
+                    <span id="subtotal" style="font-weight: 600;"><?php echo '£' . number_format($view->totalMaterials, 2); ?></span>
                 </div>
                 <div class="summary-row">
-                    <span style="font-weight: 500; color: #374151;">Installation Labour:</span>
-                    <span id="labour-cost" style="font-weight: 600;">£560.00</span>
+                    <span style="font-weight: 500;
+color: #374151;">Installation Labour:</span>
+                    <span id="labour-cost" style="font-weight: 600;"><?php echo '£' . number_format($view->labourCost, 2); ?></span>
                 </div>
                 <div class="summary-row">
-                    <span style="font-weight: 500; color: #374151;">Delivery Cost:</span>
-                    <span id="delivery-cost" style="font-weight: 600;">£50.00</span>
+                    <span style="font-weight: 500;
+color: #374151;">Delivery Cost:</span>
+                    <span id="delivery-cost" style="font-weight: 600;"><?php echo '£' . number_format($view->deliveryCost, 2); ?></span>
                 </div>
                 <div class="summary-row border-top">
                     <span style="color: #1f2937;">Subtotal Before VAT:</span>
-                    <span id="pre-vat-total" style="color: #1f2937;">£1,581.50</span>
+
+                    <span id="pre-vat-total" style="color: #1f2937;"><?php echo '£' . number_format($view->subtotalBeforeVat, 2); ?></span>
                 </div>
                 <div class="summary-row">
-                    <span style="font-weight: 500; color: #374151;">VAT (20%):</span>
-                    <span id="vat-amount" class="vat-amount">£316.30</span>
+                    <span style="font-weight: 500;
+color: #374151;">VAT (20%):</span>
+                    <span id="vat-amount" class="vat-amount"><?php echo '£' . number_format($view->vat, 2); ?></span>
                 </div>
             </div>
 
             <div class="grand-total">
                 <span class="label">TOTAL DUE:</span>
-                <span id="grand-total" class="amount">£1,897.80</span>
+                <span
+                        id="grand-total" class="amount"><?php echo '£' . number_format($view->grandTotal, 2); ?></span>
             </div>
         </div>
     </section>
 
-    <!-- Footer / Notes -->
     <footer class="invoice-footer">
         <h4>Payment & Installation Notes</h4>
         <p>A 20% non-refundable deposit is required to secure installation dates. Full terms and conditions are available upon request.</p>
-        <p style="margin-top: 8px;">Thank you for choosing Salford Flooring. We appreciate your business.</p>
+        <p style="margin-top: 8px;">Thank you for choosing Tile Plan UK. We appreciate your business.</p>
     </footer>
 
 </div>

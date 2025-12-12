@@ -5,8 +5,8 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <a href="quote.php" class="btn btn-outline-secondary">&laquo; Back to Dashboard</a>
             <div>
-                <button class="btn btn-primary"><i class="fas fa-envelope"></i> Email to Customer</button>
-                <button class="btn btn-success"><i class="fas fa-file-pdf"></i> Download PDF</button>
+                <button class="btn btn-primary" disabled><i class="fas fa-envelope"></i> Email to Customer</button>
+                <button class="btn btn-success" disabled><i class="fas fa-file-pdf"></i> Download PDF</button>
             </div>
         </div>
 
@@ -14,7 +14,7 @@
 
             <div class="row mb-4 border-bottom pb-3">
                 <div class="col-6">
-                    <h2 class="text-primary fw-bold">SALFORD FLOORING</h2>
+                    <h2 class="text-primary fw-bold">TILE PLAN UK</h2>
                     <p class="text-muted">Official Quotation</p>
                 </div>
                 <div class="col-6 text-end">
@@ -79,7 +79,6 @@
                             <td class="text-center">
                                 <?php echo number_format($item['quantity'], 0); ?>
                                 <?php
-                                // Determine unit label logic roughly
                                 echo strpos($item['description'], 'tile') !== false ? ' tiles' : ' units';
                                 ?>
                             </td>

@@ -1,7 +1,7 @@
 <?php
+// sendEmail.php
 // Ensure Composer dependencies are loaded
-
-require ("vendor/autoload.php");
+require_once __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -9,73 +9,66 @@ use PHPMailer\PHPMailer\Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-$pdfName = "Invoice";
+// --- CONFIGURATION ---
+// IMPORTANT: Use environment variables in production!
+$smtp_username = "jumbonzerhema222@gmail.com";
+$smtp_password = "dyju lihd avdr ilky"; // App Password
+// ---------------------
 
-$options = new Options();
-$options->setChroot(__DIR__);
-$dompdf = new Dompdf();
-$dompdf->setBasePath(__DIR__ ."/Views/css/bootstrap.css");
-$html = file_get_contents(__DIR__ ."/Views/template/template.phtml");
-$html = str_replace("{{name}}", $pdfName, $html);
-$dompdf->loadHtml($html);
-$dompdf->setPaper('A4', 'portrait');
-$dompdf->render();
-$dompdf->stream($pdfName, array("Attachment" => false));
-$pdfString = $dompdf->output();
-// --- CONFIGURATION / BEST PRACTICE ---
-// CRITICAL SECURITY WARNING: Do NOT use your primary Gmail password here.
-// Instead, you must generate an App Password in your Google Account security settings
-// if you are using 2FA, or ensure "Less secure app access" is enabled (NOT recommended).
-//
-// For production code, these values MUST be loaded securely from environment variables
-// or a secure configuration file, NOT hardcoded.
-$smtp_username = "jumbonzerhema@gmail.co22m"; // Set to your account as requested
-$smtp_password = "dyju lihd avdr ilky"; // <<< IMPORTANT: REPLACE THIS WITH YOUR GENERATED APP PASSWORD
+/**
+ * Generates a PDF from HTML content and emails it.
+ */
+function sendPdfInvoice(string $htmlContent, string $pdfFilename, string $toEmail, string $toName): array
+{
+    global $smtp_username, $smtp_password;
 
-// -------------------------------------
+    // 1. Generate PDF using Dompdf
+    try {
+        $options = new Options();
+        $options->setChroot(__DIR__); // Allow accessing files in project root
+        $options->setIsRemoteEnabled(true); // Allow remote images if needed
 
-$mail = new PHPMailer(true);
+        $dompdf = new Dompdf($options);
 
-try {
-    // Server settings for Gmail SMTP
-    $mail->isSMTP();
-    $mail->SMTPAuth = true;
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER; // Uncomment for detailed debug output
+        // Set base path for CSS/Images
+        $dompdf->setBasePath(__DIR__ . "/Views/");
 
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = 587;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use TLS for port 587
+        $dompdf->loadHtml($htmlContent);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $pdfString = $dompdf->output();
 
-    // Authentication
-    $mail->Username = $smtp_username;
-    $mail->Password = $smtp_password;
+    } catch (Exception $e) {
+        return ['status' => 'error', 'message' => "PDF Generation Error: " . $e->getMessage()];
+    }
 
-    // Recipients
-    $sender_name = "Salford Flooring";
+    // 2. Send Email with PHPMailer
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->SMTPAuth = true;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
-    // Set the From address. This MUST match the authenticated $smtp_username when using Gmail.
-    $mail->setFrom($smtp_username, $sender_name);
+        $mail->Username = $smtp_username;
+        $mail->Password = $smtp_password;
 
-    // The actual recipient
-    $mail->addAddress("jumbonzerhema@gmail.com", "Jumbo");
+        $sender_name = "Salford Flooring";
+        $mail->setFrom($smtp_username, $sender_name);
+        $mail->addAddress($toEmail, $toName);
 
-    // Content
-    $mail->isHTML(true); // Set email format to HTML
-    $mail->Subject = 'New Quotation Invoice from Salford Flooring';
-    $mail->Body    = 'This is the HTML body of the email. Here is your **new invoice**.';
-    $mail->AltBody = 'This is the plain text version of the email for non-HTML mail clients.';
+        $mail->isHTML(true);
+        $mail->Subject = 'New Quotation Invoice from Salford Flooring';
+        $mail->Body    = 'Dear ' . htmlspecialchars($toName) . ',<br><br>Please find your official quotation attached.<br><br>Kind Regards,<br>Salford Flooring.';
+        $mail->AltBody = 'Please find your official quotation attached.';
 
-    $mail->AddStringAttachment(
-        $pdfString,
-        'Quotation-Invoice-42.pdf', // The file name the recipient will see
-        'base64',                   // Encoding (always base64 for binary attachments)
-        'application/pdf'           // Mime type
-    );
-    // Send the email
-    $mail->send();
-    echo "Message has been sent successfully!";
+        $mail->AddStringAttachment($pdfString, $pdfFilename, 'base64', 'application/pdf');
 
+        $mail->send();
+        return ['status' => 'success', 'message' => "Invoice sent to {$toEmail}"];
 
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    } catch (Exception $e) {
+        return ['status' => 'error', 'message' => "Mailer Error: " . $mail->ErrorInfo];
+    }
 }

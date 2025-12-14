@@ -1,0 +1,41 @@
+/* =========================================
+   DARK MODE (TEK) – READY BUT INACTIVE
+   Works ONLY when <body class="tek-dark">
+   Does not change anything by default.
+========================================= */
+
+/* Apply dark background + light text to page */
+body.tek-dark {
+    background: #0b1020;
+    color: #eaeaea;
+}
+
+/* Footer in dark mode (keep TEK palette) */
+body.tek-dark footer.footer-blue {
+    background: #0f122f !important;
+    color: #eaeaea !important;
+}
+
+/* Footer headings stay yellow */
+body.tek-dark footer.footer-blue h5,
+body.tek-dark footer.footer-blue .text-uppercase {
+    color: #F2C300 !important;
+}
+
+/* Footer links */
+body.tek-dark footer.footer-blue a {
+    color: #ffffff !important;
+}
+
+body.tek-dark footer.footer-blue a:hover {
+    color: #FFDF4D !important;
+}
+
+/* Optional: inputs look better in dark mode */
+body.tek-dark input,
+body.tek-dark select,
+body.tek-dark textarea {
+    background: #111a33;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.2);
+}

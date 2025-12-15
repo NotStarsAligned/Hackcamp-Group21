@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Made by Andrew -->
 <?php
 // Only need to include the header template here.
 // Session and model files are already loaded in browse.php.
@@ -10,11 +9,10 @@ require("Views/template/header.phtml");
 <head>
     <meta charset="UTF-8">
     <title>Browse Products</title>
-    <link rel="stylesheet" href="../my-style.css">
+    <link rel="stylesheet" href="Views/css/my-style.css">
 </head>
 <body>
 
-<!-- Simple flash message system to confirm wishlist actions -->
 <?php if (!empty($view->flashMessage)): ?>
     <?php
     // Choose a different CSS class depending on success vs error
@@ -33,7 +31,6 @@ require("Views/template/header.phtml");
 
 <div id="content">
 
-    <!-- Search bar -->
     <form method="get" class="product-search">
 
         <div class="search-controls">
@@ -53,7 +50,9 @@ require("Views/template/header.phtml");
         <div class="product-grid">
             <?php foreach ($view->tiles as $tile): ?>
                 <?php
-                $img      = $tile['thumbnail_url'] ?: '\\images\\placeholder_image.png';
+                // FIX: Changed backslashes to forward slashes for Linux compatibility
+                // and removed the leading slash to make it relative
+                $img      = $tile['thumbnail_url'] ?: 'images/placeholder_image.png';
                 $variants = $tile['variants'];
 
                 // Build unique lists of colours, finishes and polishes for this product
@@ -75,7 +74,6 @@ require("Views/template/header.phtml");
                 }
                 ?>
                 <div class="product-card">
-                    <!-- Each product card posts back to browse.php so we can add items to the wishlist -->
                     <form method="post"
                           action="browse.php"
                           class="product-card-form"
@@ -87,7 +85,6 @@ require("Views/template/header.phtml");
 
                         <?php if (!empty($variants)): ?>
                             <div class="variant-selectors">
-                                <!-- Colour selector -->
                                 <label>
                                     <span class="variant-label">Colour:</span>
                                     <select class="variant-select variant-colour">
@@ -100,7 +97,6 @@ require("Views/template/header.phtml");
                                     </select>
                                 </label>
 
-                                <!-- Finish selector (if there are any finishes for this product) -->
                                 <?php if (!empty($finishes)): ?>
                                     <label>
                                         <span class="variant-label">Finish:</span>
@@ -115,7 +111,6 @@ require("Views/template/header.phtml");
                                     </label>
                                 <?php endif; ?>
 
-                                <!-- Polish selector (if present) -->
                                 <?php if (!empty($polishes)): ?>
                                     <label>
                                         <span class="variant-label">Polish:</span>
@@ -130,24 +125,19 @@ require("Views/template/header.phtml");
                                     </label>
                                 <?php endif; ?>
 
-                                <!-- Short help text so the user understands what is going on -->
                                 <p class="variant-help">
                                     Options update automatically – you can leave a choice blank
                                     to see all matching options in the other lists. To add to your
                                     wish list, please choose a Colour, Finish and Polish.
                                 </p>
 
-                                <!-- Price display updates when different combinations are chosen -->
-                                <!-- (Price output removed on public-facing website) -->
                             </div>
 
-                            <!-- This hidden field will be filled in by JS once a valid combination is chosen -->
                             <input type="hidden" name="variant_id" value="">
                         <?php else: ?>
                             <p><em>No variants available</em></p>
                         <?php endif; ?>
 
-                        <!-- Keep track of where the user is so we can redirect back correctly -->
                         <input type="hidden" name="page" value="<?php echo (int)($view->page ?? 1); ?>">
                         <?php if (!empty($view->searchTerm)): ?>
                             <input type="hidden" name="q"
@@ -167,7 +157,6 @@ require("Views/template/header.phtml");
             <?php endforeach; ?>
         </div>
 
-        <!-- Pagination -->
         <div class="pagination">
             <?php
             $searchQueryPart = '';
@@ -201,8 +190,6 @@ require("Views/template/header.phtml");
     <?php endif; ?>
 </div>
 
-<!-- Small script to handle wishlist actions via AJAX instead of full page reloads
-     and to map Colour / Finish / Polish selections to a specific product_variant_id -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Helper to show a temporary flash message in the centre of the screen

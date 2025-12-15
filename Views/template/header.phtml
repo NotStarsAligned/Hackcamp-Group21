@@ -6,7 +6,7 @@ if (!class_exists('Authentication')) {
 }
 ?>
 
-    <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -21,12 +21,8 @@ if (!class_exists('Authentication')) {
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <link href="/Views/css/my-style.css" rel="stylesheet">
-
-    <link href="/Views/css/footer.css" rel="stylesheet">
-    <link href="/Views/css/footer.css" rel="stylesheet">
-
-
+    <link href="Views/css/my-style.css" rel="stylesheet">
+    <link href="Views/css/footer.css" rel="stylesheet">
 </head>
 
 <body role="document">
@@ -34,8 +30,8 @@ if (!class_exists('Authentication')) {
 <div class="container-fluid p-0">
     <header class="navbar navbar-expand-lg border-bottom shadow-sm bg-white" id="title">
         <div class="container-fluid">
-            <a href="../../index.php?page=home" class="navbar-brand me-4">
-                <img src="/images/TILEPLAN-LOGO.webp" alt="TilePlan Logo" class="logo-img" style="width: 158px; border-radius: 6px;" />
+            <a href="index.php?page=home" class="navbar-brand me-4">
+                <img src="images/TILEPLAN-LOGO.webp" alt="TilePlan Logo" class="logo-img" style="width: 158px; border-radius: 6px;" />
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#responsiveNavbar" aria-controls="responsiveNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,16 +41,16 @@ if (!class_exists('Authentication')) {
             <div class="collapse navbar-collapse" id="responsiveNavbar">
                 <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center w-100">
                     <nav class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <a class="nav-link active" href="../../index.php?page=home">Home</a>
-                        <a class="nav-link" href="/browse.php">Browse Tiles</a>
+                        <a class="nav-link active" href="index.php?page=home">Home</a>
+                        <a class="nav-link" href="browse.php">Browse Tiles</a>
                         <?php if (Authentication::isLoggedIn() && in_array(Authentication::getUserRole(), ['admin','operator','staff'])): ?>
-                            <a class="nav-link" href="/quote.php">Quotes</a>
-                            <a class="nav-link" href="/map.php">Map</a>
+                            <a class="nav-link" href="quote.php">Quotes</a>
+                            <a class="nav-link" href="map.php">Map</a>
                         <?php endif; ?>
 
-                            <?php if (Authentication::isLoggedIn()): ?>
-                                <span class="navbar-text text-dark "><strong>Welcome- <?= htmlspecialchars(Authentication::full_name()) ?></strong></span>
-                            <?php endif; ?>
+                        <?php if (Authentication::isLoggedIn()): ?>
+                            <span class="navbar-text text-dark "><strong>Welcome- <?= htmlspecialchars(Authentication::full_name()) ?></strong></span>
+                        <?php endif; ?>
 
                     </nav>
 
@@ -62,36 +58,30 @@ if (!class_exists('Authentication')) {
                 </div>
             </div>
 
+            <div class="d-flex align-items-center ms-auto">
+
+                <div class="account-menu">
+                    <button class="account-trigger icon-button" id="accountTriggerBtn">
+                        <i class="fa fa-user-circle" style="font-size: 48px;"></i>
+                    </button>
 
 
-
-
-                <div class="d-flex align-items-center ms-auto">
-
-                        <div class="account-menu">
-                            <button class="account-trigger icon-button" id="accountTriggerBtn">
-                                <i class="fa fa-user-circle" style="font-size: 48px;"></i>
-                            </button>
-
-
-                            <ul class="account-dropdown" id="accountDropdownList">
-                               <?php if (Authentication::isLoggedIn()): ?>
-                                   <li><a href="/wishlist.php">Wish-list</a></li>
-                                   <li><a href="/UserController.php">User info</a></li>
-                                   <li><a href="/Login.php?logout=1">Log-Out</a></li>
-                               <?php else: ?>
-                               <li></li>
-                                   <li><a href="/Login.php">Log-In</a></li>
-                               <?php endif; ?>
-                            </ul>
-                        </div>
-
-
-
+                    <ul class="account-dropdown" id="accountDropdownList">
+                        <?php if (Authentication::isLoggedIn()): ?>
+                            <li><a href="wishlist.php">Wish-list</a></li>
+                            <li><a href="UserController.php">User info</a></li>
+                            <li><a href="Login.php?logout=1">Log-Out</a></li>
+                        <?php else: ?>
+                            <li></li>
+                            <li><a href="Login.php">Log-In</a></li>
+                        <?php endif; ?>
+                    </ul>
                 </div>
+
             </div>
         </div>
-    </header>
+</div>
+</header>
 </div>
 </body>
 
@@ -100,4 +90,4 @@ if (!class_exists('Authentication')) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 */ ?>
-
+</html>

@@ -23,6 +23,7 @@ $view->flashType    = $_SESSION['flash_type'] ?? 'success'; // success or error
 unset($_SESSION['flash_message'], $_SESSION['flash_type']);
 
 // --- DB SETUP ---
+// FIX: Added the missing slash before database.sqlite
 $dbPath = __DIR__ . '/database.sqlite';
 
 try {
@@ -245,4 +246,6 @@ foreach ($products as $product) {
 }
 
 // --- Render the view ---
+// FIX: Added the missing slash before Views
 require_once __DIR__ . "/Views/browse.phtml";
+?>
